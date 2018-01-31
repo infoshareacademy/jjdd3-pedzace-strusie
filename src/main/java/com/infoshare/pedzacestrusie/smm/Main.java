@@ -2,9 +2,9 @@ package com.infoshare.pedzacestrusie.smm;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-            System.out.println(new Menu().setMenuItems());
-            new Menu().chooseMenuItems(new Menu().setMenuItems());
-        }
+        //display main menu
+        new Menu().displayMenu(new Menu().setMenuItems());
+    }
 }
