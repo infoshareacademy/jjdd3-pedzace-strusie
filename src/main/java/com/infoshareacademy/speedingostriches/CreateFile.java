@@ -1,5 +1,6 @@
 package com.infoshareacademy.speedingostriches;
 
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
@@ -8,7 +9,7 @@ public class CreateFile {
 
     Scanner source = new Scanner(System.in);
 
-    public void createFile() {
+    public String createFile() {
 
         System.out.println("Please enter name of your file: ");
         String fileName = source.nextLine();
@@ -26,7 +27,8 @@ public class CreateFile {
             }
         }
         if (fileExist)
-            System.out.println("Your file" + yourFile + " was created.");
+            System.out.println("Your file  " + yourFile + " was created.");
+        return fileName;
     }
 
 

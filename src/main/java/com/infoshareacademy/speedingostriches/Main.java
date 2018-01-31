@@ -1,15 +1,22 @@
 package com.infoshareacademy.speedingostriches;
 
+import java.io.FileNotFoundException;
+
 public class Main {
 
-    public static void main (String []args){
+    public static void main (String []args) throws FileNotFoundException {
 
-        //CreateFile myFile = new CreateFile();
-        //myFile.createFile();
+        CreateFile myFile = new CreateFile();
+        String theFile = myFile.createFile();
 
         WriteToFile newWrite = new WriteToFile();
+        newWrite.writeToFile(theFile);
 
-        newWrite.writeToFile("styczen18.csv");
+
+        ReadFromFIle newRead = new ReadFromFIle();
+
+        newRead.readFromFile(theFile);
+
 
 
 
