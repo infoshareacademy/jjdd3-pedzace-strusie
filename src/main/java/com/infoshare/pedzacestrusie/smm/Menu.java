@@ -2,6 +2,9 @@ package com.infoshare.pedzacestrusie.smm;
 
 import java.util.Scanner;
 
+/**
+ * Author: Maciej Wanagos
+ */
 public class Menu {
 
 
@@ -33,15 +36,15 @@ public class Menu {
      *
      * @param menuDescr String menu
      */
-    public void chooseMenuItems(String menuDescr) {
+    private void chooseMenuItems(String menuDescr) {
 
-        int idx=1;
+        int idx = 1;
 
         //displays menu items
         System.out.println(menuDescr);
 
         //selects items from menu
-        while (idx !=0) {
+        while (idx != 0) {
             try {
 
                 idx = new Scanner(System.in).nextInt();
@@ -49,9 +52,26 @@ public class Menu {
                 if (idx < 1 || idx > menuItems.length - 1) {
                     continue;
                 }
-                //do something
-                new Income("2018-01-01", "CAT", 215.545,"OKOSAO");
-                System.out.println("Your choice is: " + idx);
+
+                switch (idx) {
+                    case 1: {
+                        // menu input expenses
+                        System.out.println("Your choice is: " + idx);
+                        System.out.println(new Income("2018-01-01", "CAT01", 215.545).getUserExpenses().get(0).getExpense());
+                        break;
+                    }
+                    case 2: {
+                        // menu display current data
+                        System.out.println("Your choice is: " + idx);
+                        System.out.println(new Income("2018-03-04", "CAT02", 356.45).getUserExpenses().get(0).getCategories());
+                        break;
+                    }
+                    case 3:
+                        // menu settings
+                        System.out.println("Your choice is: " + idx);
+                        System.out.println(new Income("2018-9-30", "CAT03", 3515.35).getUserExpenses().get(0).getDate());
+                        break;
+                }
 
             } catch (Exception e) {
                 continue;
