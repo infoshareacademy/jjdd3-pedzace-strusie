@@ -35,35 +35,28 @@ public class Menu {
      */
     public void chooseMenuItems(String menuDescr) {
 
-        int idx;
+        int idx=1;
 
         //displays menu items
         System.out.println(menuDescr);
 
         //selects items from menu
-        while (true) {
+        while (idx !=0) {
             try {
 
                 idx = new Scanner(System.in).nextInt();
-
-                if (idx == 0) {
-                    break;
-                }
 
                 if (idx < 1 || idx > menuItems.length - 1) {
                     continue;
                 }
                 //do something
+                new Income("2018-01-01", "CAT", 215.545,"OKOSAO");
                 System.out.println("Your choice is: " + idx);
 
-            } catch (NullPointerException e) {
-                break;
             } catch (Exception e) {
                 continue;
             }
-
         }
-
     }
 
     /**
