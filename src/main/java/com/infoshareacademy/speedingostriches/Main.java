@@ -4,20 +4,24 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static void main (String []args) throws FileNotFoundException {
+    public static void main(String[] args) throws Exception {
 
-        CreateFile myFile = new CreateFile();
-        String theFile = myFile.createFile();
+        //CreateFile myFile = new CreateFile();
+        String theFile = "marzec18.csv";
 
-        WriteToFile newWrite = new WriteToFile();
-        newWrite.writeToFile(theFile);
-
-
-        ReadFromFIle newRead = new ReadFromFIle();
-
-        newRead.readFromFile(theFile);
+        UpdateFile myUpdate = new UpdateFile();
 
 
+
+
+
+        for (int i=0; i<1; i++) {
+            myUpdate.UpdateMyFile(theFile, 3 );
+        }
+
+
+        //ReadFromFIle newRead = new ReadFromFIle();
+        //newRead.readFromFile(theFile);
 
 
     }

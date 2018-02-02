@@ -8,6 +8,11 @@ public class Income {
     String overHours;
     double totalIncome;
 
+    /**
+     * <b>Gets income.</b>
+     *
+     * {@link Expenses}
+     */
     public void addIncome(){
 
 
