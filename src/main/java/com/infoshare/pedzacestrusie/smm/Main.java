@@ -4,8 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Categories.restoreDefault();
-
+        Categories.main();
 
     }
 }
