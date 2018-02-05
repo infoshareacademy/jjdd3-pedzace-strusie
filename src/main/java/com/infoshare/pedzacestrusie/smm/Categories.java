@@ -10,11 +10,16 @@ public class Categories {
 
     public static void main() {
 
-        System.out.print("Categories settings\n" +
-                "---\n" +
+        System.out.print("SETTINGS - CATEGORIES\n\n" +
                 "Select option: \n" +
                 "1. Add category\n" +
-                "2. Show cate");
+                "2. Show categories\n" +
+                "3. Remove category\n" +
+                "4. Restore default categories\n\n" +
+                "Your choice: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String answer = scanner.next();
 
 
     }
@@ -42,10 +47,9 @@ public class Categories {
         System.out.println("Are you sure? Categories will be restored to default.\nType \"YES\" to delete, anything else will abort restoring.");
         Scanner scanner = new Scanner(System.in);
         String answer = answer = scanner.next();
-        if(answer.equals("YES")) {
+        if (answer.equals("YES")) {
             System.out.println("Deleted.");
-        }
-        else {
+        } else {
             System.out.println("Aborted.");
         }
     }
