@@ -5,50 +5,75 @@ import java.util.TreeSet;
 
 public class Categories {
 
-    private static TreeSet<String> categories = new TreeSet<>();
+    private TreeSet<String> categories = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
 
-    public static void main() {
+        //user case
+    public void addCategory() {
 
-        System.out.print("SETTINGS - CATEGORIES\n\n" +
-                "Select option: \n" +
-                "1. Add category\n" +
-                "2. Show categories\n" +
-                "3. Remove category\n" +
-                "4. Restore default categories\n\n" +
-                "Your choice: ");
-
+        System.out.print("Type new category: \n(\"q\" will abort)");
         Scanner scanner = new Scanner(System.in);
-        String answer = scanner.next();
+        String temp = scanner.nextLine();
+
+        if(temp == "q") {
+            System.out.println("Aborted.");
+        }
+        else {
+            categories.add(temp);
+            System.out.println("Added.");
+        }
 
 
     }
 
-    private static void addCategory() {
-        System.out.print("Type new category: ");
-        Scanner scanner = new Scanner(System.in);
-        String answer = scanner.next();
-        categories.add(answer);
-        System.out.println("Added.");
+        //developer case
+    public void addCategory(String category) {
+        categories.add(category);
     }
 
-    private static void showCategories() {
+    public void showCategories() {
         System.out.println("We have " + categories.size() + " categories.");
         System.out.println("Categories: " + categories);
     }
 
+    public void removeCategory() {
+        System.out.print("Type category to remove:\n(\"q\" will abort)");
+        Scanner scanner = new Scanner(System.in);
+        String temp = scanner.nextLine();
 
-    private void removeCategory() {
+        if(temp == "q") {
+            System.out.println("Aborted.");
+        }
+        else if (categories.contains(temp) == false) {
 
+        }
+        else {
+            categories.remove(temp);
+            System.out.println("Added.");
+        }
+        }
+
+        categories.remove(scanner.nextLine());
+        System.out.println("Removed.");
     }
 
-    private void restoreDefault() {
+    public void restoreDefault() {
 
-        System.out.println("Are you sure? Categories will be restored to default.\nType \"YES\" to delete, anything else will abort restoring.");
+        System.out.println("Are you sure? This will remove any category added by you.\nType \"YES\" to delete, anything else will abort restoring.");
         Scanner scanner = new Scanner(System.in);
-        String answer = answer = scanner.next();
-        if (answer.equals("YES")) {
-            System.out.println("Deleted.");
+        if (scanner.next().equals("YES")) {
+            categories.clear();
+
+            categories.add("Food");         // <-- DEFAULT CATEGORIES
+            categories.add("Snacks");
+            categories.add("Cleaning");
+            categories.add("Something#1");
+            categories.add("Something#2");
+            categories.add("Something#3");
+            categories.add("Something#4");
+
+            System.out.println("Restored.");
+
         } else {
             System.out.println("Aborted.");
         }
