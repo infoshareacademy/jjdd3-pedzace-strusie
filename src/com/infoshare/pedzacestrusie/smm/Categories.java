@@ -11,11 +11,11 @@ public class Categories {
         //user case
     public void addCategory() {
 
-        System.out.print("Type new category: \n(\"q\" will abort)");
+        System.out.print("Type new category: \n(\"q\" will abort)\n");
         Scanner scanner = new Scanner(System.in);
         String temp = scanner.nextLine();
 
-        if(temp == "q") {
+        if(temp.equals("q")) {
             System.out.println("Aborted.");
         }
         else {
@@ -36,25 +36,27 @@ public class Categories {
         System.out.println("Categories: " + categories);
     }
 
+        //user case
     public void removeCategory() {
-        System.out.print("Type category to remove:\n(\"q\" will abort)");
+        System.out.print("Type category to remove:\n(\"q\" will abort)\n");
         Scanner scanner = new Scanner(System.in);
         String temp = scanner.nextLine();
 
-        if(temp == "q") {
+        if(temp.equals("q")) {
             System.out.println("Aborted.");
         }
         else if (categories.contains(temp) == false) {
-
+            System.out.println("There is no such category.");
         }
         else {
             categories.remove(temp);
-            System.out.println("Added.");
+            System.out.println("Removed.");
         }
-        }
+    }
 
-        categories.remove(scanner.nextLine());
-        System.out.println("Removed.");
+        //developer case
+    public void removeCategory(String category) {
+        categories.remove(category);
     }
 
     public void restoreDefault() {
@@ -64,13 +66,18 @@ public class Categories {
         if (scanner.next().equals("YES")) {
             categories.clear();
 
-            categories.add("Food");         // <-- DEFAULT CATEGORIES
-            categories.add("Snacks");
-            categories.add("Cleaning");
-            categories.add("Something#1");
-            categories.add("Something#2");
-            categories.add("Something#3");
-            categories.add("Something#4");
+            categories.add("Accommodation");         // <-- DEFAULT CATEGORIES (alphabetical order)
+            categories.add("Children");
+            categories.add("Clothes");
+            categories.add("Entertainment");
+            categories.add("Food");
+            categories.add("Healthcare");
+            categories.add("Hygiene");
+            categories.add("Loans");
+            categories.add("Medias");
+            categories.add("Others");
+            categories.add("Savings");
+            categories.add("Transportation");
 
             System.out.println("Restored.");
 
