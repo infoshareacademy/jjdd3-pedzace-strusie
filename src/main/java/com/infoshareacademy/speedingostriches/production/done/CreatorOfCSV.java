@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 
-public class CreateFile {
+public class CreatorOfCSV {
 
     // it is needed to add functionality to ask user to add another name for the file
 
