@@ -5,10 +5,10 @@ import java.util.Scanner;
 /**
  * Author: Maciej Wanagos
  */
-public class CategoryMenu extends Menu{
+public class CategoryMenu extends Menu {
 
     //main menu description
-    private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();","Exit"};
+    private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
 
     public CategoryMenu() {
         chooseMenuItems(setMenuItems(categoryMenuItems));
@@ -57,8 +57,5 @@ public class CategoryMenu extends Menu{
                 continue;
             }
         }
-
-
     }
-
 }

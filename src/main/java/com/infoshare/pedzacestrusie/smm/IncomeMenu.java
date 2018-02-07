@@ -35,6 +35,7 @@ public class IncomeMenu extends Menu{
                 switch (idx) {
                     case 1: {
                         //income1
+                        new IncomeMenu();
                         System.out.println("Your choice is: " + idx);
                         break;
                     }

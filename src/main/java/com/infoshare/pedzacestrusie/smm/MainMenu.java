@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MainMenu extends Menu{
 
     //main menu description
-    private String[] mainMenuItems = {"Input your data", "Display current data", "Settings", "Exit"};
+    private String[] mainMenuItems = {"Input your income", "Display current expenses", "Settings", "Exit"};
 
     public MainMenu() {
         chooseMenuItems(setMenuItems(mainMenuItems));
@@ -37,14 +37,12 @@ public class MainMenu extends Menu{
                         // menu input expenses
                         new IncomeMenu();
                         System.out.println(setMenuItems(mainMenuItems));
-
                         break;
                     }
                     case 2: {
                         // menu display current data
                         new ExpensesMenu();
                         System.out.println(setMenuItems(mainMenuItems));
-
                         break;
                     }
                     case 3:
@@ -58,8 +56,5 @@ public class MainMenu extends Menu{
                 continue;
             }
         }
-
-
     }
-
 }
