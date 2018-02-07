@@ -18,11 +18,10 @@ import java.util.regex.Pattern;
 public class Income {
 
     private List<Expenses> userExpenses = new ArrayList<Expenses>();
-    private String date ="";
+    private String date = "";
     private String categories;
     private double expense;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 //    /**
 //     * Income of user
@@ -42,9 +41,9 @@ public class Income {
 
 
     public Income() {
-//        this.getUserExpenses();
+        this.getUserExpenses();
 //        this.getUserDate();
-        this.getFromUI("2001-13-10");
+//        this.getFromUI("2001-02-31");
     }
 
     /**
@@ -53,6 +52,9 @@ public class Income {
      * @return List of expenses
      */
     public void getUserExpenses() {
+        final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
         while (!Pattern.matches("2[0-9][0-9][0-9]-[0-1][0-2]-[0-3][0-9]", date)) {
             try {
 
@@ -61,32 +63,41 @@ public class Income {
 
                 date = new Scanner(System.in).next();
 
+                LocalDate localDate = LocalDate.parse(date, FORMATTER);
 
-//                if ( !) {
-//                    continue;
-//                }
+                System.out.println(localDate.getYear());
+                System.out.println(localDate.getMonthValue());
+                System.out.println(localDate.getDayOfMonth());
 
-            } catch (Exception e) {
-                continue;
+                if (!localDate.toString().equals(date)) {
+                    throw new DateTimeParseException(null, "This is not parsable!", 1);
+                }
+
+            } catch (DateTimeParseException exc) {
+                System.out.printf("%s is not parsable!%n", date);
+                date = "";
+//            } catch (Exception e) {
+//                System.out.printf("%s is not parsable!%n", date);
+//                continue;
             }
         }
 
 //        return userExpenses;
     }
 
-
-
-    public LocalDate getFromUI(String input) {
-        try {
-            LocalDate date = LocalDate.parse(input, FORMATTER);
-            return date;
-        } catch (DateTimeParseException exc) {
-            System.out.printf("%s is not parsable!%n", input);
-            throw exc;      // Rethrow the exception.
-        }
-
-
-    }
+//
+//
+//    public LocalDate getFromUI(String input) {
+//        try {
+//            LocalDate date = LocalDate.parse(input, FORMATTER);
+//            return date;
+//        } catch (DateTimeParseException exc) {
+//            System.out.printf("%s is not parsable!%n", input);
+//            throw exc;      // Rethrow the exception.
+//        }
+//
+//
+//    }
 
 
 }
