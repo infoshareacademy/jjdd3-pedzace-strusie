@@ -11,7 +11,7 @@ public class IncomeMenu extends Menu{
     private String[] incomeMenuItems = {"income menu1", "income menu 2", "income menu 3","Exit"};
 
     public IncomeMenu() {
-        chooseMenuItems(setMenuItems(incomeMenuItems));
+        chooseMenuItems(getMenuItems(incomeMenuItems));
     }
 
     @Override

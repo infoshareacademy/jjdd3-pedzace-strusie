@@ -7,11 +7,10 @@ import java.util.Scanner;
  */
 public class ExpensesMenu extends Menu{
 
-    //main menu description
     private String[] expensesMenuItems = {"Sum expenses by date", "Sum expenses by categories", "Sum expenses by months","Exit"};
 
     public ExpensesMenu() {
-        chooseMenuItems(setMenuItems(expensesMenuItems));
+        chooseMenuItems(getMenuItems(expensesMenuItems));
     }
 
     @Override
@@ -19,10 +18,8 @@ public class ExpensesMenu extends Menu{
 
         int idx = 1;
 
-        //displays menu items
         System.out.println(menuDescr);
 
-        //selects items from menu
         while (idx != 0) {
             try {
 

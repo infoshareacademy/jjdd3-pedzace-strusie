@@ -11,7 +11,7 @@ public class MainMenu extends Menu{
     private String[] mainMenuItems = {"Input your income", "Display current expenses", "Settings", "Exit"};
 
     public MainMenu() {
-        chooseMenuItems(setMenuItems(mainMenuItems));
+        chooseMenuItems(getMenuItems(mainMenuItems));
     }
 
     @Override
@@ -36,19 +36,19 @@ public class MainMenu extends Menu{
                     case 1: {
                         // menu input expenses
                         new IncomeMenu();
-                        System.out.println(setMenuItems(mainMenuItems));
+                        System.out.println(getMenuItems(mainMenuItems));
                         break;
                     }
                     case 2: {
                         // menu display current data
                         new ExpensesMenu();
-                        System.out.println(setMenuItems(mainMenuItems));
+                        System.out.println(getMenuItems(mainMenuItems));
                         break;
                     }
                     case 3:
                         // menu settings
                         new CategoryMenu();
-                        System.out.println(setMenuItems(mainMenuItems));
+                        System.out.println(getMenuItems(mainMenuItems));
                         break;
                 }
 

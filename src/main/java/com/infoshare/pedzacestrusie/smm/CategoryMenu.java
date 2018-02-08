@@ -11,7 +11,7 @@ public class CategoryMenu extends Menu {
     private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
 
     public CategoryMenu() {
-        chooseMenuItems(setMenuItems(categoryMenuItems));
+        chooseMenuItems(getMenuItems(categoryMenuItems));
     }
 
     @Override
