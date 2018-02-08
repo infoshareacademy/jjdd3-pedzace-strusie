@@ -1,4 +1,4 @@
-package com.roadrunner;
+package com.infoshare.pedzacestrusie.smm;
 
 import java.io.BufferedWriter;
 import java.io.File;

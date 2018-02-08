@@ -1,4 +1,4 @@
-package com.roadrunner;
+package com.infoshare.pedzacestrusie.smm;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,7 +12,7 @@ public class Reader {
     public void reader(String namesFile) {
         this.namesFile = namesFile;
 
-        //com.roadrunner.Reader o = new com.roadrunner.Reader();
+        //Reader o = new Reader();
 
 
         File fileReader = new File("./file.txt");

@@ -1,6 +1,4 @@
-package com.roadrunner;
-import java.io.File;
-import java.util.Scanner;
+package com.infoshare.pedzacestrusie.smm;
 
 public class Main {
 
