@@ -8,22 +8,24 @@ public class Categories {
     private TreeSet<String> categories = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
 
+    public TreeSet<String> getCategories() {
+        return categories;
+    }
+
         //user case
     public void addCategory() {
 
         System.out.print("Type new category: \n(\"q\" will abort)\n");
         Scanner scanner = new Scanner(System.in);
-        String temp = scanner.nextLine();
+        String tempScanner = scanner.nextLine();
 
-        if(temp.equals("q")) {
+        if(tempScanner.equals("q")) {
             System.out.println("Aborted.");
         }
         else {
-            categories.add(temp);
+            categories.add(tempScanner);
             System.out.println("Added.");
         }
-
-
     }
 
         //developer case
@@ -40,16 +42,16 @@ public class Categories {
     public void removeCategory() {
         System.out.print("Type category to remove:\n(\"q\" will abort)\n");
         Scanner scanner = new Scanner(System.in);
-        String temp = scanner.nextLine();
+        String tempScanner = scanner.nextLine();
 
-        if(temp.equals("q")) {
+        if(tempScanner.equals("q")) {
             System.out.println("Aborted.");
         }
-        else if (categories.contains(temp) == false) {
+        else if (categories.contains(tempScanner) == false) {
             System.out.println("There is no such category.");
         }
         else {
-            categories.remove(temp);
+            categories.remove(tempScanner);
             System.out.println("Removed.");
         }
     }

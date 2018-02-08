@@ -4,13 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Categories categories = new Categories();
 
 
-
         categories.restoreDefault();
-
-
+        categories.showCategories();
     }
 }
