@@ -1,4 +1,4 @@
-package com.infoshareacademy.speedingostriches.production.done;
+package com.infoshare.pedzacestrusie.smm.create_read_write;
 
 import com.infoshare.pedzacestrusie.smm.Expenses;
 import com.infoshare.pedzacestrusie.smm.Income;
@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
 
-public class WriteToCSV {
+public class WriteCSV {
 
     Income someIncome = new Income("14-02-2018", "mortage", 1450.34);  // sample record to add to our .csv file
 
@@ -21,7 +21,6 @@ public class WriteToCSV {
         String expense = String.valueOf(expenseList.get(0).getExpense());
 
         return dateExpense + "; " + categories + "; " + expense + "PLN";
-
     }
 
     public void writeToTheCsvFile(String fileName) {

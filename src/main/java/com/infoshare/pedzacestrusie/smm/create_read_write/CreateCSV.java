@@ -1,12 +1,19 @@
-package com.infoshareacademy.speedingostriches.production.done;
+package com.infoshare.pedzacestrusie.smm.create_read_write;
 
 import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
 
-public class CreatorOfCSV {
+public class CreateCSV {
 
-    public String createFile() {
+    public void createFile() {
+
+        String fileName = enterNameOfTheFile();
+        generateFile(fileName);
+
+    }
+
+    private String enterNameOfTheFile() {
 
         Scanner source = new Scanner(System.in);
 
@@ -14,8 +21,12 @@ public class CreatorOfCSV {
         String fileName = source.nextLine();
         fileName = fileName + ".csv";
 
-        File yourFile = new File(fileName);
+        return fileName;
+    }
 
+    private void generateFile(String nameOfFile) {
+
+        File yourFile = new File(nameOfFile);
         boolean fileExist = yourFile.exists();
 
         if (!fileExist) {
@@ -29,7 +40,7 @@ public class CreatorOfCSV {
         } else {
             System.out.println("The file is exist. Please choose another name for the file :) ");
         }
-        return fileName;
     }
+
 }
 
