@@ -17,6 +17,8 @@ public class Income {
      * @param categories String category of expenses
      * @param expense    double value of expenses
      */
+
+
     public Income(String date, String categories, double expense) {
 
         userExpenses.add(new Expenses(date, categories, expense));
@@ -29,6 +31,7 @@ public class Income {
      * @return List of expenses
      */
     public List<Expenses> getUserExpenses() {
+
         return userExpenses;
     }
 }

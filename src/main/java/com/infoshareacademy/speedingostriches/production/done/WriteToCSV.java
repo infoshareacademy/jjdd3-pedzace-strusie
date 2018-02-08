@@ -1,44 +1,40 @@
 package com.infoshareacademy.speedingostriches.production.done;
 
+import com.infoshare.pedzacestrusie.smm.Expenses;
+import com.infoshare.pedzacestrusie.smm.Income;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 
 public class WriteToCSV {
 
-    //create some simple array as an example
+    Income someIncome = new Income("14-02-2018", "mortage", 1450.34);  // sample record to add to our .csv file
 
-//    private List<String> expneseList = new ArrayList<String>();
-//
-//    public void someExampleArrays(){
-//
-//    }
+    private List<Expenses> expenseList = (List<Expenses>) Arrays.asList(someIncome.getUserExpenses().get(0));  // part of code made by codebin
 
-//    public static <T> void writeToTheCsvFile(String fileName, List<T> expenseList)
+    private String getDataFromExpenseList() {
 
+        String dateExpense = expenseList.get(0).getDate();
+        String categories = expenseList.get(0).getCategories();
+        String expense = String.valueOf(expenseList.get(0).getExpense());
 
+        return dateExpense + "; " + categories + "; " + expense + "PLN";
 
-    //method contain object class FileWriter and BufferWriter, it helps us to update information into
-    //some choose file for ex. add next line to the .csv file
-    //line 25-27 is only some values to show how methods works
+    }
 
-    public static void writeToTheCsvFile(String fileName) {
+    public void writeToTheCsvFile(String fileName) {
 
+        String writeValue = this.getDataFromExpenseList();
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
-            writer.write("next new value" + "\n");    // String.valueOf(expenseList.someValue)
-            writer.write("some category of shopping" + "\n");
-            writer.write("some expense" + "\n");
-        // method close BufferReader, clean the memory
+
+            writer.write(writeValue + "\n");
             writer.close();
-
         } catch (Exception e) {
-            System.out.println();
-
+            System.out.println("File is not exist!!!");
         }
-
     }
 }
