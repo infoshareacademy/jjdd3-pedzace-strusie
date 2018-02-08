@@ -4,33 +4,26 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Reader {
 
-    private String namesFile;
+    //metoda reader czyta kategorię wpisaną przez użytkownika
 
-    public void reader(String namesFile) {
-        this.namesFile = namesFile;
+       public String reader() {
 
-        //Reader o = new Reader();
+            String categories;
+            Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter category name: ");
+
+        categories = input.nextLine();
+
+        input.close();
+
+        return "Yours category name is: " + categories;
 
 
-        File fileReader = new File("./file.txt");
-
-
-        try {
-            BufferedReader read = new BufferedReader(new FileReader(namesFile));
-
-            String row = null;
-            while ((row = read.readLine()) != null) {
-                System.out.println(row);
-            }
-
-            read.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

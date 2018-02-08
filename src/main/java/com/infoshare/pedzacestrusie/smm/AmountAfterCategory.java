@@ -1,17 +1,19 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AmountAfterCategory {
 
-    private String date; //w formacje daty?
+    String date; 
 
-    private String categories;
+    String categories;
 
-    private double expense;
+    double expense;
 
 
-    public AmountAfterCategory (String date, String categories, double expense) {
+    public AmountAfterCategory(String date, String categories, double expense) {
 
         this.date = date;
         this.categories = categories;
@@ -25,31 +27,42 @@ public class AmountAfterCategory {
     public String getData() {
         return date;
     }
-    
-    public void setData(String  date) {
+
+    public void setData(String date) {
         this.date = date;
     }
 
-    public String getCategories() {
 
-        //AmountAfterCategory amountAfterCategory = new AmountAfterCategory("2018-02-05", "Eat", 23.10);
-        System.out.println("Enter the category after which you want to sum: ");
-        Scanner scanner = new Scanner(System.in);
-        String answer = scanner.next();
+    public String writingListElements() {
 
-        return answer;
+        List<String> lista = new ArrayList<String>();
+
+        String s = "ab,basd";
+        String[] tab = s.split(",");
+
+        //readerem czytam csv, dla każdej linii obiekt, setować pola, obiekt dodaję do listy,
+        //tworzę listę przed pętlą.
+        //streamy i filtrowanie -> na liście
+
+        lista.add("2018-02-08");
+        lista.add("drugi");
+
+        return lista.get(1);
+        //System.out.println(lista.get(1)); //wypisze "drugi"
+
     }
-    //może powinno być w nadklasie
+
     public int amount() {
 
+        int[] numbers = {1, 2, 3, 4, 5};
 
-        return 0;
+        for (int tmp : numbers) {
+            System.out.println(tmp);
+        }
+
+        return numbers.length;
+
     }
-
-
-
-
-
 
 
 }
