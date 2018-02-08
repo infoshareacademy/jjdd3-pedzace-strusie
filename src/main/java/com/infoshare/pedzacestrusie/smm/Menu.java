@@ -1,10 +1,5 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import java.util.Scanner;
-
-/**
- * Author: Maciej Wanagos
- */
 public abstract class Menu {
 
     private String[] menuItems;
@@ -18,11 +13,8 @@ public abstract class Menu {
         }
 
         menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
-
         return menuDescr;
     }
-
     protected abstract void chooseMenuItems(String menuDescr);
-
 }
 
