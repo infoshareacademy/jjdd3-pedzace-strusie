@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class MainMenu extends Menu{
 
-    //main menu description
     private String[] mainMenuItems = {"Input your income", "Display current expenses", "Settings", "Exit"};
 
     public MainMenu() {
@@ -19,10 +18,8 @@ public class MainMenu extends Menu{
 
         int idx = 1;
 
-        //displays menu items
         System.out.println(menuDescr);
 
-        //selects items from menu
         while (idx != 0) {
             try {
 
@@ -34,19 +31,16 @@ public class MainMenu extends Menu{
 
                 switch (idx) {
                     case 1: {
-                        // menu input expenses
                         new IncomeMenu();
                         System.out.println(getMenuItems(mainMenuItems));
                         break;
                     }
                     case 2: {
-                        // menu display current data
                         new ExpensesMenu();
                         System.out.println(getMenuItems(mainMenuItems));
                         break;
                     }
                     case 3:
-                        // menu settings
                         new CategoryMenu();
                         System.out.println(getMenuItems(mainMenuItems));
                         break;

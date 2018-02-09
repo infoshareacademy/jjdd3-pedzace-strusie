@@ -24,18 +24,6 @@ public class Expenses {
         return expense;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public void setExpense(double expense) {
-        this.expense = expense;
-    }
-
     @Override
     public String toString() {
         return "Expenses{" +
