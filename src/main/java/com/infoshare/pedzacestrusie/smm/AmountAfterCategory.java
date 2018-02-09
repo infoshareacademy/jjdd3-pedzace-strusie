@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class AmountAfterCategory {
 
-    String date; 
+    String date;
 
     String categories;
 
@@ -28,12 +28,11 @@ public class AmountAfterCategory {
         return date;
     }
 
-    public void setData(String date) {
-        this.date = date;
-    }
+    public String getCategories() {return categories;}
 
+    public double getExpense() {return expense;}
 
-    public String writingListElements() {
+  /*  public String writingListElements() {
 
         List<String> lista = new ArrayList<String>();
 
@@ -60,9 +59,13 @@ public class AmountAfterCategory {
             System.out.println(tmp);
         }
 
-        return numbers.length;
+        return numbers.length;*/
 
+    @Override
+    public String toString() {
+        return date +", "+ categories +", "+  expense;
     }
-
-
 }
+
+
+
