@@ -16,5 +16,7 @@ public abstract class Menu {
         return menuDescr;
     }
     protected abstract void chooseMenuItems(String menuDescr);
+
+    protected abstract void checkUserSelection();
 }
 

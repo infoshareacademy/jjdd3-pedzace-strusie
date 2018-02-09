@@ -1,5 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -7,8 +8,8 @@ import java.util.Scanner;
  */
 public class CategoryMenu extends Menu {
 
-    //main menu description
     private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
+    private int idx = 1;
 
     public CategoryMenu() {
         chooseMenuItems(getMenuItems(categoryMenuItems));
@@ -16,45 +17,39 @@ public class CategoryMenu extends Menu {
 
     @Override
     protected void chooseMenuItems(String menuDescr) {
-
-        int idx = 1;
-
-        //displays menu items
         System.out.println(menuDescr);
 
-        //selects items from menu
         while (idx != 0) {
             try {
-
                 idx = new Scanner(System.in).nextInt();
-
                 if (idx < 1 || idx > categoryMenuItems.length - 1) {
                     continue;
                 }
-
-                switch (idx) {
-                    case 1: {
-                        //addCategory
-                        System.out.println("Your choice is: " + idx);
-                        break;
-                    }
-                    case 2: {
-                        //showCategories
-                        System.out.println("Your choice is: " + idx);
-                        break;
-                    }
-                    case 3:
-                        //removeCategory
-                        System.out.println("Your choice is: " + idx);
-                        break;
-                    case 4:
-                        //restoreDefault
-                        System.out.println("Your choice is: " + idx);
-                        break;
-                }
-
-            } catch (Exception e) {
+                checkUserSelection();
+            } catch (InputMismatchException e) {
                 continue;
+            }
+        }
+    }
+
+    @Override
+    protected void checkUserSelection() {
+        switch (idx) {
+            case 1: {
+                System.out.println("Your choice is: " + idx);
+                break;
+            }
+            case 2: {
+                System.out.println("Your choice is: " + idx);
+                break;
+            }
+            case 3: {
+                System.out.println("Your choice is: " + idx);
+                break;
+            }
+            case 4: {
+                System.out.println("Your choice is: " + idx);
+                break;
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -7,7 +8,6 @@ import java.util.Scanner;
  */
 public class IncomeMenu extends Menu {
 
-    //main menu description
     private String[] incomeMenuItems = {"income menu1", "income menu 2", "income menu 3", "Exit"};
     private int idx = 1;
 
@@ -19,43 +19,35 @@ public class IncomeMenu extends Menu {
     protected void chooseMenuItems(String menuDescr) {
         System.out.println(menuDescr);
 
-        //selects items from menu
         while (idx != 0) {
             try {
-
                 idx = new Scanner(System.in).nextInt();
-
-                this.checkUserSelection();
-
-            } catch (Exception e) {
+                if (idx < 1 || idx > incomeMenuItems.length - 1) {
+                    continue;
+                }
+                checkUserSelection();
+            } catch (InputMismatchException e) {
                 continue;
             }
         }
-
     }
 
-    private void checkUserSelection() {
-        if (idx < 1 || idx > incomeMenuItems.length - 1) {
-            continue;
-        }
-
+    @Override
+    protected void checkUserSelection() {
         switch (idx) {
             case 1: {
-                //income1
-                new IncomeMenu();
                 System.out.println("Your choice is: " + idx);
+                new Income();
                 break;
             }
             case 2: {
-                //income2
                 System.out.println("Your choice is: " + idx);
                 break;
             }
-            case 3:
-                //income3
+            case 3: {
                 System.out.println("Your choice is: " + idx);
                 break;
+            }
         }
     }
-
 }
