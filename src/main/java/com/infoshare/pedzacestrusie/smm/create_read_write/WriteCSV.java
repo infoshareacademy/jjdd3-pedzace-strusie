@@ -8,11 +8,11 @@ import java.util.List;
 
 public class WriteCSV {
 
-    public void writeToTheCsvFile(String fileName, List<String> externalExpenseList) {
+    public void writeToTheCsvFile(String fileName, List<Expense> externalExpenseList) {
 
-        List<String> writeList = new ArrayList<>();
+        List<Expense> writeList = new ArrayList<>();
 
-        for (String x : externalExpenseList) {
+        for (Expense x : externalExpenseList) {
             writeList.add(x);
 
         }
@@ -20,8 +20,8 @@ public class WriteCSV {
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-            for (String y : writeList) {
-                writer.write(y + ";" +"\n");
+            for (Expense y : writeList) {
+                writer.write(y.getDaateOfExpense() + ";" + y.getCategoryOfExpense() + ";" + y.getValueOfExpense() + "\n");
             }
 
             writer.flush();
