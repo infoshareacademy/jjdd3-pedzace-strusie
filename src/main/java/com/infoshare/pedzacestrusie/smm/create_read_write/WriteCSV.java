@@ -8,20 +8,20 @@ import java.util.TreeSet;
 
 public class WriteCSV {
 
-    public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList) {
+    public void writeToTheCsvFileExpenses(List<Expenses> externalExpenseList) {
 
         String fileName = "expenses18.csv";
-        List<Expense> writeList = new ArrayList<>();
+        List<Expenses> writeList = new ArrayList<>();
 
-        for (Expense x : externalExpenseList) {
+        for (Expenses x : externalExpenseList) {
             writeList.add(x);
         }
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-            for (Expense y : writeList) {
-                writer.write( y.getDaateOfExpense() + ";" + y.getCategoryOfExpense() + ";" + y.getValueOfExpense() + "\n");
+            for (Expenses y : writeList) {
+                writer.write(y.getDate() + ";" + y.getCategories() + ";" + y.getExpense() + "\n");
             }
             writer.flush();
             writer.close();
@@ -43,7 +43,7 @@ public class WriteCSV {
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             for (Income y : writeList) {
-                writer.write( y.getDateOfIncome() + ";"   + y.getValueOfIncome() + "\n");
+                writer.write(y.getDateofIncome() + ";" + y.getValueOfIncome() + "\n");
             }
             writer.flush();
             writer.close();
@@ -54,10 +54,10 @@ public class WriteCSV {
 
     public void writeToTheCsvFileIncomes(TreeSet<Categories> externalCategoriesList) {
 
-        String fileName = "expenses18.csv";
-        Set<Categories> writeList = new TreeSet<>();
+        String fileName = "categories-default.csv";
+        List<Categories> writeList = new ArrayList<>();
 
-        for (Categories x : externalIncomeList) {
+        for (Categories x : externalCategoriesList) {
             writeList.add(x);
         }
 
@@ -65,7 +65,7 @@ public class WriteCSV {
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             for (Categories y : writeList) {
-                writer.write( y.getCategories() + "\n");
+                writer.write(y.getCategories() + "\n");
             }
             writer.flush();
             writer.close();

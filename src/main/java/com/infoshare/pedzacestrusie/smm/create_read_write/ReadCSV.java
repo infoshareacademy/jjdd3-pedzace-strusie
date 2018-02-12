@@ -6,15 +6,15 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class ReadCSV {
 
-    public List<Expense> readFromFileExpenses() throws Exception {
+    public List<Expenses> readFromFileExpenses() throws Exception {
 
         String expensesData = "expenses18.csv";
-        List<Expense> readListExp = new ArrayList<>();
+        List<Expenses> readListExp = new ArrayList<>();
 
         FileReader myFile = new FileReader(expensesData);
         BufferedReader fileReader = new BufferedReader(myFile);
@@ -24,12 +24,11 @@ public class ReadCSV {
 
         try {
             while ((line = fileReader.readLine()) != null) {
-
                 String[] arrays = line.split(";");
-                Expense expense = new Expense();
-                expense.setDaateOfExpense(LocalDate.parse(arrays[0], dtf));
-                expense.setCategoryOfExpense(arrays[1]);
-                expense.setValueOfExpense(Double.parseDouble(arrays[2]));
+                Expenses expense = new Expenses();
+                expense.setDate(LocalDate.parse(arrays[0], dtf));
+                expense.setCategories(arrays[1]);
+                expense.setExpense(Double.parseDouble(arrays[2]));
                 readListExp.add(expense);
             }
             fileReader.close();
@@ -43,7 +42,7 @@ public class ReadCSV {
     public List<Income> readFromFileIncomes() throws Exception {
 
         String incomesData = "incomes18.csv";
-        List<Expense> readListInc = new ArrayList<>();
+        List<Income> readListInc = new ArrayList<>();
 
         FileReader myFile = new FileReader(incomesData);
         BufferedReader fileReader = new BufferedReader(myFile);
@@ -56,17 +55,16 @@ public class ReadCSV {
 
                 String[] arrays = line.split(";");
                 Income income = new Income();
-                income.setDateOfExpense(LocalDate.parse(arrays[0], dtf)); // tutaj dodaj informacje z klasy Income - data
-                income.setCategoryOfExpense(arrays[1]); // tutaj dodaj info z klasy Income - wartość
-                income.setValueOfExpense(Double.parseDouble(arrays[2])); // to usunąć
-                readListInc.add(expense);
+                income.setDateOfIncome(LocalDate.parse(arrays[0], dtf));
+                income.setValueOfIncome(Double.parseDouble(arrays[1]));
+                readListInc.add(income);
             }
             fileReader.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return readListExp;
+        return readListInc;
 
     }
 
@@ -79,16 +77,12 @@ public class ReadCSV {
         BufferedReader fileReader = new BufferedReader(myFile);
         String line = null;
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
         try {
             while ((line = fileReader.readLine()) != null) {
 
                 String[] arrays = line.split(";");
                 Categories category = new Categories();
-                category.setDateOfExpense(LocalDate.parse(arrays[0], dtf)); // tutaj dodaj informacje z klasy Income - data
-                //income.setCategoryOfExpense(arrays[1]); // tutaj dodaj info z klasy Income - wartość
-                //income.setValueOfExpense(Double.parseDouble(arrays[2])); // to usunąć
+                category.setCategories(arrays[0]);
                 readListCat.add(category);
             }
             fileReader.close();
@@ -97,8 +91,5 @@ public class ReadCSV {
             e.printStackTrace();
         }
         return readListCat;
-
     }
-
-
 }
