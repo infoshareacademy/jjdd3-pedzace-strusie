@@ -1,18 +1,19 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
 import java.io.ObjectInput;
+import java.time.LocalDate;
 
-public class Expense  {
+public class Expense {
 
-    private String daateOfExpense;
+    private LocalDate daateOfExpense;
     private String categoryOfExpense;
     private double valueOfExpense;
 
-    public String getDaateOfExpense() {
+    public LocalDate getDaateOfExpense() {
         return daateOfExpense;
     }
 
-    public void setDaateOfExpense(String daateOfExpense) {
+    public void setDaateOfExpense(LocalDate daateOfExpense) {
         this.daateOfExpense = daateOfExpense;
     }
 
@@ -32,13 +33,12 @@ public class Expense  {
         this.valueOfExpense = valueOfExpense;
     }
 
-    public Expense(String daateOfExpense, String categoryOfExpense, double valueOfExpense) {
-        this.daateOfExpense = daateOfExpense;
-        this.categoryOfExpense = categoryOfExpense;
-        this.valueOfExpense = valueOfExpense;
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "daateOfExpense=" + daateOfExpense +
+                ", categoryOfExpense='" + categoryOfExpense + '\'' +
+                ", valueOfExpense=" + valueOfExpense +
+                '}';
     }
-
-
-
-
 }
