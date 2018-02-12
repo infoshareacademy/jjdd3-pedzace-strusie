@@ -3,9 +3,7 @@ package com.infoshare.pedzacestrusie.smm;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Income {
 
@@ -19,6 +17,7 @@ public class Income {
 
     public Income() {
         this.getUserExpenses();
+//        this.getUserCategorie();
     }
 
     public void getUserExpenses() {
@@ -45,4 +44,12 @@ public class Income {
     private void parseDateFromUser() {
         localDate = LocalDate.parse(date, FORMATTER);
     }
+
+    public void getUserCategorie(Set<String> categorieSet) {
+        String[] categories = categorieSet.stream().toArray(String[]::new);
+
+        Arrays.stream(categories).forEach(System.out::println);
+    }
+
+
 }
