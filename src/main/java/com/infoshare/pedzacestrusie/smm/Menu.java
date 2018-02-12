@@ -15,6 +15,7 @@ public abstract class Menu {
         menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
         return menuDescr;
     }
+
     protected abstract void chooseMenuItems(String menuDescr);
 
     protected abstract void checkUserSelection();

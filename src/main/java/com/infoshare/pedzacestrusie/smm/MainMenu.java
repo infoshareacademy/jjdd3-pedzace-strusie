@@ -3,9 +3,6 @@ package com.infoshare.pedzacestrusie.smm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Author: Maciej Wanagos
- */
 public class MainMenu extends Menu {
 
     private String[] mainMenuItems = {"Input your income", "Display current expenses", "Settings", "Exit"};

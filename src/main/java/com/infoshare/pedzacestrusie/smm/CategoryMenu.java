@@ -3,9 +3,6 @@ package com.infoshare.pedzacestrusie.smm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Author: Maciej Wanagos
- */
 public class CategoryMenu extends Menu {
 
     private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};

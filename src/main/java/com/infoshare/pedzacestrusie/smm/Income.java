@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Author: Maciej Wanagos
- */
 public class Income {
 
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -36,7 +33,7 @@ public class Income {
         }
     }
 
-    private boolean isDataFormatIsOk(){
+    private boolean isDataFormatIsOk() {
         return localDate.toString().equals(date);
     }
 

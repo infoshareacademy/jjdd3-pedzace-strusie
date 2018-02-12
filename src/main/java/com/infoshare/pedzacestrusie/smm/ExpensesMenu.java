@@ -3,12 +3,9 @@ package com.infoshare.pedzacestrusie.smm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Author: Maciej Wanagos
- */
-public class ExpensesMenu extends Menu{
+public class ExpensesMenu extends Menu {
 
-    private String[] expensesMenuItems = {"Sum expenses by date", "Sum expenses by categories", "Sum expenses by months","Exit"};
+    private String[] expensesMenuItems = {"Sum expenses by date", "Sum expenses by categories", "Sum expenses by months", "Exit"};
     private int idx = 1;
 
     public ExpensesMenu() {
@@ -43,7 +40,7 @@ public class ExpensesMenu extends Menu{
                 System.out.println("Ania: " + idx);
                 break;
             }
-            case 3:{
+            case 3: {
                 System.out.println("Ania: " + idx);
                 break;
             }
