@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class Income {
+public class Budget {
 
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private List<Expenses> userExpenses = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Income {
     private LocalDate localDate = LocalDate.now();
 
 
-    public Income() {
+    public Budget() {
         this.getUserExpenses();
 //        this.getUserCategorie();
     }
@@ -51,5 +51,9 @@ public class Income {
         Arrays.stream(categories).forEach(System.out::println);
     }
 
+    public void readUserCategory(){
+        System.out.println("Choose category[Cat1, Cat2, Cat3]: ");
+        categories = new Scanner(System.in).next();
+    }
 
 }

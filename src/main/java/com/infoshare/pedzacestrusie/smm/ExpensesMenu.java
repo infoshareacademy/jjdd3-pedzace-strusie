@@ -1,8 +1,5 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class ExpensesMenu extends Menu {
 
     private String[] expensesMenuItems = {"Sum expenses by date", "Sum expenses by categories", "Sum expenses by months", "Exit"};
@@ -15,22 +12,12 @@ public class ExpensesMenu extends Menu {
     @Override
     protected void chooseMenuItems(String menuDescr) {
         System.out.println(menuDescr);
+        readInputFromUser(expensesMenuItems.length);
 
-        while (idx != 0) {
-            try {
-                idx = new Scanner(System.in).nextInt();
-                if (idx < 1 || idx > expensesMenuItems.length - 1) {
-                    continue;
-                }
-                checkUserSelection();
-            } catch (InputMismatchException e) {
-                continue;
-            }
-        }
     }
 
     @Override
-    protected void checkUserSelection() {
+    protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
                 System.out.println("Ania: " + idx);
