@@ -1,12 +1,16 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
 
+import org.junit.experimental.categories.Categories;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class ReadCSV {
@@ -68,10 +72,10 @@ public class ReadCSV {
 
     }
 
-    public List<Categories> readFromFileCategories() throws Exception {
+    public Set<Categories> readFromFileCategories() throws Exception {
 
         String incomesData = "categories-default.csv";
-        List<Categories> readListCat = new ArrayList<>();
+        Set<Categories> readListCat = new TreeSet<>();
 
         FileReader myFile = new FileReader(incomesData);
         BufferedReader fileReader = new BufferedReader(myFile);
