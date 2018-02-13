@@ -1,5 +1,9 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
+import com.infoshare.pedzacestrusie.smm.Categories;
+import com.infoshare.pedzacestrusie.smm.Expenses;
+import com.infoshare.pedzacestrusie.smm.Incomes;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -30,20 +34,20 @@ public class WriteCSV {
         }
     }
 
-    public void writeToTheCsvFileIncomes(List<Income> externalIncomeList) {
+    public void writeToTheCsvFileIncomes(List<Incomes> externalIncomeList) {
 
         String fileName = "incomes18.csv";
-        List<Income> writeList = new ArrayList<>();
+        List<Incomes> writeList = new ArrayList<>();
 
-        for (Income x : externalIncomeList) {
+        for (Incomes x : externalIncomeList) {
             writeList.add(x);
         }
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-            for (Income y : writeList) {
-                writer.write(y.getDateofIncome() + ";" + y.getValueOfIncome() + "\n");
+            for (Incomes y : writeList) {
+                writer.write(y.getDate() + ";" + y.getIncomes() + "\n");
             }
             writer.flush();
             writer.close();
