@@ -1,11 +1,11 @@
 package com.infoshare.pedzacestrusie.smm;
 
-public class CategoryMenu extends Menu {
+public class CategoriesMenu extends Menu {
 
     private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
     private int idx = 1;
 
-    public CategoryMenu() {
+    public CategoriesMenu() {
         chooseMenuItems(getMenuItems(categoryMenuItems));
     }
 

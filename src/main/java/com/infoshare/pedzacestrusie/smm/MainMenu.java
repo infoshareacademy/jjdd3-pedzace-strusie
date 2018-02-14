@@ -29,7 +29,7 @@ public class MainMenu extends Menu {
                 break;
             }
             case 3:
-                new CategoryMenu();
+                new CategoriesMenu();
                 System.out.println(getMenuItems(mainMenuItems));
                 break;
         }

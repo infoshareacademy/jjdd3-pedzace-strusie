@@ -36,8 +36,8 @@ public abstract class Menu {
 
     }
 
-    protected void chooseMenuItems(String menuDescr){};
+    protected abstract void chooseMenuItems(String menuDescr);
 
-    protected void checkUserSelection(int idx){};
+    protected abstract void checkUserSelection(int idx);
 }
 

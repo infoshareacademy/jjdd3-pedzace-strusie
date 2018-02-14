@@ -16,9 +16,8 @@ public class InputService {
     private LocalDate localDate = LocalDate.now();
 
     public InputService() {
-//        this.getUserExpenses();
+        this.getUserExpenses();
 //        this.printUserCategories(categorySet);
-        new SubCategoryMenu();
         this.readUserCategories();
         this.readUserExpenses();
         this.setListExpenses();
@@ -56,8 +55,9 @@ public class InputService {
     }
 
     public void readUserCategories() {
-        System.out.println("Choose category: ");
-        categories = new Scanner(System.in).next();
+//        System.out.println("Choose category: ");
+//        categories = new Scanner(System.in).next();
+        categories = new SubCategoriesMenu().getCategories();
         System.out.println(categories);
     }
 
