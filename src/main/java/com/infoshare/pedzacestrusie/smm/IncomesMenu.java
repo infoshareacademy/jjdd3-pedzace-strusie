@@ -1,26 +1,27 @@
 package com.infoshare.pedzacestrusie.smm;
 
-public class CategoryMenu extends Menu {
+public class IncomesMenu extends Menu {
 
-    private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
+    private String[] incomesMenuItems = {"income menu1", "income menu 2", "income menu 3", "Exit"};
     private int idx = 1;
 
-    public CategoryMenu() {
-        chooseMenuItems(getMenuItems(categoryMenuItems));
+    public IncomesMenu() {
+        chooseMenuItems(getMenuItems(incomesMenuItems));
     }
 
     @Override
     protected void chooseMenuItems(String menuDescr) {
         System.out.println(menuDescr);
-        readInputFromUser(categoryMenuItems.length);
-
+        readInputFromUser(incomesMenuItems.length);
     }
 
     @Override
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                System.out.println("Your choice is: " + idx);
+                new InputService();
+                System.out.println(getMenuItems(incomesMenuItems));
+
                 break;
             }
             case 2: {
@@ -28,10 +29,6 @@ public class CategoryMenu extends Menu {
                 break;
             }
             case 3: {
-                System.out.println("Your choice is: " + idx);
-                break;
-            }
-            case 4: {
                 System.out.println("Your choice is: " + idx);
                 break;
             }
