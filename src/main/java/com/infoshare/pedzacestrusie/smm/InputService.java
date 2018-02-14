@@ -8,7 +8,7 @@ import java.util.*;
 public class InputService {
 
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
+    private Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
     private List<Expense> userExpense = new ArrayList<>();
     private String date = "";
     private String categories;
@@ -16,8 +16,9 @@ public class InputService {
     private LocalDate localDate = LocalDate.now();
 
     public InputService() {
-        this.getUserExpenses();
-        this.printUserCategories(categorySet);
+//        this.getUserExpenses();
+//        this.printUserCategories(categorySet);
+        new SubCategoryMenu();
         this.readUserCategories();
         this.readUserExpenses();
         this.setListExpenses();
