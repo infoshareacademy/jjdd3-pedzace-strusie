@@ -1,9 +1,5 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
-import com.infoshare.pedzacestrusie.smm.Categories;
-import com.infoshare.pedzacestrusie.smm.Expenses;
-import com.infoshare.pedzacestrusie.smm.Incomes;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;

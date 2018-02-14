@@ -1,9 +1,7 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
-import com.infoshare.pedzacestrusie.smm.Expenses;
-import com.infoshare.pedzacestrusie.smm.Incomes;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +15,23 @@ public class CSVReader {
         String expensesData = "expenses18.csv";
         List<Expenses> readListExp = new ArrayList<>();
 
-        FileReader myFile = new FileReader(expensesData);
-        BufferedReader fileReader = new BufferedReader(myFile);
-        String line = null;
+        BufferedReader fileReader =filePreparation(expensesData);
 
-        while ((line = fileReader.readLine()) != null) {
-            String[] arrays = line.split(";");
-            Expenses expense = new Expenses(null, null, 0);
-            expense.setDate(arrays[0]);
-            expense.setCategories(arrays[1]);
-            expense.setExpense(Double.parseDouble(arrays[2]));
-            readListExp.add(expense);
+        String line = null;
+        try {
+            while ((line = fileReader.readLine()) != null) {
+                String[] arrays = line.split(";");
+                Expenses expense = new Expenses(null, null, 0);
+                expense.setDate(arrays[0]);
+                expense.setCategories(arrays[1]);
+                expense.setExpense(Double.parseDouble(arrays[2]));
+                readListExp.add(expense);
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e){
+            System.out.println("File is not exist!!!");
         }
-        fileReader.close();
+
 
         return readListExp;
     }
@@ -39,30 +41,33 @@ public class CSVReader {
         String incomesData = "incomes18.csv";
         List<Incomes> readListInc = new ArrayList<>();
 
-        FileReader myFile = new FileReader(incomesData);
-        BufferedReader fileReader = new BufferedReader(myFile);
+        BufferedReader fileReader =filePreparation(incomesData);
         String line = null;
+        try {
+            while ((line = fileReader.readLine()) != null) {
 
-        while ((line = fileReader.readLine()) != null) {
-
-            String[] arrays = line.split(";");
-            Incomes income = new Incomes(null, 0.0);
-            income.setDate(arrays[0]);
-            income.setIncomes(Double.parseDouble(arrays[1]));
-            readListInc.add(income);
+                String[] arrays = line.split(";");
+                Incomes income = new Incomes(null, 0.0);
+                income.setDate(arrays[0]);
+                income.setIncomes(Double.parseDouble(arrays[1]));
+                readListInc.add(income);
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e){
+            System.out.println("File is not exist!!!");
         }
-        fileReader.close();
+
 
         return readListInc;
     }
 
     public TreeSet<String> readFromFileCategories() throws Exception {
 
-        String incomesData = "categories-default.csv";
+        String categories = "categories-default.csv";
         TreeSet<String> readListCat = new TreeSet<>();
 
-        FileReader myFile = new FileReader(incomesData);
-        BufferedReader fileReader = new BufferedReader(myFile);
+        BufferedReader fileReader =filePreparation(categories);
+
         String line = null;
 
         try {
@@ -71,9 +76,16 @@ public class CSVReader {
             }
             fileReader.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("File is not exist!!!");
         }
         return readListCat;
+    }
+
+    private BufferedReader filePreparation (String inputFile) throws Exception{
+        FileReader myFile = new FileReader(inputFile);
+        BufferedReader fileReader = new BufferedReader(myFile);
+
+        return fileReader;
     }
 }
