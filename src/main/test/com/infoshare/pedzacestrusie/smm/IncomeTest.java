@@ -13,7 +13,7 @@ public class IncomeTest {
 //    @Test
 //    public void shouldParseDateSuccessfully() {
 //        LocalDate expected = LocalDate.of(2018, 02, 07);
-//        Budget subject = new Budget();
+//        InputService subject = new InputService();
 //
 //        LocalDate actual = subject.getFromUI("2018-02-07");
 //        assertEquals(actual, expected);

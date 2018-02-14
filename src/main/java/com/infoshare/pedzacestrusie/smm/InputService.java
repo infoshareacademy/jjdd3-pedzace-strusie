@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class Budget {
+public class InputService {
 
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private List<Expenses> userExpenses = new ArrayList<>();
@@ -13,11 +13,14 @@ public class Budget {
     private String categories;
     private double expense;
     private LocalDate localDate = LocalDate.now();
+    Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
 
-
-    public Budget() {
+    public InputService() {
         this.getUserExpenses();
-//        this.getUserCategorie();
+        this.printUserCategories(categorySet);
+        this.readUserCategories();
+        this.readUserExpenses();
+        this.setListExpenses();
     }
 
     public void getUserExpenses() {
@@ -45,15 +48,29 @@ public class Budget {
         localDate = LocalDate.parse(date, FORMATTER);
     }
 
-    public void getUserCategorie(Set<String> categorieSet) {
-        String[] categories = categorieSet.stream().toArray(String[]::new);
-
-        Arrays.stream(categories).forEach(System.out::println);
+    public void printUserCategories(Set<String> categorySet) {
+        String[] categories = categorySet.stream().toArray(String[]::new);
+        String stringCategories =  Arrays.stream(categories).reduce("",(i,a)->i+a+"\t");
+        System.out.println(stringCategories);
     }
 
-    public void readUserCategory(){
-        System.out.println("Choose category[Cat1, Cat2, Cat3]: ");
+    public void readUserCategories(){
+        System.out.println("Choose category: ");
         categories = new Scanner(System.in).next();
+        System.out.println(categories);
     }
+
+    public void readUserExpenses(){
+        System.out.println("Choose your expense: ");
+        expense = new Scanner(System.in).nextDouble();
+        System.out.println(expense);
+    }
+
+public void setListExpenses(){
+    System.out.println(date+"\t"+ categories+"\t"+expense);
+        userExpenses.add(new Expenses(date,categories,expense));
+}
+
+
 
 }

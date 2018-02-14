@@ -19,7 +19,7 @@ public class IncomesMenu extends Menu {
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                new Budget();
+                new InputService();
                 System.out.println(getMenuItems(incomesMenuItems));
 
                 break;

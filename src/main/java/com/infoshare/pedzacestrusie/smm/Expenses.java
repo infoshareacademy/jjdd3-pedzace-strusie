@@ -6,6 +6,15 @@ public class Expenses {
     private String categories;
     private double expense;
 
+    public Expenses() {
+    }
+
+    public Expenses(String date, String categories, double expense) {
+        this.date = date;
+        this.categories = categories;
+        this.expense = expense;
+    }
+
     public String getDate() {
         return date;
     }
