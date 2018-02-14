@@ -1,6 +1,10 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
+import com.infoshare.pedzacestrusie.smm.Expenses;
+import org.junit.experimental.categories.Categories;
+
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +12,7 @@ import java.util.TreeSet;
 
 public class CSVWriter {
 
-    public void writeToTheCsvFileExpenses(List<Expenses> externalExpenseList) {
+    public void writeToTheCsvFileExpenses(List<Expenses> externalExpenseList) throws Exception {
 
         String fileName = "expenses18.csv";
         List<Expenses> writeList = new ArrayList<>();
@@ -25,8 +29,8 @@ public class CSVWriter {
             }
             writer.flush();
             writer.close();
-        } catch (Exception e) {
-            System.out.println("File is not exist!!!");
+        } catch (FileNotFoundException e) {
+            System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
 
@@ -49,7 +53,7 @@ public class CSVWriter {
             writer.flush();
             writer.close();
         } catch (Exception e) {
-            System.out.println("File is not exist!!!");
+            System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
 
@@ -71,9 +75,7 @@ public class CSVWriter {
             writer.flush();
             writer.close();
         } catch (Exception e) {
-            System.out.println("File is not exist!!!");
+            System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
-
-
 }

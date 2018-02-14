@@ -1,5 +1,7 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
+import com.infoshare.pedzacestrusie.smm.Expenses;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,7 +31,7 @@ public class CSVReader {
             }
             fileReader.close();
         } catch (FileNotFoundException e){
-            System.out.println("File is not exist!!!");
+            System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
         }
 
 
@@ -54,7 +56,7 @@ public class CSVReader {
             }
             fileReader.close();
         } catch (FileNotFoundException e){
-            System.out.println("File is not exist!!!");
+            System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
         }
 
 
@@ -77,7 +79,7 @@ public class CSVReader {
             fileReader.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("File is not exist!!!");
+            System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
         }
         return readListCat;
     }
