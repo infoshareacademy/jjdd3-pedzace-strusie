@@ -1,6 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import com.infoshare.pedzacestrusie.smm.create_read_write.ReadCSV;
+import com.infoshare.pedzacestrusie.smm.create_read_write.CSVReader;
 
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -10,7 +10,7 @@ public class Categories {
     private TreeSet<String> categories = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
     Categories() {
-        ReadCSV readFromFile = new ReadCSV();
+        CSVReader readFromFile = new CSVReader();
      //   categories.addAll(readFromFile.readFromFileCategories("Categories.txt"));
     }
 
@@ -74,7 +74,7 @@ public class Categories {
         if (scanner.next().equals("YES")) {
             categories.clear();
 
-            ReadCSV readFromFile = new ReadCSV();
+            CSVReader readFromFile = new CSVReader();
            // categories.addAll(readFromFile("DefaultCategories.txt"));
 
             System.out.println("Restored.");

@@ -5,6 +5,11 @@ public class Incomes {
     private String date;
     private Double incomes;
 
+    public Incomes(String date, Double incomes) {
+        this.date = date;
+        this.incomes = incomes;
+    }
+
     public String getDate() {
         return date;
     }

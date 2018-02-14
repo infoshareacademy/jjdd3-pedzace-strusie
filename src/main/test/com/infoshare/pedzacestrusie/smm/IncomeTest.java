@@ -1,11 +1,11 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import org.junit.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.*;
+//import org.junit.Test;
+//
+//import java.time.LocalDate;
+//
+//import static org.junit.Assert.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
 
 public class IncomeTest {

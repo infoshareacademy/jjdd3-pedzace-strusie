@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class WriteCSV {
+public class CSVWriter {
 
     public void writeToTheCsvFileExpenses(List<Expenses> externalExpenseList) {
 
@@ -46,6 +46,7 @@ public class WriteCSV {
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
+
             for (Incomes y : writeList) {
                 writer.write(y.getDate() + ";" + y.getIncomes() + "\n");
             }
@@ -56,7 +57,7 @@ public class WriteCSV {
         }
     }
 
-    public void writeToTheCsvFileIncomes(TreeSet<Categories> externalCategoriesList) {
+    public void writeToTheCsvFileCategories(TreeSet<Categories> externalCategoriesList) {
 
         String fileName = "categories-default.csv";
         List<Categories> writeList = new ArrayList<>();
