@@ -8,12 +8,12 @@ import java.util.*;
 public class InputService {
 
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private List<Expenses> userExpenses = new ArrayList<>();
+    Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
+    private List<Expense> userExpense = new ArrayList<>();
     private String date = "";
     private String categories;
     private double expense;
     private LocalDate localDate = LocalDate.now();
-    Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
 
     public InputService() {
         this.getUserExpenses();
@@ -50,27 +50,25 @@ public class InputService {
 
     public void printUserCategories(Set<String> categorySet) {
         String[] categories = categorySet.stream().toArray(String[]::new);
-        String stringCategories =  Arrays.stream(categories).reduce("",(i,a)->i+a+"\t");
+        String stringCategories = Arrays.stream(categories).reduce("", (i, a) -> i + a + "\t");
         System.out.println(stringCategories);
     }
 
-    public void readUserCategories(){
+    public void readUserCategories() {
         System.out.println("Choose category: ");
         categories = new Scanner(System.in).next();
         System.out.println(categories);
     }
 
-    public void readUserExpenses(){
+    public void readUserExpenses() {
         System.out.println("Choose your expense: ");
         expense = new Scanner(System.in).nextDouble();
         System.out.println(expense);
     }
 
-public void setListExpenses(){
-    System.out.println(date+"\t"+ categories+"\t"+expense);
-        userExpenses.add(new Expenses(date,categories,expense));
-}
-
-
+    public void setListExpenses() {
+        System.out.println(localDate + "\t" + categories + "\t" + expense);
+        userExpense.add(new Expense(localDate, categories, expense));
+    }
 
 }

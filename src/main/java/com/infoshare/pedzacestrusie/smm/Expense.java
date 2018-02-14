@@ -1,21 +1,20 @@
 package com.infoshare.pedzacestrusie.smm;
 
-public class Expenses {
+import java.time.LocalDate;
 
-    private String date;
+public class Expense {
+
+    private LocalDate date;
     private String categories;
     private double expense;
 
-    public Expenses() {
-    }
-
-    public Expenses(String date, String categories, double expense) {
+    public Expense(LocalDate date, String categories, double expense) {
         this.date = date;
         this.categories = categories;
         this.expense = expense;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -27,21 +26,9 @@ public class Expenses {
         return expense;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public void setExpense(double expense) {
-        this.expense = expense;
-    }
-
     @Override
     public String toString() {
-        return "Expenses{" +
+        return "Expense{" +
                 "date='" + date + '\'' +
                 ", categories='" + categories + '\'' +
                 ", expense=" + expense +

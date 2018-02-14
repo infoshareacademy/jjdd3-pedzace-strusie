@@ -1,6 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
-public class Incomes {
+public class Income {
 
     private String date;
     private double incomes;
@@ -23,7 +23,7 @@ public class Incomes {
 
     @Override
     public String toString() {
-        return "Incomes{" +
+        return "Income{" +
                 "date='" + date + '\'' +
                 ", incomes=" + incomes +
                 '}';
