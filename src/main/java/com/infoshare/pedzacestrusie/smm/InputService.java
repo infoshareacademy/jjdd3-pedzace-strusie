@@ -26,7 +26,7 @@ public class InputService {
     public void getUserExpenses() {
         while (!isDataFormatIsOk()) {
             try {
-                this.getDateFromUser();
+                this.readDateFromUser();
                 this.parseDateFromUser();
             } catch (DateTimeParseException exc) {
                 System.out.printf("%s is not parsable!%n", date);
@@ -39,7 +39,7 @@ public class InputService {
         return localDate.toString().equals(date);
     }
 
-    private void getDateFromUser() {
+    private void readDateFromUser() {
         System.out.println("Enter date[YYYY-MM-DD]: ");
         date = new Scanner(System.in).next();
     }

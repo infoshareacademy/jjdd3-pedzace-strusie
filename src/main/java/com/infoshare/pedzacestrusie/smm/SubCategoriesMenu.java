@@ -1,13 +1,18 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
-public class SubCategoriesMenu extends Menu{
+public class SubCategoriesMenu extends Menu {
 
-    private String[] subCategoryMenuItems = {"cat01", "cat02", "cat03", "cat04", "Exit"};
+    private Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
+    String[] subCategoryMenuItems = categorySet.stream().toArray(String[]::new);
+
     private int idx = 1;
     private String categories;
+
+    public SubCategoriesMenu() {
+        chooseMenuItems(setMenuItems(subCategoryMenuItems));
+    }
 
     public String getCategories() {
         return categories;
@@ -17,34 +22,24 @@ public class SubCategoriesMenu extends Menu{
         this.categories = categories;
     }
 
-    public SubCategoriesMenu() {
-        chooseMenuItems(getMenuItems(subCategoryMenuItems));
-    }
-
     @Override
     protected void chooseMenuItems(String menuDescr) {
         System.out.println(menuDescr);
-        readInputFromUser(subCategoryMenuItems.length);
+        while (true) {
+            try {
+                idx = new Scanner(System.in).nextInt();
+                if (idx >= 0 && idx < menuDescr.length()) {
+                    checkUserSelection(idx);
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                continue;
+            }
+        }
     }
 
     @Override
     protected void checkUserSelection(int idx) {
-        this.setCategories(subCategoryMenuItems[idx+1]);
+        this.setCategories(subCategoryMenuItems[idx - 1]);
     }
-
-//    protected String chooseSubMenuItems(String menuDescr) {
-//        System.out.println(menuDescr);
-//
-//        while (idx != 0) {
-//            try {
-//                idx = new Scanner(System.in).nextInt();
-//                if (idx < 1 || idx > subCategoryMenuItems.length - 1) {
-//                    continue;
-//                }
-//            } catch (InputMismatchException e) {
-//                continue;
-//            }
-//        }
-//        return subCategoryMenuItems[idx+1];
-//    }
 }

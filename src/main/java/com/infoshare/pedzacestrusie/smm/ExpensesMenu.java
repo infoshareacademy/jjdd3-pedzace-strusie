@@ -6,7 +6,7 @@ public class ExpensesMenu extends Menu {
     private int idx = 1;
 
     public ExpensesMenu() {
-        chooseMenuItems(getMenuItems(expensesMenuItems));
+        chooseMenuItems(setMenuItems(expensesMenuItems));
     }
 
     @Override

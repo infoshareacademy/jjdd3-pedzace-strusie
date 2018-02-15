@@ -6,7 +6,7 @@ public class MainMenu extends Menu {
     private int idx = 1;
 
     public MainMenu() {
-        chooseMenuItems(getMenuItems(mainMenuItems));
+        chooseMenuItems(setMenuItems(mainMenuItems));
     }
 
     @Override
@@ -20,17 +20,17 @@ public class MainMenu extends Menu {
         switch (idx) {
             case 1: {
                 new IncomesMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                System.out.println(setMenuItems(mainMenuItems));
                 break;
             }
             case 2: {
                 new ExpensesMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                System.out.println(setMenuItems(mainMenuItems));
                 break;
             }
             case 3:
                 new CategoriesMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                System.out.println(setMenuItems(mainMenuItems));
                 break;
         }
     }
