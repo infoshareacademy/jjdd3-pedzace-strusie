@@ -1,5 +1,4 @@
 package com.infoshare.pedzacestrusie.smm;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,32 +10,33 @@ public class Main {
         Reader newReader = new Reader();
         ReaderOfCSV newReader1 = new ReaderOfCSV();
 
-      // System.out.println(newReader.reader());
 
-      // System.out.println(myAmount.writingListElements());
+//        Expenses expenses = new Expenses();
 
-      // myAmount.amount();
+        List<Expenses> expenses = Arrays.asList(
 
-     // newReader1.readFromFile("file.txt");
-
-     /*   List<Expenses> example = Arrays.asList(
-                new AmountAfterCategory("2018-02-10", "Food", 900),
-                new AmountAfterCategory("2018-02-10", "Bill", 650),
-                new AmountAfterCategory("2018-02-10", "Bill", 469),
-                new AmountAfterCategory("2018-02-10", "Food", 714),
-                new AmountAfterCategory("2018-02-10", "Bill", 230),
-                new AmountAfterCategory("2018-02-10", "Food", 15),
-                new AmountAfterCategory("2018-02-10", "Food", 200),
-                new AmountAfterCategory("2018-02-10", "Bill", 350)
+                new Expenses ("2017-01-09", "food", 900),
+                new Expenses ("2018-02-03", "bill", 650),
+                new Expenses ("2018-01-09", "food", 469),
+                new Expenses ("2014-01-04", "food", 714),
+                new Expenses ("2018-01-09", "bill", 230),
+                new Expenses ("2016-01-09", "bill", 15),
+                new Expenses ("2018-01-09", "food", 200),
+                new Expenses("2018-01-09", "bill", 350)
         );
 
-       example.forEach(System.out::println);
-
-       public static int amountAfterCategory(List<Expenses> example) {
-            return example.stream()
-                    .map(example::getCategories)
-                    .reduce(0, (element,suma) -> element + suma);
-        }*/
+        for(Expenses ex : SortByCategories.sortByCategories(expenses)){
+            System.out.println(ex);
+        }
+        System.out.println("  ");
+        for(Expenses data : SortByData.sortByData(expenses)){
+            System.out.println(data);
+        }
+        System.out.println("  ");
+        for(Expenses ex1 : AmountAfterCategory.amountAfterCategory(List<Expenses>))){
+            System.out.println(ex1);
+        }
 
     }
+
 }
