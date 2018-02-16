@@ -6,7 +6,7 @@ public class IncomesMenu extends Menu {
     private int idx = 1;
 
     public IncomesMenu() {
-        chooseMenuItems(setMenuItems(incomesMenuItems));
+        chooseMenuItems(createMenuItems(incomesMenuItems));
     }
 
     @Override
@@ -20,7 +20,7 @@ public class IncomesMenu extends Menu {
         switch (idx) {
             case 1: {
                 new InputService();
-                System.out.println(setMenuItems(incomesMenuItems));
+                System.out.println(createMenuItems(incomesMenuItems));
 
                 break;
             }

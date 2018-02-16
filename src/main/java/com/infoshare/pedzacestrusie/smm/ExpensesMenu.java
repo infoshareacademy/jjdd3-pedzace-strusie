@@ -6,14 +6,13 @@ public class ExpensesMenu extends Menu {
     private int idx = 1;
 
     public ExpensesMenu() {
-        chooseMenuItems(setMenuItems(expensesMenuItems));
+        chooseMenuItems(createMenuItems(expensesMenuItems));
     }
 
     @Override
     protected void chooseMenuItems(String menuDescr) {
         System.out.println(menuDescr);
         readInputFromUser(expensesMenuItems.length);
-
     }
 
     @Override

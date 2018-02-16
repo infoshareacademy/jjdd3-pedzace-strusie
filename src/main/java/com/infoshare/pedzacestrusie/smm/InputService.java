@@ -17,7 +17,7 @@ public class InputService {
 
     public InputService() {
         this.getUserExpenses();
-//        this.printUserCategories(categorySet);
+        this.printUserCategories(categorySet);
         this.readUserCategories();
         this.readUserExpenses();
         this.setListExpenses();
@@ -55,8 +55,8 @@ public class InputService {
     }
 
     public void readUserCategories() {
-//        System.out.println("Choose category: ");
-//        categories = new Scanner(System.in).next();
+        System.out.println("Choose category: ");
+        categories = new Scanner(System.in).next();
         categories = new SubCategoriesMenu().getCategories();
         System.out.println(categories);
     }

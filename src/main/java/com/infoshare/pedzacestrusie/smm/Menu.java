@@ -7,20 +7,21 @@ public abstract class Menu {
 
     private String[] menuItems;
     private int idx =1;
-    String menuDescr = "Choose option:";
 
-    protected void setMenuItems(String[] menuItems) {
+    protected String createMenuItems(String[] menuItems) {
+        String menuDescr = "Choose option:";
+
 
         for (int i = 0, j = 1; i < menuItems.length - 1; i++) {
             menuDescr += "\n" + j++ + " - " + menuItems[i];
         }
 
 //        menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
-//        return menuDescr;
+        return menuDescr;
     }
 
-    protected String setExitLineToMenuItems(String menuDescr){
-//        this.setMenuItems(menuItems);
+    protected String addExitLineToMenuItems(String menuDescr){
+//        this.createMenuItems(menuItems);
         return menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
     }
 

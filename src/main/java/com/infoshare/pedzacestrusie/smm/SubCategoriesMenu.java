@@ -11,7 +11,8 @@ public class SubCategoriesMenu extends Menu {
     private String categories;
 
     public SubCategoriesMenu() {
-        chooseMenuItems(setMenuItems(subCategoryMenuItems));
+        String menuContent = createMenuItems(subCategoryMenuItems);
+        chooseMenuItems(addExitLineToMenuItems(menuContent));
     }
 
     public String getCategories() {

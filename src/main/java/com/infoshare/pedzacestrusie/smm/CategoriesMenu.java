@@ -6,7 +6,7 @@ public class CategoriesMenu extends Menu {
     private int idx = 1;
 
     public CategoriesMenu() {
-        chooseMenuItems(setMenuItems(categoryMenuItems));
+        chooseMenuItems(createMenuItems(categoryMenuItems));
     }
 
     @Override
