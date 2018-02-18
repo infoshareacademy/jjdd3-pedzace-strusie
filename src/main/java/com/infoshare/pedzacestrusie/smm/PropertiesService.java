@@ -6,8 +6,8 @@ import java.util.*;
 
 public class PropertiesService {
 
-    Properties properties = new Properties();
 
+    private Properties properties = new Properties();
 
     public String getCurrency() {
         return this.properties.getProperty("currency", "PLN");
@@ -27,8 +27,6 @@ public class PropertiesService {
             InputStream input = input = new FileInputStream("config.properties");
             properties.load(input);
             input.close();
-
-
         } catch (IOException e) {
             System.out.println("There is some problems with load the config data!!!" + e.getMessage());
         }
