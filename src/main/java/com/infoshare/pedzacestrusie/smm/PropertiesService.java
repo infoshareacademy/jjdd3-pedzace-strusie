@@ -10,14 +10,15 @@ public class PropertiesService {
 
 
     public String getCurrency() {
-        String currency = this.properties.getProperty("currency", "PLN");
-        return currency;
+        return this.properties.getProperty("currency", "PLN");
     }
 
     public String getFormatDate() {
+        return this.properties.getProperty("date-format", "yyyy-MM-dd");
+    }
 
-        String formatDate = this.properties.getProperty("date-format", "yyyy-MM-dd");
-        return formatDate;
+    public PropertiesService (){
+        loadPropertyService();
     }
 
     private void loadPropertyService() {
@@ -32,6 +33,4 @@ public class PropertiesService {
             System.out.println("There is some problems with load the config data!!!" + e.getMessage());
         }
     }
-
-
 }
