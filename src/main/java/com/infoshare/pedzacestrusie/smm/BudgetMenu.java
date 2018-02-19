@@ -12,17 +12,15 @@ public class BudgetMenu extends Menu {
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                new InputService();
-                System.out.println("Your choice is: " + idx);
+                new InputService().inputIncome();
                 printMenu(setMenuDescription(budgetMenuItems));
                 break;
             }
             case 2: {
-                System.out.println("Your choice is: " + idx);
+                new InputService().inputExpense();
                 printMenu(setMenuDescription(budgetMenuItems));
                 break;
             }
-
         }
     }
 }

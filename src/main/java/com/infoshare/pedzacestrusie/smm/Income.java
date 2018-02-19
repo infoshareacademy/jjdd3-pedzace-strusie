@@ -1,16 +1,18 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.time.LocalDate;
+
 public class Income {
 
-    private String date;
+    private LocalDate date;
     private double income;
 
-    Income(String date, double income) {
+    Income(LocalDate date, double income) {
         this.date = date;
         this.income = income;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
