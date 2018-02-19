@@ -4,19 +4,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Menu {
-    private final static String ALERT_MESSAGE = "Incorrect choice. Please, try again!";
+    protected final static String ALERT_MESSAGE = "Incorrect choice. Please, try again!";
     private int idx = 1;
 
     protected String setMenuDescription(String[] menuItems) {
-        String menuDescr = "Choose option:";
+        StringBuilder menuDescr = new StringBuilder("Choose option:");
 
         for (int i = 0, j = 1; i < menuItems.length - 1; i++) {
-            menuDescr += "\n" + j++ + " - " + menuItems[i];
+            menuDescr.append("\n").append(j++).append(" - ").append(menuItems[i]);
         }
-        return menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
+        return menuDescr.append("\n0 - ").append(menuItems[menuItems.length - 1]).toString();
     }
 
-    protected void printMenu(String menuDescr) {
+    void printMenu(String menuDescr) {
         System.out.println(menuDescr);
     }
 
@@ -31,7 +31,7 @@ public abstract class Menu {
                 checkUserSelection(idx);
             } catch (InputMismatchException e) {
                 System.out.println(ALERT_MESSAGE);
-                continue;
+//                continue;
             }
         }
     }

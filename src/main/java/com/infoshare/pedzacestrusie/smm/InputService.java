@@ -4,32 +4,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.List;
 
 public class InputService {
 
-    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private Set<String> categorySet = new TreeSet<>(Arrays.asList("Cat01", "Cat02", "Cat03"));
+    private final static String DTF = "yyyy-MM-dd";
+    private final static double MAX_VALUE_OF_EXPENSE = 1000000;
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DTF);
+
     private List<Expense> userExpense = new ArrayList<>();
+
     private String date = "";
-    private String categories;
-    private double expense;
     private LocalDate localDate = LocalDate.now();
 
-    public InputService() {
-        this.getUserExpenses();
-        this.printUserCategories(categorySet);
-        this.readUserCategories();
-        this.readUserExpenses();
+    private String categories;
+    private double expense;
+
+    InputService() {
+        this.readUserDate();
+        this.readUserCategory();
+        this.readUserExpense();
         this.setListExpenses();
     }
 
-    public void getUserExpenses() {
+    private void readUserDate() {
         while (!isDataFormatIsOk()) {
             try {
-                this.readDateFromUser();
-                this.parseDateFromUser();
+                this.readDateFromUI();
+                this.parseDateFromUI();
             } catch (DateTimeParseException exc) {
-                System.out.printf("%s is not parsable!%n", date);
+                System.out.println(Menu.ALERT_MESSAGE);
                 date = "";
             }
         }
@@ -39,37 +43,41 @@ public class InputService {
         return localDate.toString().equals(date);
     }
 
-    private void readDateFromUser() {
-        System.out.println("Enter date[YYYY-MM-DD]: ");
+    private void readDateFromUI() {
+        System.out.println("Enter date[" + DTF.toUpperCase() + "]: ");
         date = new Scanner(System.in).next();
     }
 
-    private void parseDateFromUser() {
+    private void parseDateFromUI() {
         localDate = LocalDate.parse(date, FORMATTER);
     }
 
-    public void printUserCategories(Set<String> categorySet) {
-        String[] categories = categorySet.stream().toArray(String[]::new);
-        String stringCategories = Arrays.stream(categories).reduce("", (i, a) -> i + a + "\t");
-        System.out.println(stringCategories);
-    }
-
-    public void readUserCategories() {
-        System.out.println("Choose category: ");
-        categories = new Scanner(System.in).next();
+    private void readUserCategory() {
         categories = new SubCategoriesMenu().getCategories();
-        System.out.println(categories);
     }
 
-    public void readUserExpenses() {
-        System.out.println("Choose your expense: ");
-        expense = new Scanner(System.in).nextDouble();
-        System.out.println(expense);
+    private void readUserExpense() {
+        System.out.println("Input your expense: ");
+        while (true) {
+            try {
+                expense = new Scanner(System.in).nextDouble();
+                if (expense <= 0 || expense > MAX_VALUE_OF_EXPENSE) {
+                    System.out.println(Menu.ALERT_MESSAGE);
+//                    continue;
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println(Menu.ALERT_MESSAGE);
+//                continue;
+            }
+        }
     }
 
-    public void setListExpenses() {
+    private void setListExpenses() {
         System.out.println(localDate + "\t" + categories + "\t" + expense);
         userExpense.add(new Expense(localDate, categories, expense));
+        userExpense.forEach(System.out::println);
     }
 
 }
