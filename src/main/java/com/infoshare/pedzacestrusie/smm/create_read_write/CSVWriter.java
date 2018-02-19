@@ -1,7 +1,8 @@
 package com.infoshare.pedzacestrusie.smm.create_read_write;
 
-import com.infoshare.pedzacestrusie.smm.Expenses;
-import org.junit.experimental.categories.Categories;
+import com.infoshare.pedzacestrusie.smm.Expense;
+import com.infoshare.pedzacestrusie.smm.Income;
+
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -12,19 +13,19 @@ import java.util.TreeSet;
 
 public class CSVWriter {
 
-    public void writeToTheCsvFileExpenses(List<Expenses> externalExpenseList) throws Exception {
+    public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath) throws Exception {
 
-        String fileName = "expenses18.csv";
-        List<Expenses> writeList = new ArrayList<>();
+        String fileName = externalFilePath;
+        List<Expense> writeList = new ArrayList<>();
 
-        for (Expenses x : externalExpenseList) {
+        for (Expense x : externalExpenseList) {
             writeList.add(x);
         }
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-            for (Expenses y : writeList) {
+            for (Expense y : writeList) {
                 writer.write(y.getDate() + ";" + y.getCategories() + ";" + y.getExpense() + "\n");
             }
             writer.flush();
@@ -34,20 +35,19 @@ public class CSVWriter {
         }
     }
 
-    public void writeToTheCsvFileIncomes(List<Incomes> externalIncomeList) {
+    public void writeToTheCsvFileIncomes(List<Income> externalIncomeList, String externalFilePath) {
 
-        String fileName = "incomes18.csv";
-        List<Incomes> writeList = new ArrayList<>();
+        String fileName = externalFilePath;
+        List<Income> writeList = new ArrayList<>();
 
-        for (Incomes x : externalIncomeList) {
+        for (Income x : externalIncomeList) {
             writeList.add(x);
         }
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-
-            for (Incomes y : writeList) {
+            for (Income y : writeList) {
                 writer.write(y.getDate() + ";" + y.getIncomes() + "\n");
             }
             writer.flush();
@@ -57,19 +57,19 @@ public class CSVWriter {
         }
     }
 
-    public void writeToTheCsvFileCategories(TreeSet<Categories> externalCategoriesList) {
+    public void writeToTheCsvFileCategories(TreeSet<String> externalCategoriesList, String externalFilePath) {
 
         String fileName = "categories-default.csv";
-        List<Categories> writeList = new ArrayList<>();
+        List<String> writeList = new ArrayList<>();
 
-        for (Categories x : externalCategoriesList) {
+        for (String x : externalCategoriesList) {
             writeList.add(x);
         }
 
         try (FileWriter fileWriter = new FileWriter(fileName, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
-            for (Categories y : writeList) {
+            for (String y : writeList) {
                 writer.write(y.getCategories() + "\n");
             }
             writer.flush();
