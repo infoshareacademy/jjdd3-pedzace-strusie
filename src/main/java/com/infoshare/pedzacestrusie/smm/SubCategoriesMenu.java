@@ -11,8 +11,8 @@ public class SubCategoriesMenu extends Menu {
     private String categories;
 
     public SubCategoriesMenu() {
-        String menuContent = createMenuItems(subCategoryMenuItems);
-        chooseMenuItems(addExitLineToMenuItems(menuContent));
+        String menuContent = setMenuDescription(subCategoryMenuItems);
+//        chooseMenuItems(setExitLineInMenu(menuContent));
     }
 
     public String getCategories() {
@@ -23,21 +23,7 @@ public class SubCategoriesMenu extends Menu {
         this.categories = categories;
     }
 
-    @Override
-    protected void chooseMenuItems(String menuDescr) {
-        System.out.println(menuDescr);
-        while (true) {
-            try {
-                idx = new Scanner(System.in).nextInt();
-                if (idx >= 0 && idx < menuDescr.length()) {
-                    checkUserSelection(idx);
-                    break;
-                }
-            } catch (InputMismatchException e) {
-                continue;
-            }
-        }
-    }
+
 
     @Override
     protected void checkUserSelection(int idx) {

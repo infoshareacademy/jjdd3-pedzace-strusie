@@ -8,7 +8,7 @@ public class Expense {
     private String categories;
     private double expense;
 
-    public Expense(LocalDate date, String categories, double expense) {
+    Expense(LocalDate date, String categories, double expense) {
         this.date = date;
         this.categories = categories;
         this.expense = expense;

@@ -5,7 +5,7 @@ public class Income {
     private String date;
     private double income;
 
-    public Income(String date, double income) {
+    Income(String date, double income) {
         this.date = date;
         this.income = income;
     }
