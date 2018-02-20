@@ -3,17 +3,16 @@ package com.infoshare.pedzacestrusie.smm.create_read_write;
 import com.infoshare.pedzacestrusie.smm.Expense;
 import com.infoshare.pedzacestrusie.smm.Income;
 
-
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
 public class CSVWriter {
 
-    public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath) throws Exception {
+    public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath)  {
 
         String fileName = externalFilePath;
         List<Expense> writeList = new ArrayList<>();
@@ -30,7 +29,7 @@ public class CSVWriter {
             }
             writer.flush();
             writer.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
@@ -48,7 +47,7 @@ public class CSVWriter {
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             for (Income y : writeList) {
-                writer.write(y.getDate() + ";" + y.getIncomes() + "\n");
+                writer.write(y.getDate() + ";" + y.getIncome() + "\n");
             }
             writer.flush();
             writer.close();
@@ -59,7 +58,7 @@ public class CSVWriter {
 
     public void writeToTheCsvFileCategories(TreeSet<String> externalCategoriesList, String externalFilePath) {
 
-        String fileName = "categories-default.csv";
+        String fileName = externalFilePath;
         List<String> writeList = new ArrayList<>();
 
         for (String x : externalCategoriesList) {
@@ -70,7 +69,7 @@ public class CSVWriter {
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
 
             for (String y : writeList) {
-                writer.write(y.getCategories() + "\n");
+                writer.write(y + "\n");
             }
             writer.flush();
             writer.close();
