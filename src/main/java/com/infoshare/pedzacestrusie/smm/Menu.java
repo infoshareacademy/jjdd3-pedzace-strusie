@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Menu {
-    protected final static String ALERT_MESSAGE = "Incorrect choice. Please, try again!";
+    protected final static String ALERT_MESSAGE = "Incorrect input data. Please, try again!";
     private int idx = 1;
 
     protected String setMenuDescription(String[] menuItems) {
@@ -31,7 +31,6 @@ public abstract class Menu {
                 checkUserSelection(idx);
             } catch (InputMismatchException e) {
                 System.out.println(ALERT_MESSAGE);
-//                continue;
             }
         }
     }

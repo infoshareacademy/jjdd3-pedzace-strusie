@@ -12,8 +12,8 @@ public class InputService {
     private final static double MAX_VALUE_OF_EXPENSE = 1000000;
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DTF);
 
-    private List<Expense> userExpense = new ArrayList<>();
-    private List<Income> userIncome = new ArrayList<>();
+    private static List<Expense> userExpense = new ArrayList<>();
+    private static List<Income> userIncome = new ArrayList<>();
 
     private String date = "";
     private LocalDate localDate = LocalDate.now();
@@ -81,13 +81,11 @@ public class InputService {
                 amount = new Scanner(System.in).nextDouble();
                 if (amount <= 0 || amount > MAX_VALUE_OF_EXPENSE) {
                     System.out.println(Menu.ALERT_MESSAGE);
-//                    continue;
                 } else {
                     break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println(Menu.ALERT_MESSAGE);
-//                continue;
             }
         }
         return amount;
@@ -105,4 +103,11 @@ public class InputService {
         userIncome.forEach(System.out::println);
     }
 
+    public List<Expense> getUserExpense() {
+        return userExpense;
+    }
+
+    public List<Income> getUserIncome() {
+        return userIncome;
+    }
 }

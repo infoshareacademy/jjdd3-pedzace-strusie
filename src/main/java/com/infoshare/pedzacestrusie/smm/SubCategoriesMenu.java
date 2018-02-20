@@ -38,14 +38,12 @@ public class SubCategoriesMenu extends Menu {
                 int idx = new Scanner(System.in).nextInt();
                 if (idx < 1 || idx > menuLength) {
                     System.out.println(ALERT_MESSAGE);
-//                    continue;
                 } else {
                     checkUserSelection(idx);
                     break;
                 }
             } catch (InputMismatchException e) {
                 System.out.println(ALERT_MESSAGE);
-//                continue;
             }
         }
     }
