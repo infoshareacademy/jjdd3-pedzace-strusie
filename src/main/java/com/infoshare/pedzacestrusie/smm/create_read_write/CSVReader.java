@@ -4,8 +4,8 @@ import com.infoshare.pedzacestrusie.smm.Expense;
 import com.infoshare.pedzacestrusie.smm.Income;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +14,13 @@ import java.util.TreeSet;
 
 public class CSVReader {
 
-    public List<Expense> readFromFileExpenses(String externalFilePath) throws Exception {
+    public List<Expense> readFromFileExpenses(String externalFilePath) {
 
         String expensesData = externalFilePath;
         List<Expense> readListExp = new ArrayList<>();
-
         BufferedReader fileReader = filePreparation(expensesData);
+        String line=" ";
 
-        String line;
         try {
             while ((line = fileReader.readLine()) != null) {
                 String[] arrays = line.split(";");
@@ -29,56 +28,62 @@ public class CSVReader {
                 readListExp.add(expense);
             }
             fileReader.close();
-        } catch (FileNotFoundException e) {
+            return readListExp;
+        } catch (IOException e) {
             System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
         }
-        return readListExp;
+        return null;
     }
 
-    public List<Income> readFromFileIncomes(String externalFilePath) throws Exception {
+    public List<Income> readFromFileIncomes(String externalFilePath) {
 
         String incomesData = externalFilePath;
         List<Income> readListInc = new ArrayList<>();
-
         BufferedReader fileReader = filePreparation(incomesData);
-        String line;
+        String line=" ";
+
         try {
             while ((line = fileReader.readLine()) != null) {
                 String[] arrays = line.split(";");
-                Income income = new Income(LocalDate.parse(arrays[0], Double.parseDouble(arrays[1])));
+                Income income = new Income(LocalDate.parse(arrays[0]), Double.parseDouble(arrays[1]));
                 readListInc.add(income);
             }
             fileReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("There is problems with read data from file!!!   " + e.getMessage());
+        } finally {
+
         }
         return readListInc;
     }
 
-    public TreeSet<String> readFromFileCategories(String externalFilePath) throws Exception {
+    public TreeSet<String> readFromFileCategories(String externalFilePath) {
 
         String categories = externalFilePath;
         TreeSet<String> readListCat = new TreeSet<>();
-
         BufferedReader fileReader = filePreparation(categories);
-        String line;
+        String line=" ";
 
         try {
             while ((line = fileReader.readLine()) != null) {
                 readListCat.add(line);
             }
             fileReader.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("There is problems with read data from file!!!   " + e.getMessage());
         }
         return readListCat;
     }
 
-    private BufferedReader filePreparation(String inputFile) throws Exception {
-        FileReader myFile = new FileReader(inputFile);
-        BufferedReader fileReader = new BufferedReader(myFile);
+    private BufferedReader filePreparation(String inputFile) {
 
-        return fileReader;
+        try {
+            FileReader myFile = new FileReader(inputFile);
+            BufferedReader fileReader = new BufferedReader(myFile);
+            return fileReader;
+        } catch (IOException e) {
+            System.out.println("There is problems with read file!!!    " + e.getMessage());
+        }
+        return null;
     }
 }
