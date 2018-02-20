@@ -3,7 +3,8 @@ package com.infoshare.pedzacestrusie.smm;
 public class BudgetMenu extends Menu {
     private String[] budgetMenuItems = {"Input income", "Input expenses", "Exit"};
 
-    BudgetMenu() {
+    @Override
+    protected void executeMenu() {
         printMenu(setMenuDescription(budgetMenuItems));
         readUserChoice(budgetMenuItems.length);
     }

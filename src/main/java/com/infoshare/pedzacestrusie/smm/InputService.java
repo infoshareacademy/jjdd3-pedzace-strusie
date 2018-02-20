@@ -61,7 +61,9 @@ public class InputService {
     }
 
     private void readUserCategory() {
-        categories = new SubCategoriesMenu().getCategories();
+        SubCategoriesMenu subCategoriesMenu = new SubCategoriesMenu();
+        subCategoriesMenu.executeMenu();
+        categories = subCategoriesMenu.getCategories();
     }
 
     private void readUserExpense() {

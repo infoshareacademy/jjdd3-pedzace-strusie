@@ -7,6 +7,8 @@ public abstract class Menu {
     protected final static String ALERT_MESSAGE = "Incorrect input data. Please, try again!";
     private int idx = 1;
 
+    protected abstract void executeMenu();
+
     protected String setMenuDescription(String[] menuItems) {
         StringBuilder menuDescr = new StringBuilder("Choose option:");
 

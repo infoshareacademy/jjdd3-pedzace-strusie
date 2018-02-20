@@ -8,7 +8,8 @@ public class SubCategoriesMenu extends Menu {
 
     private String categories;
 
-    SubCategoriesMenu() {
+    @Override
+    protected void executeMenu() {
         printMenu(setMenuDescription(subCategoryMenuItems));
         readUserChoice(subCategoryMenuItems.length);
     }

@@ -3,7 +3,8 @@ package com.infoshare.pedzacestrusie.smm;
 public class MainMenu extends Menu {
     private String[] mainMenuItems = {"Input your incomes and expenses", "Display statistics", "Settings", "Exit"};
 
-    MainMenu() {
+    @Override
+    protected void executeMenu() {
         printMenu(setMenuDescription(mainMenuItems));
         readUserChoice(mainMenuItems.length);
     }
@@ -12,17 +13,17 @@ public class MainMenu extends Menu {
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                new BudgetMenu();
+                new BudgetMenu().executeMenu();
                 printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
             case 2: {
-                new StatisticsMenu();
+                new StatisticsMenu().executeMenu();
                 printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
             case 3:
-                new CategoriesMenu();
+                new CategoriesMenu().executeMenu();
                 printMenu(setMenuDescription(mainMenuItems));
                 break;
         }

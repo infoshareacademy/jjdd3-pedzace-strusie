@@ -3,7 +3,8 @@ package com.infoshare.pedzacestrusie.smm;
 public class CategoriesMenu extends Menu {
     private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
 
-    CategoriesMenu() {
+    @Override
+    protected void executeMenu() {
         printMenu(setMenuDescription(categoryMenuItems));
         readUserChoice(categoryMenuItems.length);
     }

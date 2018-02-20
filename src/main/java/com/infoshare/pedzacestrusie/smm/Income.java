@@ -7,7 +7,7 @@ public class Income {
     private LocalDate date;
     private double income;
 
-    Income(LocalDate date, double income) {
+    public Income(LocalDate date, double income) {
         this.date = date;
         this.income = income;
     }
