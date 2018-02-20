@@ -20,7 +20,7 @@ public class Main {
         //gets data from agrs
         new InputService().setFilePathFromArgs(args);
 
-//        new MainMenu().executeMenu();
+        new MainMenu().executeMenu();
     }
 
 }
