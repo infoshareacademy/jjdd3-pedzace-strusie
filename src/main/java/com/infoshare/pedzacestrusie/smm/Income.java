@@ -1,31 +1,30 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.time.LocalDate;
+
 public class Income {
 
-    private String date;
-    private double incomes;
+    private LocalDate date;
+    private double income;
 
-    public String getDate() {
+    public Income(LocalDate date, double income) {
+        this.date = date;
+        this.income = income;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public double getIncomes() {
-        return incomes;
-    }
-
-    public void setIncomes(double incomes) {
-        this.incomes = incomes;
+    public double getIncome() {
+        return income;
     }
 
     @Override
     public String toString() {
         return "Income{" +
                 "date='" + date + '\'' +
-                ", incomes=" + incomes +
+                ", income=" + income +
                 '}';
     }
 }

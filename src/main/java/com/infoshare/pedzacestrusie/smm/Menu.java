@@ -4,40 +4,39 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Menu {
+    protected final static String ALERT_MESSAGE = "Incorrect input data. Please, try again!";
+    private int idx = 1;
 
-    private String[] menuItems;
-    private int idx =1;
+    protected abstract void executeMenu();
 
-
-    protected String getMenuItems(String[] menuItems) {
-
-        String menuDescr = "Choose option:";
+    protected String setMenuDescription(String[] menuItems) {
+        StringBuilder menuDescr = new StringBuilder("Choose option:");
 
         for (int i = 0, j = 1; i < menuItems.length - 1; i++) {
-            menuDescr += "\n" + j++ + " - " + menuItems[i];
+            menuDescr.append("\n").append(j++).append(" - ").append(menuItems[i]);
         }
-
-        menuDescr += "\n0 - " + menuItems[menuItems.length - 1];
-        return menuDescr;
+        return menuDescr.append("\n0 - ").append(menuItems[menuItems.length - 1]).toString();
     }
 
-    protected void readInputFromUser(int menuLength ){
+    void printMenu(String menuDescr) {
+        System.out.println(menuDescr);
+    }
+
+    protected void readUserChoice(int menuLength) {
         while (idx != 0) {
             try {
                 idx = new Scanner(System.in).nextInt();
-                if (idx < 1 || idx > menuLength - 1) {
+                if (idx < 0 || idx > menuLength - 1) {
+                    System.out.println(ALERT_MESSAGE);
                     continue;
                 }
                 checkUserSelection(idx);
             } catch (InputMismatchException e) {
-                continue;
+                System.out.println(ALERT_MESSAGE);
             }
         }
-
     }
 
-    protected void chooseMenuItems(String menuDescr){};
-
-    protected void checkUserSelection(int idx){};
+    protected abstract void checkUserSelection(int idx);
 }
 

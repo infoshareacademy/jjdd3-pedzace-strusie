@@ -1,36 +1,30 @@
 package com.infoshare.pedzacestrusie.smm;
 
 public class MainMenu extends Menu {
-
-    private String[] mainMenuItems = {"Input your income", "Display current expenses", "Settings", "Exit"};
-    private int idx = 1;
-
-    public MainMenu() {
-        chooseMenuItems(getMenuItems(mainMenuItems));
-    }
+    private String[] mainMenuItems = {"Input your incomes and expenses", "Display statistics", "Settings", "Exit"};
 
     @Override
-    protected void chooseMenuItems(String menuDescr) {
-        System.out.println(menuDescr);
-        readInputFromUser(mainMenuItems.length);
+    protected void executeMenu() {
+        printMenu(setMenuDescription(mainMenuItems));
+        readUserChoice(mainMenuItems.length);
     }
 
     @Override
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                new IncomesMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                new BudgetMenu().executeMenu();
+                printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
             case 2: {
-                new ExpensesMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                new StatisticsMenu().executeMenu();
+                printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
             case 3:
-                new CategoryMenu();
-                System.out.println(getMenuItems(mainMenuItems));
+                new CategoriesMenu().executeMenu();
+                printMenu(setMenuDescription(mainMenuItems));
                 break;
         }
     }
