@@ -8,12 +8,12 @@ import java.util.List;
 
 public class InputService {
 
-    private final static String DTF = "yyyy-MM-dd";
+    private final static String DTF = UserRepository.getDateTimeFormatter();
     private final static double MAX_VALUE_OF_EXPENSE = 1000000;
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DTF);
 
-    private static List<Expense> userExpense = new ArrayList<>();
-    private static List<Income> userIncome = new ArrayList<>();
+    private static List<Expense> userExpense = UserRepository.getExpenseUserRepository();
+    private static List<Income> userIncome = UserRepository.getIncomeUserRepository();
 
     private String date = "";
     private LocalDate localDate = LocalDate.now();
