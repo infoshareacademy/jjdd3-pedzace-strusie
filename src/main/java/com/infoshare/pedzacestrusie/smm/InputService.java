@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputService {
 
@@ -111,5 +112,19 @@ public class InputService {
 
     public List<Income> getUserIncome() {
         return userIncome;
+    }
+
+    public void setFilePathFromArgs(String[] args) {
+        if (args.length != 0) {
+            if (args.length == 1 && Pattern.matches("[a-zA-Z0-9]+[\\.]?[a-zA-Z]{3}", args[0])) {
+                UserRepository.setExpenseFileName(args[0]);
+            } else {
+                System.out.println("Incorrect input data!");
+                UserRepository.setExpenseFileName("expense.csv");
+            }
+        } else {
+            UserRepository.setExpenseFileName("expense.csv");
+        }
+        System.out.println("Default expense file name is set to: " + UserRepository.getExpenseFileName());
     }
 }
