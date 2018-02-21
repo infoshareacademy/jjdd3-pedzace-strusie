@@ -1,10 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 public class Main {
 
