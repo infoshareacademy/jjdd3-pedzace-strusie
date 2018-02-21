@@ -1,13 +1,15 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 public class StatisticsService {
+    private List<Expense> userExpense = UserRepository.getExpensesUserRepository();
+    private List<Income> userIncome = UserRepository.getIncomesUserRepository();
+    private Set<String> userCategories = UserRepository.getCategoriesUserRepository();
+
 
     public void amountByCategory(List<Expense> expenses) {
         Map<String, Double> sum = expenses.stream()
@@ -24,7 +26,7 @@ public class StatisticsService {
                 .mapToDouble(Expense::getExpense)
                 .sum();
 
-        System.out.printf("%nTotal amount of expenses:%31.2f%s", result, UserRepository.getCurrency());
+        System.out.printf("%nTotal amount of expenses:%31.2f%s%n", result, UserRepository.getCurrency());
     }
 
     public double AmountAfterDay(List<Expense> expenses, String category) {

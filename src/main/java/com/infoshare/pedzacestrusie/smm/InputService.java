@@ -15,8 +15,8 @@ public class InputService {
     private final static double MAX_VALUE_OF_EXPENSE = 1000000;
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DTF);
 
-    private static List<Expense> userExpense = UserRepository.getExpensesUserRepository();
-    private static List<Income> userIncome = UserRepository.getIncomesUserRepository();
+    private List<Expense> userExpense = UserRepository.getExpensesUserRepository();
+    private List<Income> userIncome = UserRepository.getIncomesUserRepository();
 
     private String date = "";
     private LocalDate localDate = LocalDate.now();
