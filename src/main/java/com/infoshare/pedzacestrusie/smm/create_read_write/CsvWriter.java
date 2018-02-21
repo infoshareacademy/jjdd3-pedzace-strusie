@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class CSVWriter {
+public class CsvWriter {
 
     public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath)  {
 

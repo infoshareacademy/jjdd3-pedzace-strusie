@@ -3,7 +3,7 @@ package com.infoshare.pedzacestrusie.smm;
 import java.util.*;
 
 public class SubCategoriesMenu extends Menu {
-    private Set<String> categorySet = UserRepository.getCategoryUserRepository();
+    private Set<String> categorySet = UserRepository.getCategoriesUserRepository();
     private String[] subCategoryMenuItems = categorySet.toArray(new String[0]);
 
     private String categories;

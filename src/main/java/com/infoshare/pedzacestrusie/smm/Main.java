@@ -1,6 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
-import com.infoshare.pedzacestrusie.smm.create_read_write.CSVReader;
+import com.infoshare.pedzacestrusie.smm.create_read_write.CsvReader;
 
 public class Main {
 
@@ -8,18 +8,20 @@ public class Main {
 
         //gets data from properties file
         PropertiesService service = new PropertiesService();
-        UserRepository.setDateTimeFormatter(service.getFormatDate());
         UserRepository.setCurrency(service.getCurrency());
-        UserRepository.setDefaultExpenseFilePath(service.getDefaultExpenseFilePath());
-        UserRepository.setDefaultCategoryFilePath(service.getDefaultCategoryFilePath());
+        UserRepository.setDateTimeFormatter(service.getFormatDate());
+        UserRepository.setExpensesFilePath(service.getExpensesFilePath());
+        UserRepository.setIncomesFilePath(service.getIncomesFilePath());
+        UserRepository.setDefaultCategoriesFilePath(service.getDefaultCategoriesFilePath());
+        UserRepository.setUserCategoriesFilePath(service.getUserCategoriesFilePath());
 
         //gets categories from settings file
-        CSVReader csvReader = new CSVReader();
-        UserRepository.setCategoryUserRepository(csvReader.readFromFileCategories(UserRepository.getDefaultCategoryFilePath()));
+        CsvReader csvReader = new CsvReader();
+        UserRepository.setCategoriesUserRepository(csvReader.readFromFileCategories(UserRepository.getDefaultCategoriesFilePath()));
 
         //gets data from agrs
         new InputService().setFilePathFromArgs(args);
-        System.out.println(UserRepository.getDefaultCategoryFilePath());
+        System.out.println(UserRepository.getDefaultCategoriesFilePath());
 
         new MainMenu().executeMenu();
     }

@@ -1,5 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import com.infoshare.pedzacestrusie.smm.create_read_write.CsvWriter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,8 +15,8 @@ public class InputService {
     private final static double MAX_VALUE_OF_EXPENSE = 1000000;
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DTF);
 
-    private static List<Expense> userExpense = UserRepository.getExpenseUserRepository();
-    private static List<Income> userIncome = UserRepository.getIncomeUserRepository();
+    private static List<Expense> userExpense = UserRepository.getExpensesUserRepository();
+    private static List<Income> userIncome = UserRepository.getIncomesUserRepository();
 
     private String date = "";
     private LocalDate localDate = LocalDate.now();
@@ -95,15 +97,21 @@ public class InputService {
     }
 
     private void setExpensesList() {
-        System.out.println(localDate + "\t" + categories + "\t" + expense);
         userExpense.add(new Expense(localDate, categories, expense));
         userExpense.forEach(System.out::println);
     }
 
     private void setIncomesList() {
-        System.out.println(localDate + "\t" + income);
         userIncome.add(new Income(localDate, income));
         userIncome.forEach(System.out::println);
+    }
+
+    public void saveListToFile() {
+        CsvWriter writer = new CsvWriter();
+        writer.writeToTheCsvFileExpenses(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
+        UserRepository.getExpensesUserRepository().clear();
+        writer.writeToTheCsvFileIncomes(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
+        UserRepository.getIncomesUserRepository().clear();
     }
 
     public List<Expense> getUserExpense() {
@@ -117,11 +125,11 @@ public class InputService {
     public void setFilePathFromArgs(String[] args) {
         if (args.length != 0) {
             if (args.length == 1 && Pattern.matches("[a-zA-Z0-9]+[\\.]?[a-zA-Z]{3}", args[0])) {
-                UserRepository.setDefaultExpenseFilePath(args[0]);
+                UserRepository.setExpensesFilePath(args[0]);
             } else {
                 System.out.println("Incorrect input data!");
             }
         }
-        System.out.println("Default expense file name is set to: " + UserRepository.getDefaultExpenseFilePath());
+        System.out.println("Default expense file name is set to: " + UserRepository.getExpensesFilePath());
     }
 }

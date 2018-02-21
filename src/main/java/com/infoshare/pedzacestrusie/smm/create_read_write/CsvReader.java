@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-public class CSVReader {
+public class CsvReader {
 
     public List<Expense> readFromFileExpenses(String externalFilePath) {
 

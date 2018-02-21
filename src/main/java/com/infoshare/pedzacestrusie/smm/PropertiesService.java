@@ -16,11 +16,19 @@ public class PropertiesService {
         return this.properties.getProperty("date-format", "yyyy-MM-dd");
     }
 
-    public String getDefaultExpenseFilePath(){
-        return this.properties.getProperty("defaultExpenseFilePath","Resources/expense.csv");
+    public String getExpensesFilePath(){
+        return this.properties.getProperty("expensesFilePath","Resources/expenses.csv");
     }
-    public String getDefaultCategoryFilePath(){
-        return this.properties.getProperty("defaultCategoryFilePath","Resources/defaultCategories.csv");
+
+    public String getIncomesFilePath(){
+        return this.properties.getProperty("incomesFilePath","Resources/incomes.csv");
+    }
+
+    public String getDefaultCategoriesFilePath(){
+        return this.properties.getProperty("defaultCategoriesFilePath","Resources/defaultCategories.csv");
+    }
+    public String getUserCategoriesFilePath(){
+        return this.properties.getProperty("userCategoriesFilePath","Resources/userCategories.csv");
     }
 
     public PropertiesService (){

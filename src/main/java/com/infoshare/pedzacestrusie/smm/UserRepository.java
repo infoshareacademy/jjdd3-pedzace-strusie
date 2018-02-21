@@ -4,37 +4,39 @@ import java.util.*;
 
 public class UserRepository {
 
-    private static List<Expense> expenseUserRepository = new ArrayList<>();
-    private static List<Income> incomeUserRepository = new ArrayList<>();
-    private static Set<String> categoryUserRepository = new TreeSet<>();
+    private static List<Expense> expensesUserRepository = new ArrayList<>();
+    private static List<Income> incomesUserRepository = new ArrayList<>();
+    private static Set<String> categoriesUserRepository = new TreeSet<>();
 
     private static String dateTimeFormatter;
     private static String currency;
-    private static String defaultExpenseFilePath;
-    private static String defaultCategoryFilePath;
+    private static String expensesFilePath;
+    private static String incomesFilePath;
+    private static String defaultCategoriesFilePath;
+    private static String userCategoriesFilePath;
 
-    public static List<Expense> getExpenseUserRepository() {
-        return expenseUserRepository;
+    public static List<Expense> getExpensesUserRepository() {
+        return expensesUserRepository;
     }
 
-    public static void setExpenseUserRepository(List<Expense> expenseUserRepository) {
-        UserRepository.expenseUserRepository = expenseUserRepository;
+    public static void setExpensesUserRepository(List<Expense> expensesUserRepository) {
+        UserRepository.expensesUserRepository = expensesUserRepository;
     }
 
-    public static List<Income> getIncomeUserRepository() {
-        return incomeUserRepository;
+    public static List<Income> getIncomesUserRepository() {
+        return incomesUserRepository;
     }
 
-    public static void setIncomeUserRepository(List<Income> incomeUserRepository) {
-        UserRepository.incomeUserRepository = incomeUserRepository;
+    public static void setIncomesUserRepository(List<Income> incomesUserRepository) {
+        UserRepository.incomesUserRepository = incomesUserRepository;
     }
 
-    public static Set<String> getCategoryUserRepository() {
-        return categoryUserRepository;
+    public static Set<String> getCategoriesUserRepository() {
+        return categoriesUserRepository;
     }
 
-    public static void setCategoryUserRepository(Set<String> categoryUserRepository) {
-        UserRepository.categoryUserRepository = categoryUserRepository;
+    public static void setCategoriesUserRepository(Set<String> categoriesUserRepository) {
+        UserRepository.categoriesUserRepository = categoriesUserRepository;
     }
 
     public static String getDateTimeFormatter() {
@@ -53,19 +55,35 @@ public class UserRepository {
         UserRepository.currency = currency;
     }
 
-    public static String getDefaultExpenseFilePath() {
-        return defaultExpenseFilePath;
+    public static String getExpensesFilePath() {
+        return expensesFilePath;
     }
 
-    public static void setDefaultExpenseFilePath(String defaultExpenseFilePath) {
-        UserRepository.defaultExpenseFilePath = defaultExpenseFilePath;
+    public static void setExpensesFilePath(String expensesFilePath) {
+        UserRepository.expensesFilePath = expensesFilePath;
     }
 
-    public static String getDefaultCategoryFilePath() {
-        return defaultCategoryFilePath;
+    public static String getIncomesFilePath() {
+        return incomesFilePath;
     }
 
-    public static void setDefaultCategoryFilePath(String defaultCategoryFilePath) {
-        UserRepository.defaultCategoryFilePath = defaultCategoryFilePath;
+    public static void setIncomesFilePath(String incomesFilePath) {
+        UserRepository.incomesFilePath = incomesFilePath;
+    }
+
+    public static String getDefaultCategoriesFilePath() {
+        return defaultCategoriesFilePath;
+    }
+
+    public static void setDefaultCategoriesFilePath(String defaultCategoriesFilePath) {
+        UserRepository.defaultCategoriesFilePath = defaultCategoriesFilePath;
+    }
+
+    public static String getUserCategoriesFilePath() {
+        return userCategoriesFilePath;
+    }
+
+    public static void setUserCategoriesFilePath(String userCategoriesFilePath) {
+        UserRepository.userCategoriesFilePath = userCategoriesFilePath;
     }
 }
