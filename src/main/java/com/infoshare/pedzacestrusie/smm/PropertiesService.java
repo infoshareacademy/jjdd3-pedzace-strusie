@@ -6,7 +6,6 @@ import java.util.*;
 
 public class PropertiesService {
 
-
     private Properties properties = new Properties();
 
     public String getCurrency() {
@@ -15,6 +14,13 @@ public class PropertiesService {
 
     public String getFormatDate() {
         return this.properties.getProperty("date-format", "yyyy-MM-dd");
+    }
+
+    public String getDefaultExpenseFilePath(){
+        return this.properties.getProperty("defaultExpenseFilePath","Resources/expense.csv");
+    }
+    public String getDefaultCategoryFilePath(){
+        return this.properties.getProperty("defaultCategoryFilePath","Resources/defaultCategories.csv");
     }
 
     public PropertiesService (){

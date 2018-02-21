@@ -10,7 +10,8 @@ public class UserRepository {
 
     private static String dateTimeFormatter;
     private static String currency;
-    private static String expenseFileName;
+    private static String defaultExpenseFilePath;
+    private static String defaultCategoryFilePath;
 
     public static List<Expense> getExpenseUserRepository() {
         return expenseUserRepository;
@@ -52,11 +53,19 @@ public class UserRepository {
         UserRepository.currency = currency;
     }
 
-    public static String getExpenseFileName() {
-        return expenseFileName;
+    public static String getDefaultExpenseFilePath() {
+        return defaultExpenseFilePath;
     }
 
-    public static void setExpenseFileName(String expenseFileName) {
-        UserRepository.expenseFileName = expenseFileName;
+    public static void setDefaultExpenseFilePath(String defaultExpenseFilePath) {
+        UserRepository.defaultExpenseFilePath = defaultExpenseFilePath;
+    }
+
+    public static String getDefaultCategoryFilePath() {
+        return defaultCategoryFilePath;
+    }
+
+    public static void setDefaultCategoryFilePath(String defaultCategoryFilePath) {
+        UserRepository.defaultCategoryFilePath = defaultCategoryFilePath;
     }
 }

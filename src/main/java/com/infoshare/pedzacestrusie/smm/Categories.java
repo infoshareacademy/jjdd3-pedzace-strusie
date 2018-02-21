@@ -74,7 +74,7 @@ public class Categories {
             categories.clear();
 
 //            readCSV readFromFile = new readCSV();
-//            categories.addAll(readFromFile("DefaultCategories.txt"));
+//            categories.addAll(readFromFile("defaultCategories.csv"));
 
             System.out.println("Restored.");
 

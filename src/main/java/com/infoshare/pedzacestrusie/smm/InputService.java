@@ -117,14 +117,11 @@ public class InputService {
     public void setFilePathFromArgs(String[] args) {
         if (args.length != 0) {
             if (args.length == 1 && Pattern.matches("[a-zA-Z0-9]+[\\.]?[a-zA-Z]{3}", args[0])) {
-                UserRepository.setExpenseFileName(args[0]);
+                UserRepository.setDefaultExpenseFilePath(args[0]);
             } else {
                 System.out.println("Incorrect input data!");
-                UserRepository.setExpenseFileName("expense.csv");
             }
-        } else {
-            UserRepository.setExpenseFileName("expense.csv");
         }
-        System.out.println("Default expense file name is set to: " + UserRepository.getExpenseFileName());
+        System.out.println("Default expense file name is set to: " + UserRepository.getDefaultExpenseFilePath());
     }
 }

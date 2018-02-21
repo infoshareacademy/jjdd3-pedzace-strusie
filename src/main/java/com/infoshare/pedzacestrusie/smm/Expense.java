@@ -31,7 +31,7 @@ public class Expense {
         return "Expense{" +
                 "date='" + date + '\'' +
                 ", categories='" + categories + '\'' +
-                ", expense=" + expense +
+                ", expense=" + expense + UserRepository.getCurrency()+
                 '}';
     }
 }

@@ -24,7 +24,7 @@ public class Income {
     public String toString() {
         return "Income{" +
                 "date='" + date + '\'' +
-                ", income=" + income +
+                ", income=" + income + UserRepository.getCurrency() +
                 '}';
     }
 }
