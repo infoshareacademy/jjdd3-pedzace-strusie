@@ -1,7 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
 import com.infoshare.pedzacestrusie.smm.create_read_write.CsvReader;
-import com.sun.org.glassfish.external.statistics.Statistic;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class Main {
         System.out.println(expenseList);
         UserRepository.setExpensesUserRepository(expenseList);
 
-new StatisticsService().amountAfterCategory(UserRepository.getExpensesUserRepository());
+new StatisticsService().amountByCategory(UserRepository.getExpensesUserRepository());
 
     }
 }
