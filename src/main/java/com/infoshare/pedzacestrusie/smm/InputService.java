@@ -130,6 +130,6 @@ public class InputService {
                 System.out.println("Incorrect input data!");
             }
         }
-        System.out.println("Default expense file name is set to: " + UserRepository.getExpensesFilePath());
+        System.out.println("Default expenses file path is set to: " + UserRepository.getExpensesFilePath());
     }
 }

@@ -1,28 +1,24 @@
 package com.infoshare.pedzacestrusie.smm;
 
 import com.infoshare.pedzacestrusie.smm.create_read_write.CsvReader;
+import com.sun.org.glassfish.external.statistics.Statistic;
+
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
+        new Settings().update(args);
+//        new MainMenu().executeMenu();
 
-        //gets data from properties file
-        PropertiesService service = new PropertiesService();
-        UserRepository.setCurrency(service.getCurrency());
-        UserRepository.setDateTimeFormatter(service.getFormatDate());
-        UserRepository.setExpensesFilePath(service.getExpensesFilePath());
-        UserRepository.setIncomesFilePath(service.getIncomesFilePath());
-        UserRepository.setDefaultCategoriesFilePath(service.getDefaultCategoriesFilePath());
-        UserRepository.setUserCategoriesFilePath(service.getUserCategoriesFilePath());
-
-        //gets categories from settings file
         CsvReader csvReader = new CsvReader();
-        UserRepository.setCategoriesUserRepository(csvReader.readFromFileCategories(UserRepository.getDefaultCategoriesFilePath()));
+        List<Expense> expenseList;
 
-        //gets data from agrs
-        new InputService().setFilePathFromArgs(args);
-        System.out.println(UserRepository.getDefaultCategoriesFilePath());
+        expenseList = csvReader.readFromFileExpenses("Resources/testjanuary18exp.csv");
+        System.out.println(expenseList);
+        UserRepository.setExpensesUserRepository(expenseList);
 
-        new MainMenu().executeMenu();
+new StatisticsService().amountAfterCategory(UserRepository.getExpensesUserRepository());
+
     }
 }
