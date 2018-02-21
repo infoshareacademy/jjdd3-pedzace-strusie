@@ -24,7 +24,7 @@ public class PropertiesService {
     private void loadPropertyService() {
 
         try {
-            InputStream input = input = new FileInputStream("config.properties");
+            InputStream input = input = new FileInputStream("Resources/config.properties");
             properties.load(input);
             input.close();
         } catch (IOException e) {

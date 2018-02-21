@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 
@@ -57,10 +58,10 @@ public class CSVReader {
         return readListInc;
     }
 
-    public TreeSet<String> readFromFileCategories(String externalFilePath) {
+    public Set<String> readFromFileCategories(String externalFilePath) {
 
         String categories = externalFilePath;
-        TreeSet<String> readListCat = new TreeSet<>();
+        Set<String> readListCat = new TreeSet<>();
         BufferedReader fileReader = filePreparation(categories);
         String line=" ";
 
