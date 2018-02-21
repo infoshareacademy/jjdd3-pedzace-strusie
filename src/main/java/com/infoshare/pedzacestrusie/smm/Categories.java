@@ -1,18 +1,19 @@
 package com.infoshare.pedzacestrusie.smm;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Categories {
 
-    private TreeSet<String> categories = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+    private Set<String> categories = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
-    Categories() {
-        readCSV readFromFile = new readCSV();
-        categories.addAll(readFromFile("Categories.txt"));
-    }
+//    Categories() {
+//        readCSV readFromFile = new readCSV();
+//        categories.addAll(readFromFile("Categories.txt"));
+//    }
 
-    public TreeSet<String> getCategories() {
+    public Set<String> getCategories() {
         return categories;
     }
 
@@ -72,8 +73,8 @@ public class Categories {
         if (scanner.next().equals("YES")) {
             categories.clear();
 
-            readCSV readFromFile = new readCSV();
-            categories.addAll(readFromFile("DefaultCategories.txt"));
+//            readCSV readFromFile = new readCSV();
+//            categories.addAll(readFromFile("defaultCategories.csv"));
 
             System.out.println("Restored.");
 

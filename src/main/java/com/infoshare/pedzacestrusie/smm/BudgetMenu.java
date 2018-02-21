@@ -1,7 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
 public class BudgetMenu extends Menu {
-    private String[] budgetMenuItems = {"Input income", "Input expenses", "Exit"};
+    private String[] budgetMenuItems = {"Input income", "Input expenses", "Save", "Exit"};
 
     @Override
     protected void executeMenu() {
@@ -19,6 +19,11 @@ public class BudgetMenu extends Menu {
             }
             case 2: {
                 new InputService().inputExpense();
+                printMenu(setMenuDescription(budgetMenuItems));
+                break;
+            }
+            case 3: {
+                new InputService().saveListToFile();
                 printMenu(setMenuDescription(budgetMenuItems));
                 break;
             }

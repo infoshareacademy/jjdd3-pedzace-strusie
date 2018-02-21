@@ -8,9 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
-public class CSVWriter {
+public class CsvWriter {
 
     public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath)  {
 
@@ -56,7 +57,7 @@ public class CSVWriter {
         }
     }
 
-    public void writeToTheCsvFileCategories(TreeSet<String> externalCategoriesList, String externalFilePath) {
+    public void writeToTheCsvFileCategories(Set<String> externalCategoriesList, String externalFilePath) {
 
         String fileName = externalFilePath;
         List<String> writeList = new ArrayList<>();
