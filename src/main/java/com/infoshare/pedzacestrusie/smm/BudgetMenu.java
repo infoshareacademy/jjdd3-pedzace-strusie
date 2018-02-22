@@ -24,6 +24,7 @@ public class BudgetMenu extends Menu {
             }
             case 3: {
                 new InputService().saveListToFile();
+                new InputService().clearList();
                 printMenu(setMenuDescription(budgetMenuItems));
                 break;
             }

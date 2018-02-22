@@ -51,31 +51,23 @@ public class StatisticsService {
         System.out.printf("Period date is from %s to %s.%n", String.valueOf(minDate.get().getDate()), String.valueOf(maxDate.get().getDate()));
     }
 
-    public double AmountAfterDay(List<Expense> expenses, String category) {
-        return expenses.stream()
-                .filter(e -> e.getCategories().equals(category))
+    public void testAmountByCategory(List<Expense> expenses) {
+        printPeriod(expenses);
+
+        Map<String, Double> mapByCategories = expenses.stream()
+                .collect(Collectors.groupingBy(e -> e.getDate().getMonth() + ", " + e.getDate().getYear(),
+                        Collectors.summingDouble(Expense::getExpense)));
+
+        Map sortMap = mapByCategories.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .peek((i) -> System.out.printf("M:%20s\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        Double result = expenses.stream()
                 .mapToDouble(Expense::getExpense)
                 .sum();
-    }
 
-    public List<Expense> sortByCategories(List<Expense> expenses) {
-        return expenses.stream()
-                .sorted((o1, o2) -> o1.getCategories().compareTo(o2.getCategories()))
-                .collect(toList());
-    }
-
-    public List<Expense> sortByData(List<Expense> data) {
-        return data.stream()
-                .sorted((o1, o2) -> o1.getDate().compareTo(o2.getDate()))
-                .collect(toList());
-    }
-
-
-    public List<Expense> sortByExpense(List<Expense> data) {
-        return data.stream()
-                .sorted((o1, o2) -> Double.compare(o1.getExpense(), o2.getExpense()))
-                .collect(toList());
-
-
+        System.out.printf("%nTotal amount of expenses:%31.2f%s%n", result, UserRepository.getCurrency());
     }
 }

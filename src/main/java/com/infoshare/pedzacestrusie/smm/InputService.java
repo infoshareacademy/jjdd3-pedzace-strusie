@@ -109,8 +109,11 @@ public class InputService {
     public void saveListToFile() {
         CsvWriter writer = new CsvWriter();
         writer.writeToTheCsvFileExpenses(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
-        UserRepository.getExpensesUserRepository().clear();
         writer.writeToTheCsvFileIncomes(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
+    }
+
+    public void clearList(){
+        UserRepository.getExpensesUserRepository().clear();
         UserRepository.getIncomesUserRepository().clear();
     }
 
@@ -131,5 +134,10 @@ public class InputService {
             }
         }
         System.out.println("Default expenses file path is set to: " + UserRepository.getExpensesFilePath());
+    }
+
+    public LocalDate getLocalDate() {
+        this.readUserDate();
+        return localDate;
     }
 }

@@ -1,5 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.time.LocalDate;
 
 public class StatisticsMenu extends Menu {
@@ -23,14 +25,17 @@ public class StatisticsMenu extends Menu {
             case 2: {
                 new Settings().updateExpenseListFromFile();
                 //for test only
-                LocalDate minDatePeriod = LocalDate.parse("2050-01-01");
-                LocalDate maxDatePeriod = LocalDate.parse("3000-02-01");
+                System.out.println("Begin period:");
+                LocalDate minDatePeriod = new InputService().getLocalDate();
+                System.out.println("End period:");
+                LocalDate maxDatePeriod = new InputService().getLocalDate();
                 new StatisticsService().amountByCategoryByPeriod(UserRepository.getExpensesUserRepository(),minDatePeriod,maxDatePeriod);
                 printMenu(setMenuDescription(statisticsMenuItems));
                 break;
             }
             case 3: {
-                System.out.println("Ania: " + idx);
+                new Settings().updateExpenseListFromFile();
+                new StatisticsService().testAmountByCategory(UserRepository.getExpensesUserRepository());
                 printMenu(setMenuDescription(statisticsMenuItems));
                 break;
             }

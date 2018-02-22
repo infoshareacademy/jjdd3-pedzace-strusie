@@ -14,11 +14,13 @@ public class MainMenu extends Menu {
         switch (idx) {
             case 1: {
                 new BudgetMenu().executeMenu();
+                new InputService().clearList();
                 printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
             case 2: {
                 new StatisticsMenu().executeMenu();
+                new InputService().clearList();
                 printMenu(setMenuDescription(mainMenuItems));
                 break;
             }
