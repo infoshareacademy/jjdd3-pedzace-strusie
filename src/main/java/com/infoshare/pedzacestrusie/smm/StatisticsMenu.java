@@ -1,7 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
 public class StatisticsMenu extends Menu {
-    private String[] statisticsMenuItems = {"Sum expenses by date", "Sum expenses by categories", "Sum expenses by months", "Exit"};
+    private String[] statisticsMenuItems = {"Sum expenses by categories", "Sum expenses by date", "Sum expenses by months", "Exit"};
 
     @Override
     protected void executeMenu() {
@@ -13,7 +13,8 @@ public class StatisticsMenu extends Menu {
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                System.out.println("Ania: " + idx);
+                new Settings().updateExpenseListFromFile();
+                new StatisticsService().amountByCategory(UserRepository.getExpensesUserRepository());
                 printMenu(setMenuDescription(statisticsMenuItems));
                 break;
             }
