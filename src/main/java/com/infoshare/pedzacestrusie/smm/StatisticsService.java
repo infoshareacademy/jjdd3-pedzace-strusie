@@ -13,6 +13,8 @@ public class StatisticsService {
 
 
     public void amountByCategory(List<Expense> expenses) {
+        printPeriod(expenses);
+
         Map<String, Double> mapByCategories = expenses.stream()
                 .collect(Collectors.groupingBy(Expense::getCategories,
                         Collectors.summingDouble(Expense::getExpense)));
@@ -28,19 +30,25 @@ public class StatisticsService {
                 .sum();
 
         System.out.printf("%nTotal amount of expenses:%31.2f%s%n", result, UserRepository.getCurrency());
+    }
 
-        //finds min date
-        Optional<Expense> minDate = expenses.stream().min(Comparator.comparing(Expense::getDate));
+    public void amountByCategoryByPeriod(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+
+        List<Expense> periodList = expenses.stream()
+                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
+                .collect(toList());
+
+        amountByCategory(periodList);
+    }
+
+    public void printPeriod(List<Expense> periodList) {
+        Optional<Expense> minDate = periodList.stream().min(Comparator.comparing(Expense::getDate));
         System.out.println("Min date: " + minDate.get().getDate());
 
-        //finds max date
-        Optional<Expense> maxDate = expenses.stream().max(Comparator.comparing(Expense::getDate));
+        Optional<Expense> maxDate = periodList.stream().max(Comparator.comparing(Expense::getDate));
         System.out.println("Max date: " + maxDate.get().getDate());
 
-        //print period
-        System.out.printf("Period date is from %s to %s.%n",String.valueOf(minDate.get().getDate()),String.valueOf(maxDate.get().getDate()));
-
-
+        System.out.printf("Period date is from %s to %s.%n", String.valueOf(minDate.get().getDate()), String.valueOf(maxDate.get().getDate()));
     }
 
     public double AmountAfterDay(List<Expense> expenses, String category) {
