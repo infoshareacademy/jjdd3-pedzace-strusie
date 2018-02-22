@@ -1,5 +1,6 @@
 package com.infoshare.pedzacestrusie.smm;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,11 @@ public class StatisticsService {
 
 
     public void amountByCategory(List<Expense> expenses) {
-        Map<String, Double> sum = expenses.stream()
+        Map<String, Double> mapByCategories = expenses.stream()
                 .collect(Collectors.groupingBy(Expense::getCategories,
                         Collectors.summingDouble(Expense::getExpense)));
 
-        Map sortMap = sum.entrySet().stream()
+        Map sortMap = mapByCategories.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .peek((i) -> System.out.printf("Category:%20s\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
@@ -27,6 +28,19 @@ public class StatisticsService {
                 .sum();
 
         System.out.printf("%nTotal amount of expenses:%31.2f%s%n", result, UserRepository.getCurrency());
+
+        //finds min date
+        Optional<Expense> minDate = expenses.stream().min(Comparator.comparing(Expense::getDate));
+        System.out.println("Min date: " + minDate.get().getDate());
+
+        //finds max date
+        Optional<Expense> maxDate = expenses.stream().max(Comparator.comparing(Expense::getDate));
+        System.out.println("Max date: " + maxDate.get().getDate());
+
+        //print period
+        System.out.printf("Period date is from %s to %s.%n",String.valueOf(minDate.get().getDate()),String.valueOf(maxDate.get().getDate()));
+
+
     }
 
     public double AmountAfterDay(List<Expense> expenses, String category) {

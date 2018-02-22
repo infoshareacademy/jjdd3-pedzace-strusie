@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class Settings {
     public void updateDefaults(String[] args) {
-        //gets data from properties file
         PropertiesService service = new PropertiesService();
 
         UserRepository.setCurrency(service.getCurrency());
@@ -17,10 +16,8 @@ public class Settings {
         UserRepository.setDefaultCategoriesFilePath(service.getDefaultCategoriesFilePath());
         UserRepository.setUserCategoriesFilePath(service.getUserCategoriesFilePath());
 
-        //gets categories from settings file
         updateCategorySetFromFile();
 
-        //gets data from agrs
         new InputService().setFilePathFromArgs(args);
     }
 
