@@ -2,6 +2,7 @@ package com.infoshare.pedzacestrusie.smm;
 
 import com.infoshare.pedzacestrusie.smm.create_read_write.CsvWriter;
 
+import java.util.Scanner;
 import java.util.Set;
 
 public class CategoriesService {
@@ -24,19 +25,39 @@ public class CategoriesService {
     protected void removeCategories() {
         InputService inputService = new InputService();
         inputService.readUserCategory();
-        System.out.println("Removing: \t" + inputService.getCategories());
-//TODO:potwierdzenie remove;
-        categorySet.remove(inputService.getCategories());
-        new CsvWriter().writeToCategoriesCsvFile(categorySet,UserRepository.getUserCategoriesFilePath());
+        String categoryToRemove = inputService.getCategory();
+        System.out.println("Category to remove is: \t" + categoryToRemove);
+        checkCategoryToRemove(categoryToRemove);
     }
 
-    protected void restoreDefaultCategoies(){
+    protected void restoreDefaultCategories() {
         new Settings().updateCategorySetFromFile(UserRepository.getDefaultCategoriesFilePath());
         new CsvWriter().writeToCategoriesCsvFile(UserRepository.getCategoriesUserRepository(), UserRepository.getUserCategoriesFilePath());
     }
 
-    private boolean isRemovingCategoryOk(){
-        return true;
+    private void checkCategoryToRemove(String categoryToRemove) {
+        String categoryToRemoveFromUI = "";
+        while (!isExit(categoryToRemoveFromUI)) {
+            try {
+                categoryToRemoveFromUI = this.readCategoryToRemoveFromUI();
+                if (categoryToRemove.equals(categoryToRemoveFromUI)) {
+                    categorySet.remove(categoryToRemove);
+                    new CsvWriter().writeToCategoriesCsvFile(categorySet, UserRepository.getUserCategoriesFilePath());
+                    System.out.printf("Category %s was deleted.", categoryToRemove.toUpperCase());
+                    break;
+                }
+            } catch (Exception exc) {
+                System.out.println(Menu.ALERT_MESSAGE);
+            }
+        }
+    }
 
+    private boolean isExit(String categoryToRemoveFromUI) {
+        return categoryToRemoveFromUI.equals("0");
+    }
+
+    private String readCategoryToRemoveFromUI() {
+        System.out.println("Please type in the name of the category to confirm or 0 to Exit.");
+        return new Scanner(System.in).next().toLowerCase();
     }
 }

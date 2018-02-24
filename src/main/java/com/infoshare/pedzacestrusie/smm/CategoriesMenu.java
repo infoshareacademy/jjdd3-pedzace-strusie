@@ -28,7 +28,7 @@ public class CategoriesMenu extends Menu {
                 break;
             }
             case 4: {
-                new CategoriesService().restoreDefaultCategoies();
+                new CategoriesService().restoreDefaultCategories();
                 printMenu(setMenuDescription(categoryMenuItems));
                 break;
             }

@@ -21,21 +21,21 @@ public class InputService {
     private String date = "";
     private LocalDate localDate = LocalDate.now();
 
-    private String categories;
+    private String category;
     private double expense;
     private double income;
+
+    protected void inputIncome() {
+        this.readUserDate();
+        this.readUserIncome();
+        this.setIncomesList();
+    }
 
     protected void inputExpense() {
         this.readUserDate();
         this.readUserCategory();
         this.readUserExpense();
         this.setExpensesList();
-    }
-
-    protected void inputIncome() {
-        this.readUserDate();
-        this.readUserIncome();
-        this.setIncomesList();
     }
 
     private void readUserDate() {
@@ -64,7 +64,7 @@ public class InputService {
     }
 
     protected void readUserCategory() {
-        categories = new SubCategoriesMenu().getCategories();
+        category = new SubCategoriesMenu().getCategory();
     }
 
     private void readUserExpense() {
@@ -95,7 +95,7 @@ public class InputService {
     }
 
     private void setExpensesList() {
-        userExpense.add(new Expense(localDate, categories, expense));
+        userExpense.add(new Expense(localDate, category, expense));
         userExpense.forEach(System.out::println);
     }
 
@@ -139,7 +139,7 @@ public class InputService {
         return localDate;
     }
 
-    public String getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 }
