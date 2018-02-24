@@ -25,7 +25,6 @@ public class Settings {
         UserRepository.getExpensesUserRepository().clear();
 
         CsvReader csvReader = new CsvReader();
-
         List<Expense> expenseList;
         expenseList = csvReader.readFromFileExpenses(UserRepository.getExpensesFilePath());
 
@@ -36,7 +35,6 @@ public class Settings {
         UserRepository.getIncomesUserRepository().clear();
 
         CsvReader csvReader = new CsvReader();
-
         List<Income> incomeList;
         incomeList = csvReader.readFromFileIncomes(UserRepository.getIncomesFilePath());
 
@@ -47,7 +45,6 @@ public class Settings {
         UserRepository.getCategoriesUserRepository().clear();
 
         CsvReader csvReader = new CsvReader();
-
         Set<String> categorySet;
         categorySet = csvReader.readCategoriesFromFile(filePath);
 

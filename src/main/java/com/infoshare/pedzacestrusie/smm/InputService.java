@@ -110,7 +110,7 @@ public class InputService {
         writer.writeToIncomesCsvFile(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
     }
 
-    public void clearList(){
+    public void clearList() {
         UserRepository.getExpensesUserRepository().clear();
         UserRepository.getIncomesUserRepository().clear();
     }
