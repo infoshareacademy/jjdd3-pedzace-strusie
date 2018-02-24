@@ -21,7 +21,7 @@ public class StatisticsService {
         printPeriod(expenses);
 
         Map<String, Double> mapByCategories = expenses.stream()
-                .collect(Collectors.groupingBy(Expense::getCategories,
+                .collect(Collectors.groupingBy(Expense::getCategory,
                         Collectors.summingDouble(Expense::getExpense)));
 
         mapByCategories.entrySet().stream()
@@ -90,7 +90,7 @@ public class StatisticsService {
 
         Map<String, Map<String, Double>> mapByCategories = expenses.stream()
                 .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
-                        Collectors.groupingBy(Expense::getCategories, Collectors.summingDouble(Expense::getExpense))));
+                        Collectors.groupingBy(Expense::getCategory, Collectors.summingDouble(Expense::getExpense))));
 
         Map<String, Map<String, Double>> sortMap = mapByCategories.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())

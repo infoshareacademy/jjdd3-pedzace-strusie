@@ -6,74 +6,36 @@ import com.infoshare.pedzacestrusie.smm.Income;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class CsvWriter {
-
-    public void writeToTheCsvFileExpenses(List<Expense> externalExpenseList, String externalFilePath)  {
-
-        String fileName = externalFilePath;
-        List<Expense> writeList = new ArrayList<>();
-
-        for (Expense x : externalExpenseList) {
-            writeList.add(x);
-        }
-
-        try (FileWriter fileWriter = new FileWriter(fileName, true);
+    public void writeToExpensesCsvFile(List<Expense> externalExpenseList, String externalFilePath) {
+        try (FileWriter fileWriter = new FileWriter(externalFilePath, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
-
-            for (Expense y : writeList) {
-                writer.write(y.getDate() + ";" + y.getCategories() + ";" + y.getExpense() + "\n");
+            for (Expense output : externalExpenseList) {
+                writer.write(output.getDate() + ";" + output.getCategory() + ";" + output.getExpense() + "\n");
             }
-            writer.flush();
-            writer.close();
         } catch (IOException e) {
             System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
 
-    public void writeToTheCsvFileIncomes(List<Income> externalIncomeList, String externalFilePath) {
-
-        String fileName = externalFilePath;
-        List<Income> writeList = new ArrayList<>();
-
-        for (Income x : externalIncomeList) {
-            writeList.add(x);
-        }
-
-        try (FileWriter fileWriter = new FileWriter(fileName, true);
-             BufferedWriter writer = new BufferedWriter(fileWriter)) {
-
-            for (Income y : writeList) {
-                writer.write(y.getDate() + ";" + y.getIncome() + "\n");
+    public void writeToIncomesCsvFile(List<Income> externalIncomeList, String externalFilePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(externalFilePath, true))) {
+            for (Income output : externalIncomeList) {
+                writer.write(output.getDate() + ";" + output.getIncome() + "\n");
             }
-            writer.flush();
-            writer.close();
         } catch (Exception e) {
             System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }
     }
 
-    public void writeToTheCsvFileCategories(Set<String> externalCategoriesList, String externalFilePath) {
-
-        String fileName = externalFilePath;
-        List<String> writeList = new ArrayList<>();
-
-        for (String x : externalCategoriesList) {
-            writeList.add(x);
-        }
-
-        try (FileWriter fileWriter = new FileWriter(fileName, true);
-             BufferedWriter writer = new BufferedWriter(fileWriter)) {
-
-            for (String y : writeList) {
-                writer.write(y + "\n");
+    public void writeToCategoriesCsvFile(Set<String> externalCategoriesList, String externalFilePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(externalFilePath))) {
+            for (String output : externalCategoriesList) {
+                writer.write(output + "\n");
             }
-            writer.flush();
-            writer.close();
         } catch (Exception e) {
             System.out.println("File does not exist. I can't write your data!!! " + e.getMessage());
         }

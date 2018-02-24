@@ -16,7 +16,7 @@ public class Settings {
         UserRepository.setDefaultCategoriesFilePath(service.getDefaultCategoriesFilePath());
         UserRepository.setUserCategoriesFilePath(service.getUserCategoriesFilePath());
 
-        updateCategorySetFromFile();
+        updateCategorySetFromFile(UserRepository.getUserCategoriesFilePath());
 
         new InputService().setFilePathFromArgs(args);
     }
@@ -30,7 +30,6 @@ public class Settings {
         expenseList = csvReader.readFromFileExpenses(UserRepository.getExpensesFilePath());
 
         UserRepository.setExpensesUserRepository(expenseList);
-
     }
 
     public void updateIncomeListFromFile() {
@@ -44,13 +43,13 @@ public class Settings {
         UserRepository.setIncomesUserRepository(incomeList);
     }
 
-    public void updateCategorySetFromFile() {
+    public void updateCategorySetFromFile(String filePath) {
         UserRepository.getCategoriesUserRepository().clear();
 
         CsvReader csvReader = new CsvReader();
 
         Set<String> categorySet;
-        categorySet = csvReader.readFromFileCategories(UserRepository.getUserCategoriesFilePath());
+        categorySet = csvReader.readCategoriesFromFile(filePath);
 
         UserRepository.setCategoriesUserRepository(categorySet);
     }

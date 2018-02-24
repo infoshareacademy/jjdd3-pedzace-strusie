@@ -63,10 +63,8 @@ public class InputService {
         localDate = LocalDate.parse(date, FORMATTER);
     }
 
-    private void readUserCategory() {
-        SubCategoriesMenu subCategoriesMenu = new SubCategoriesMenu();
-        subCategoriesMenu.executeMenu();
-        categories = subCategoriesMenu.getCategories();
+    protected void readUserCategory() {
+        categories = new SubCategoriesMenu().getCategories();
     }
 
     private void readUserExpense() {
@@ -108,8 +106,8 @@ public class InputService {
 
     public void saveListToFile() {
         CsvWriter writer = new CsvWriter();
-        writer.writeToTheCsvFileExpenses(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
-        writer.writeToTheCsvFileIncomes(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
+        writer.writeToExpensesCsvFile(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
+        writer.writeToIncomesCsvFile(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
     }
 
     public void clearList(){
@@ -139,5 +137,9 @@ public class InputService {
     public LocalDate getLocalDate() {
         this.readUserDate();
         return localDate;
+    }
+
+    public String getCategories() {
+        return categories;
     }
 }

@@ -15,6 +15,7 @@ public class SubCategoriesMenu extends Menu {
     }
 
     public String getCategories() {
+        this.executeMenu();
         return categories;
     }
 

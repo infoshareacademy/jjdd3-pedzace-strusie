@@ -3,14 +3,13 @@ package com.infoshare.pedzacestrusie.smm;
 import java.time.LocalDate;
 
 public class Expense {
-
     private LocalDate date;
-    private String categories;
+    private String category;
     private double expense;
 
-    public Expense(LocalDate date, String categories, double expense) {
+    public Expense(LocalDate date, String category, double expense) {
         this.date = date;
-        this.categories = categories;
+        this.category = category;
         this.expense = expense;
     }
 
@@ -18,8 +17,8 @@ public class Expense {
         return date;
     }
 
-    public String getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 
     public double getExpense() {
@@ -30,7 +29,7 @@ public class Expense {
     public String toString() {
         return "Expense{" +
                 "date='" + date + '\'' +
-                ", categories='" + categories + '\'' +
+                ", category='" + category + '\'' +
                 ", expense=" + expense + UserRepository.getCurrency()+
                 '}';
     }
