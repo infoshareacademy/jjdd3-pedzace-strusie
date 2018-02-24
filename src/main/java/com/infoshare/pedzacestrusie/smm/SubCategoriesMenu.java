@@ -52,6 +52,6 @@ public class SubCategoriesMenu extends Menu {
 
     @Override
     protected void checkUserSelection(int idx) {
-        this.setCategory(subCategoryMenuItems[idx-1]);
+        this.setCategory(subCategoryMenuItems[idx - 1]);
     }
 }

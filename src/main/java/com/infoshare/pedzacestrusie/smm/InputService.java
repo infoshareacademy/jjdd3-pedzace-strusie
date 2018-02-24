@@ -115,14 +115,6 @@ public class InputService {
         UserRepository.getIncomesUserRepository().clear();
     }
 
-    public List<Expense> getUserExpense() {
-        return userExpense;
-    }
-
-    public List<Income> getUserIncome() {
-        return userIncome;
-    }
-
     public void setFilePathFromArgs(String[] args) {
         if (args.length != 0) {
             if (args.length == 1 && Pattern.matches("[a-zA-Z0-9]+[\\.]?[a-zA-Z]{3}", args[0])) {

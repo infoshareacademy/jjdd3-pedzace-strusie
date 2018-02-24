@@ -1,7 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
 public class CategoriesMenu extends Menu {
-    private String[] categoryMenuItems = {"Show Categories", "Add category", "Remove Category", "Restore default categories", "Exit"};
+    private String[] categoryMenuItems = {"Show categories", "Add category", "Remove category", "Restore default categories", "Exit"};
 
     @Override
     protected void executeMenu() {

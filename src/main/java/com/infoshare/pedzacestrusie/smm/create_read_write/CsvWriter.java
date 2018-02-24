@@ -11,8 +11,7 @@ import java.util.Set;
 
 public class CsvWriter {
     public void writeToExpensesCsvFile(List<Expense> externalExpenseList, String externalFilePath) {
-        try (FileWriter fileWriter = new FileWriter(externalFilePath, true);
-             BufferedWriter writer = new BufferedWriter(fileWriter)) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(externalFilePath, true))) {
             for (Expense output : externalExpenseList) {
                 writer.write(output.getDate() + ";" + output.getCategory() + ";" + output.getExpense() + "\n");
             }

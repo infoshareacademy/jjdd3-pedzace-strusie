@@ -11,10 +11,10 @@ public class CategoriesService {
     private String[] categoryMenuItems = categorySet.toArray(new String[0]);
 
     protected void showCategories() {
-        printCategoies(categoryMenuItems);
+        printCategories(categoryMenuItems);
     }
 
-    private void printCategoies(String[] menuItems) {
+    private void printCategories(String[] menuItems) {
         StringBuilder menuDescr = new StringBuilder("Categories list:");
 
         for (int i = 0, j = 1; i < menuItems.length; i++) {

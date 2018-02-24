@@ -16,31 +16,29 @@ public class PropertiesService {
         return this.properties.getProperty("date-format", "yyyy-MM-dd");
     }
 
-    public String getExpensesFilePath(){
-        return this.properties.getProperty("expensesFilePath","Resources/expenses.csv");
+    public String getExpensesFilePath() {
+        return this.properties.getProperty("expensesFilePath", "Resources/expenses.csv");
     }
 
-    public String getIncomesFilePath(){
-        return this.properties.getProperty("incomesFilePath","Resources/incomes.csv");
+    public String getIncomesFilePath() {
+        return this.properties.getProperty("incomesFilePath", "Resources/incomes.csv");
     }
 
-    public String getDefaultCategoriesFilePath(){
-        return this.properties.getProperty("defaultCategoriesFilePath","Resources/defaultCategories.csv");
-    }
-    public String getUserCategoriesFilePath(){
-        return this.properties.getProperty("userCategoriesFilePath","Resources/userCategories.csv");
+    public String getDefaultCategoriesFilePath() {
+        return this.properties.getProperty("defaultCategoriesFilePath", "Resources/defaultCategories.csv");
     }
 
-    public PropertiesService (){
+    public String getUserCategoriesFilePath() {
+        return this.properties.getProperty("userCategoriesFilePath", "Resources/userCategories.csv");
+    }
+
+    public PropertiesService() {
         loadPropertyService();
     }
 
     private void loadPropertyService() {
-
-        try {
-            InputStream input = input = new FileInputStream("Resources/config.properties");
+        try (InputStream input = new FileInputStream("Resources/config.properties")) {
             properties.load(input);
-            input.close();
         } catch (IOException e) {
             System.out.println("There is some problems with load the config data!!!" + e.getMessage());
         }
