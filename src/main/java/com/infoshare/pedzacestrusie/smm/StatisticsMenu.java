@@ -17,16 +17,23 @@ public class StatisticsMenu extends Menu {
             case 1: {
                 new Settings().updateExpenseListFromFile();
                 new Settings().updateIncomeListFromFile();
+                LocalDate minDatePeriod;
+                LocalDate maxDatePeriod;
 
-                System.out.println("Begin period:");
-                LocalDate minDatePeriod = new InputService().getLocalDate();
-                System.out.println("End period:");
-                LocalDate maxDatePeriod = new InputService().getLocalDate();
+                while (true) {
+                    System.out.println("Begin period:");
+                    minDatePeriod = new InputService().getLocalDate();
+                    System.out.println("End period:");
+                    maxDatePeriod = new InputService().getLocalDate();
 
-                LocalDate tempDate = maxDatePeriod;
-                if (maxDatePeriod.isBefore(minDatePeriod)){
-                    maxDatePeriod=minDatePeriod;
-                    minDatePeriod=tempDate;
+                    LocalDate tempDate = maxDatePeriod;
+                    if (maxDatePeriod.isBefore(minDatePeriod)) {
+                        maxDatePeriod = minDatePeriod;
+                        minDatePeriod = tempDate;
+                    }
+                    if (!minDatePeriod.isEqual(maxDatePeriod)) {
+                        break;
+                    }
                 }
                 new StatisticsService().printAmountByCategoriesByPeriod(UserRepository.getExpensesUserRepository(), UserRepository.getIncomesUserRepository(), minDatePeriod, maxDatePeriod);
                 printMenu(setMenuDescription(statisticsMenuItems));
@@ -34,16 +41,23 @@ public class StatisticsMenu extends Menu {
             }
             case 2: {
                 new Settings().updateExpenseListFromFile();
+                LocalDate minDatePeriod;
+                LocalDate maxDatePeriod;
 
-                System.out.println("Begin period:");
-                LocalDate minDatePeriod = new InputService().getLocalDate();
-                System.out.println("End period:");
-                LocalDate maxDatePeriod = new InputService().getLocalDate();
+                while (true) {
+                    System.out.println("Begin period:");
+                    minDatePeriod = new InputService().getLocalDate();
+                    System.out.println("End period:");
+                    maxDatePeriod = new InputService().getLocalDate();
 
-                LocalDate tempDate = maxDatePeriod;
-                if (maxDatePeriod.isBefore(minDatePeriod)){
-                    maxDatePeriod=minDatePeriod;
-                    minDatePeriod=tempDate;
+                    LocalDate tempDate = maxDatePeriod;
+                    if (maxDatePeriod.isBefore(minDatePeriod)) {
+                        maxDatePeriod = minDatePeriod;
+                        minDatePeriod = tempDate;
+                    }
+                    if (!minDatePeriod.isEqual(maxDatePeriod)) {
+                        break;
+                    }
                 }
                 new StatisticsService().printAmountByDateByPeriod(UserRepository.getExpensesUserRepository(), minDatePeriod, maxDatePeriod);
                 printMenu(setMenuDescription(statisticsMenuItems));
@@ -51,16 +65,23 @@ public class StatisticsMenu extends Menu {
             }
             case 3: {
                 new Settings().updateExpenseListFromFile();
+                LocalDate minDatePeriod;
+                LocalDate maxDatePeriod;
 
-                System.out.println("Begin period:");
-                LocalDate minDatePeriod = new InputService().getLocalDate();
-                System.out.println("End period:");
-                LocalDate maxDatePeriod = new InputService().getLocalDate();
+                while (true) {
+                    System.out.println("Begin period:");
+                    minDatePeriod = new InputService().getLocalDate();
+                    System.out.println("End period:");
+                    maxDatePeriod = new InputService().getLocalDate();
 
-                LocalDate tempDate = maxDatePeriod;
-                if (maxDatePeriod.isBefore(minDatePeriod)){
-                    maxDatePeriod=minDatePeriod;
-                    minDatePeriod=tempDate;
+                    LocalDate tempDate = maxDatePeriod;
+                    if (maxDatePeriod.isBefore(minDatePeriod)) {
+                        maxDatePeriod = minDatePeriod;
+                        minDatePeriod = tempDate;
+                    }
+                    if (!minDatePeriod.isEqual(maxDatePeriod)) {
+                        break;
+                    }
                 }
                 new StatisticsService().printAmountByDateByCategoriesByPeriod(UserRepository.getExpensesUserRepository(), minDatePeriod, maxDatePeriod);
                 printMenu(setMenuDescription(statisticsMenuItems));
