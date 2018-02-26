@@ -33,6 +33,8 @@ public class StatisticsMenu extends Menu {
                     }
                     if (!minDatePeriod.isEqual(maxDatePeriod)) {
                         break;
+                    } else {
+                        System.out.println("Date should be different!");
                     }
                 }
                 new StatisticsService().printAmountByCategoriesByPeriod(UserRepository.getExpensesUserRepository(), UserRepository.getIncomesUserRepository(), minDatePeriod, maxDatePeriod);
@@ -57,6 +59,8 @@ public class StatisticsMenu extends Menu {
                     }
                     if (!minDatePeriod.isEqual(maxDatePeriod)) {
                         break;
+                    }else {
+                        System.out.println("Date should be different!");
                     }
                 }
                 new StatisticsService().printAmountByDateByPeriod(UserRepository.getExpensesUserRepository(), minDatePeriod, maxDatePeriod);
@@ -81,6 +85,8 @@ public class StatisticsMenu extends Menu {
                     }
                     if (!minDatePeriod.isEqual(maxDatePeriod)) {
                         break;
+                    }else {
+                        System.out.println("Date should be different!");
                     }
                 }
                 new StatisticsService().printAmountByDateByCategoriesByPeriod(UserRepository.getExpensesUserRepository(), minDatePeriod, maxDatePeriod);
