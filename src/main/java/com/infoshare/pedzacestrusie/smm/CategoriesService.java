@@ -56,6 +56,7 @@ public class CategoriesService {
     protected void restoreDefaultCategories() {
         new Settings().updateCategorySetFromFile(UserRepository.getDefaultCategoriesFilePath());
         new CsvWriter().writeToCategoriesCsvFile(UserRepository.getCategoriesUserRepository(), UserRepository.getUserCategoriesFilePath());
+        System.out.println("Categories are up to date.");
     }
 
     private void checkCategoryToRemove(String categoryToRemove) {
