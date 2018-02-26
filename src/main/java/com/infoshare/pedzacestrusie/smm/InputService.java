@@ -21,21 +21,21 @@ public class InputService {
     private String date = "";
     private LocalDate localDate = LocalDate.now();
 
-    private String categories;
+    private String category;
     private double expense;
     private double income;
+
+    protected void inputIncome() {
+        this.readUserDate();
+        this.readUserIncome();
+        this.setIncomesList();
+    }
 
     protected void inputExpense() {
         this.readUserDate();
         this.readUserCategory();
         this.readUserExpense();
         this.setExpensesList();
-    }
-
-    protected void inputIncome() {
-        this.readUserDate();
-        this.readUserIncome();
-        this.setIncomesList();
     }
 
     private void readUserDate() {
@@ -63,10 +63,8 @@ public class InputService {
         localDate = LocalDate.parse(date, FORMATTER);
     }
 
-    private void readUserCategory() {
-        SubCategoriesMenu subCategoriesMenu = new SubCategoriesMenu();
-        subCategoriesMenu.executeMenu();
-        categories = subCategoriesMenu.getCategories();
+    protected void readUserCategory() {
+        category = new SubCategoriesMenu().getCategory();
     }
 
     private void readUserExpense() {
@@ -97,7 +95,7 @@ public class InputService {
     }
 
     private void setExpensesList() {
-        userExpense.add(new Expense(localDate, categories, expense));
+        userExpense.add(new Expense(localDate, category, expense));
         userExpense.forEach(System.out::println);
     }
 
@@ -108,18 +106,13 @@ public class InputService {
 
     public void saveListToFile() {
         CsvWriter writer = new CsvWriter();
-        writer.writeToTheCsvFileExpenses(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
+        writer.writeToExpensesCsvFile(UserRepository.getExpensesUserRepository(), UserRepository.getExpensesFilePath());
+        writer.writeToIncomesCsvFile(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
+    }
+
+    public void clearList() {
         UserRepository.getExpensesUserRepository().clear();
-        writer.writeToTheCsvFileIncomes(UserRepository.getIncomesUserRepository(), UserRepository.getIncomesFilePath());
         UserRepository.getIncomesUserRepository().clear();
-    }
-
-    public List<Expense> getUserExpense() {
-        return userExpense;
-    }
-
-    public List<Income> getUserIncome() {
-        return userIncome;
     }
 
     public void setFilePathFromArgs(String[] args) {
@@ -131,5 +124,14 @@ public class InputService {
             }
         }
         System.out.println("Default expenses file path is set to: " + UserRepository.getExpensesFilePath());
+    }
+
+    public LocalDate getLocalDate() {
+        this.readUserDate();
+        return localDate;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

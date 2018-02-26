@@ -6,7 +6,7 @@ public class SubCategoriesMenu extends Menu {
     private Set<String> categorySet = UserRepository.getCategoriesUserRepository();
     private String[] subCategoryMenuItems = categorySet.toArray(new String[0]);
 
-    private String categories;
+    private String category;
 
     @Override
     protected void executeMenu() {
@@ -14,12 +14,13 @@ public class SubCategoriesMenu extends Menu {
         readUserChoice(subCategoryMenuItems.length);
     }
 
-    public String getCategories() {
-        return categories;
+    public String getCategory() {
+        this.executeMenu();
+        return category;
     }
 
-    private void setCategories(String categories) {
-        this.categories = categories;
+    private void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
@@ -51,6 +52,6 @@ public class SubCategoriesMenu extends Menu {
 
     @Override
     protected void checkUserSelection(int idx) {
-        this.setCategories(subCategoryMenuItems[idx-1]);
+        this.setCategory(subCategoryMenuItems[idx - 1]);
     }
 }

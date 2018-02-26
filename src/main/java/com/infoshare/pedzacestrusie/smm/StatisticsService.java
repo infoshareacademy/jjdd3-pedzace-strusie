@@ -4,70 +4,108 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 public class StatisticsService {
-    private List<Expense> userExpense = UserRepository.getExpensesUserRepository();
-    private List<Income> userIncome = UserRepository.getIncomesUserRepository();
-    private Set<String> userCategories = UserRepository.getCategoriesUserRepository();
+    public void printAmountByCategoriesByPeriod(List<Expense> expenses, List<Income> incomes, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        List<Expense> periodExpensesList = expenses.stream()
+                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
+                .collect(Collectors.toList());
 
+        List<Income> periodIncomesList = incomes.stream()
+                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
+                .collect(Collectors.toList());
 
-    public void amountByCategory(List<Expense> expenses) {
+        printAmountByCategories(periodExpensesList, periodIncomesList);
+    }
+
+    private void printAmountByCategories(List<Expense> expenses, List<Income> incomes) {
+        printPeriod(expenses);
+
         Map<String, Double> mapByCategories = expenses.stream()
-                .collect(Collectors.groupingBy(Expense::getCategories,
+                .collect(Collectors.groupingBy(Expense::getCategory,
                         Collectors.summingDouble(Expense::getExpense)));
 
-        Map sortMap = mapByCategories.entrySet().stream()
+        mapByCategories.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .peek((i) -> System.out.printf("Category:%20s\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                .forEach((i) -> System.out.printf("Category:%20s,\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()));
+
+        Double resultIncome = incomes.stream()
+                .mapToDouble(Income::getIncome)
+                .sum();
+
+        System.out.printf("%nTotal amount of revenue:%32.2f%s%n", resultIncome, UserRepository.getCurrency());
+        Double resultExpense = expenses.stream()
+                .mapToDouble(Expense::getExpense)
+                .sum();
+
+        System.out.printf("Total amount of expenditure:%28.2f%s%n", resultExpense, UserRepository.getCurrency());
+        System.out.printf("Total profit:%43.2f%s%n", resultIncome - resultExpense, UserRepository.getCurrency());
+    }
+
+    private void printPeriod(List<Expense> periodList) {
+        Optional<Expense> minDate = periodList.stream().min(Comparator.comparing(Expense::getDate));
+        System.out.println("Min date: " + minDate.get().getDate());
+
+        Optional<Expense> maxDate = periodList.stream().max(Comparator.comparing(Expense::getDate));
+        System.out.println("Max date: " + maxDate.get().getDate());
+
+        System.out.printf("Period date is from %s to %s.%n", String.valueOf(minDate.get().getDate()), String.valueOf(maxDate.get().getDate()));
+    }
+
+    public void printAmountByDateByPeriod(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        List<Expense> periodList = expenses.stream()
+                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
+                .collect(Collectors.toList());
+
+        printAmountByDate(periodList);
+    }
+
+    private void printAmountByDate(List<Expense> expenses) {
+        printPeriod(expenses);
+
+        Map<String, Double> mapByCategories = expenses.stream()
+                .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
+                        Collectors.summingDouble(Expense::getExpense)));
+
+        mapByCategories.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach((i) -> System.out.printf("Month:%24s.\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()));
 
         Double result = expenses.stream()
                 .mapToDouble(Expense::getExpense)
                 .sum();
 
-        System.out.printf("%nTotal amount of expenses:%31.2f%s%n", result, UserRepository.getCurrency());
-
-        //finds min date
-        Optional<Expense> minDate = expenses.stream().min(Comparator.comparing(Expense::getDate));
-        System.out.println("Min date: " + minDate.get().getDate());
-
-        //finds max date
-        Optional<Expense> maxDate = expenses.stream().max(Comparator.comparing(Expense::getDate));
-        System.out.println("Max date: " + maxDate.get().getDate());
-
-        //print period
-        System.out.printf("Period date is from %s to %s.%n",String.valueOf(minDate.get().getDate()),String.valueOf(maxDate.get().getDate()));
-
-
+        System.out.printf("%nTotal amount of expenditure:%28.2f%s%n", result, UserRepository.getCurrency());
     }
 
-    public double AmountAfterDay(List<Expense> expenses, String category) {
-        return expenses.stream()
-                .filter(e -> e.getCategories().equals(category))
+    public void printAmountByDateByCategoriesByPeriod(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        List<Expense> periodList = expenses.stream()
+                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
+                .collect(Collectors.toList());
+
+        printAmountByDateByCategories(periodList);
+    }
+
+    private void printAmountByDateByCategories(List<Expense> expenses) {
+        printPeriod(expenses);
+
+        Map<String, Map<String, Double>> mapByCategories = expenses.stream()
+                .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
+                        Collectors.groupingBy(Expense::getCategory, Collectors.summingDouble(Expense::getExpense))));
+
+        Map<String, Map<String, Double>> sortMap = mapByCategories.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        sortMap.forEach((key, value) -> {
+            System.out.printf("%nDate:%20s%n", key);
+            value.forEach((keyInside, valueInside) -> System.out.printf("Category:%20s,\t\tExpense:%12.2f%s%n", keyInside, valueInside, UserRepository.getCurrency()));
+        });
+
+        Double result = expenses.stream()
                 .mapToDouble(Expense::getExpense)
                 .sum();
-    }
 
-    public List<Expense> sortByCategories(List<Expense> expenses) {
-        return expenses.stream()
-                .sorted((o1, o2) -> o1.getCategories().compareTo(o2.getCategories()))
-                .collect(toList());
-    }
-
-    public List<Expense> sortByData(List<Expense> data) {
-        return data.stream()
-                .sorted((o1, o2) -> o1.getDate().compareTo(o2.getDate()))
-                .collect(toList());
-    }
-
-
-    public List<Expense> sortByExpense(List<Expense> data) {
-        return data.stream()
-                .sorted((o1, o2) -> Double.compare(o1.getExpense(), o2.getExpense()))
-                .collect(toList());
-
-
+        System.out.printf("%nTotal amount of expenditure:%28.2f%s%n", result, UserRepository.getCurrency());
     }
 }

@@ -1,7 +1,7 @@
 package com.infoshare.pedzacestrusie.smm;
 
 public class CategoriesMenu extends Menu {
-    private String[] categoryMenuItems = {"addCategory();", "showCategories();", "removeCategory();", "restoreDefault();", "Exit"};
+    private String[] categoryMenuItems = {"Show categories", "Add category", "Remove category", "Restore default categories", "Exit"};
 
     @Override
     protected void executeMenu() {
@@ -13,22 +13,22 @@ public class CategoriesMenu extends Menu {
     protected void checkUserSelection(int idx) {
         switch (idx) {
             case 1: {
-                System.out.println("Your choice is: " + idx);
+                new CategoriesService().showCategories();
                 printMenu(setMenuDescription(categoryMenuItems));
                 break;
             }
             case 2: {
-                System.out.println("Your choice is: " + idx);
+                new CategoriesService().addCategory();
                 printMenu(setMenuDescription(categoryMenuItems));
                 break;
             }
             case 3: {
-                System.out.println("Your choice is: " + idx);
+                new CategoriesService().removeCategory();
                 printMenu(setMenuDescription(categoryMenuItems));
                 break;
             }
             case 4: {
-                System.out.println("Your choice is: " + idx);
+                new CategoriesService().restoreDefaultCategories();
                 printMenu(setMenuDescription(categoryMenuItems));
                 break;
             }

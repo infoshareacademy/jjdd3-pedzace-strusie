@@ -14,77 +14,49 @@ import java.util.TreeSet;
 
 
 public class CsvReader {
-
     public List<Expense> readFromFileExpenses(String externalFilePath) {
+        List<Expense> expenseList = new ArrayList<>();
 
-        String expensesData = externalFilePath;
-        List<Expense> readListExp = new ArrayList<>();
-        BufferedReader fileReader = filePreparation(expensesData);
-        String line=" ";
-
-        try {
-            while ((line = fileReader.readLine()) != null) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(externalFilePath))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] arrays = line.split(";");
-                Expense expense = new Expense(LocalDate.parse(arrays[0]), arrays[1], Double.parseDouble(arrays[2]));
-                readListExp.add(expense);
+                Expense newExpense = new Expense(LocalDate.parse(arrays[0]), arrays[1], Double.parseDouble(arrays[2]));
+                expenseList.add(newExpense);
             }
-            fileReader.close();
-            return readListExp;
         } catch (IOException e) {
             System.out.println("There is some problems with read data from file!!!   " + e.getMessage());
         }
-        return null;
+        return expenseList;
     }
 
     public List<Income> readFromFileIncomes(String externalFilePath) {
+        List<Income> incomeList = new ArrayList<>();
 
-        String incomesData = externalFilePath;
-        List<Income> readListInc = new ArrayList<>();
-        BufferedReader fileReader = filePreparation(incomesData);
-        String line=" ";
-
-        try {
-            while ((line = fileReader.readLine()) != null) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(externalFilePath))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] arrays = line.split(";");
-                Income income = new Income(LocalDate.parse(arrays[0]), Double.parseDouble(arrays[1]));
-                readListInc.add(income);
+                Income newIncome = new Income(LocalDate.parse(arrays[0]), Double.parseDouble(arrays[1]));
+                incomeList.add(newIncome);
             }
-            fileReader.close();
-        } catch (IOException e) {
-            System.out.println("There is problems with read data from file!!!   " + e.getMessage());
-        } finally {
-
-        }
-        return readListInc;
-    }
-
-    public Set<String> readFromFileCategories(String externalFilePath) {
-
-        String categories = externalFilePath;
-        Set<String> readListCat = new TreeSet<>();
-        BufferedReader fileReader = filePreparation(categories);
-        String line=" ";
-
-        try {
-            while ((line = fileReader.readLine()) != null) {
-                readListCat.add(line);
-            }
-            fileReader.close();
         } catch (IOException e) {
             System.out.println("There is problems with read data from file!!!   " + e.getMessage());
         }
-        return readListCat;
+        return incomeList;
     }
 
-    private BufferedReader filePreparation(String inputFile) {
+    public Set<String> readCategoriesFromFile(String externalFilePath) {
+        Set<String> categoriesSet = new TreeSet<>();
 
-        try {
-            FileReader myFile = new FileReader(inputFile);
-            BufferedReader fileReader = new BufferedReader(myFile);
-            return fileReader;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(externalFilePath))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                categoriesSet.add(line);
+            }
         } catch (IOException e) {
-            System.out.println("There is problems with read file!!!    " + e.getMessage());
+            System.out.println("There is problems with read data from file!!!   " + e.getMessage());
         }
-        return null;
+        return categoriesSet;
     }
 }
