@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.infoshareacademy-pedzace-strusie</groupId>
+    <groupId>com.infoshareacademy.pedzace-strusie</groupId>
     <artifactId>smm</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
