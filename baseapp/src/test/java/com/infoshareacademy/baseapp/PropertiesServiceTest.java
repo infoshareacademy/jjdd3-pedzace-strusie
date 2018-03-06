@@ -37,7 +37,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightExpensesFilePath() {
         // Given
-        String expectedExpensesFilePath = "Resources/expenses.csv";
+        String expectedExpensesFilePath = "/userData/expenses.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -50,7 +50,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightIncomesFilePath() {
         // Given
-        String expectedIncomesFilePath = "Resources/incomes.csv";
+        String expectedIncomesFilePath = "/userData/incomes.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -63,7 +63,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightDefaultCategoriesFilePath() {
         // Given
-        String expectedDefaultCategoriesFilePath = "Resources/defaultCategories.csv";
+        String expectedDefaultCategoriesFilePath = "baseapp/src/main/resources/defaultCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -76,7 +76,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightUserCategoriesFilePath() {
         // Given
-        String expectedUserCategoriesFilePath = "Resources/userCategories.csv";
+        String expectedUserCategoriesFilePath = "/userData/userCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
