@@ -21,6 +21,9 @@ public class Income {
     @NotNull
     private double income;
 
+    public Income() {
+    }
+
     public Income(LocalDate date, double income) {
         this.date = date;
         this.income = income;
