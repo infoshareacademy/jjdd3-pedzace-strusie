@@ -4,10 +4,11 @@ package com.infoshareacademy.webapp.servlets;
 import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
 import com.infoshareacademy.webapp.dao.UsersRepositoryDao;
 import com.infoshareacademy.webapp.domain.User;
-import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -17,21 +18,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/add-user")
 @MultipartConfig
 public class AddUserServlet extends HttpServlet {
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private static final Logger logger = LoggerFactory.getLogger(AddUserServlet.class);
 
     File templatesPath;
     Template template;
@@ -47,7 +45,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-edit-user.ftlh");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.debug(e.getMessage());
         }
     }
 
@@ -67,7 +65,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.debug(e.getMessage());
         }
     }
 

@@ -1,14 +1,15 @@
 package com.infoshareacademy.webapp.interceptors;
 
 import com.infoshareacademy.webapp.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-import java.util.logging.Logger;
 
 public class AddUserInterceptor {
 
-    Logger logger = Logger.getLogger(AddUserInterceptor.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(AddUserInterceptor.class);
 
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {

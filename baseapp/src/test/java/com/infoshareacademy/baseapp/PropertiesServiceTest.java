@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PropertiesServiceTest {
 
-/*    @Test
+    @Test
     void shouldGetRightValueOfCurrency() {
         // Given
         new Settings().updateDefaults(new String[0]);
@@ -63,7 +63,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightDefaultCategoriesFilePath() {
         // Given
-        String expectedDefaultCategoriesFilePath = "defaultCategories.csv";
+        String expectedDefaultCategoriesFilePath = "baseapp/src/main/resources/defaultCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -84,5 +84,5 @@ class PropertiesServiceTest {
 
         // Then
         assertEquals(expectedUserCategoriesFilePath, actualUserCategoriesFilePath);
-    }*/
+    }
 }

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CsvReaderTest {
     @Test
     void shouldReadRightValueFromExpensesFile() {
-     /*   // Given
+        // Given
         List<Expense> expectedExpense = new ArrayList<>();
         expectedExpense.add(0, new Expense(LocalDate.of(2018, 5, 1), "children", Double.parseDouble("135.44")));
         expectedExpense.add(1, new Expense(LocalDate.of(2018, 8, 7), "hygiene", Double.parseDouble("125.61")));
@@ -28,13 +28,13 @@ class CsvReaderTest {
         String actual = String.valueOf(actualExpense);
 
         // Then
-        assertEquals(expected, actual);*/
+        assertEquals(expected, actual);
 
     }
 
     @Test
     void shouldReadRightValueFromIncomeFile() {
-  /*      // Given
+        // Given
         List<Income> expectedIncome = new ArrayList<>();
         expectedIncome.add(0, new Income(LocalDate.of(2018, 1, 8), Double.parseDouble("4450.47")));
         expectedIncome.add(1, new Income(LocalDate.of(2018, 2, 10), Double.parseDouble("6562.15")));
@@ -49,12 +49,12 @@ class CsvReaderTest {
         String actual = String.valueOf(actualIncome);
 
         // Then
-        assertEquals(expected, actual);*/
+        assertEquals(expected, actual);
     }
 
     @Test
     void shouldReadRightValueFromCategoriesFile() {
-  /*      // Given
+        // Given
         Set<String> expectedCategories = new TreeSet<>();
         expectedCategories.add("accommodation");
         expectedCategories.add("broadband");
@@ -71,6 +71,6 @@ class CsvReaderTest {
         String actual = String.valueOf(actualCategories);
 
         // Then
-        assertEquals(expected, actual);*/
+        assertEquals(expected, actual);
     }
 }

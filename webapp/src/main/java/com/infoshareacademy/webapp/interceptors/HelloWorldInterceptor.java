@@ -1,12 +1,14 @@
 package com.infoshareacademy.webapp.interceptors;
 
+import org.slf4j.LoggerFactory;
+
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-import java.util.logging.Logger;
 
 public class HelloWorldInterceptor {
 
-    Logger logger = Logger.getLogger(HelloWorldInterceptor.class.getName());
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(HelloWorldInterceptor.class);
+
 
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {

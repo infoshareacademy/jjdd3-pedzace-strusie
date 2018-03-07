@@ -19,7 +19,7 @@ import java.util.Map;
 @WebServlet("/welcome-user")
 public class WelcomeUserServlet extends HttpServlet {
 
-    Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

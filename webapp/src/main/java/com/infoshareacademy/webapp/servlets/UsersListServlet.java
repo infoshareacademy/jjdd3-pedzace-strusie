@@ -5,6 +5,8 @@ import com.infoshareacademy.webapp.domain.User;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import java.util.Map;
 
 @WebServlet("/users-list")
 public class UsersListServlet extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
 
     @EJB
     UsersRepositoryDao usersRepositoryDao;
@@ -36,6 +40,8 @@ public class UsersListServlet extends HttpServlet {
             template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
+            logger.debug(e.getMessage());
+
         }
     }
 }

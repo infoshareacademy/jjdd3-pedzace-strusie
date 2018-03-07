@@ -1,10 +1,10 @@
 package com.infoshareacademy.webapp.domain;
 
 public class User {
-    Integer id;
-    String name;
-    String login;
-    String password;
+    private Integer id;
+    private String name;
+    private String login;
+    private String password;
 
 
     public Integer getId() {
