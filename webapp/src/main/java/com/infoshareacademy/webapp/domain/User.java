@@ -1,18 +1,18 @@
 package com.infoshareacademy.webapp.domain;
 
 public class User {
-    private Integer id;
+    private Integer idUser;
     private String name;
     private String login;
     private String password;
 
 
     public Integer getId() {
-        return id;
+        return idUser;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idUser = id;
     }
 
     public String getName() {

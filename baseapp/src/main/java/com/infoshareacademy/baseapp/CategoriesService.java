@@ -5,14 +5,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-@Entity
-@Table(name = "CATEGORIES")
+
 public class CategoriesService {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_category")
-    private Integer id;
-    @Column(name = "name")
+
     private Set<String> categorySet = UserRepository.getCategoriesUserRepository();
     private String[] categoryMenuItems = categorySet.toArray(new String[0]);
 
