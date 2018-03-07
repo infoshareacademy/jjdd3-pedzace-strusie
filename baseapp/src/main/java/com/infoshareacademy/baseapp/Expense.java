@@ -5,12 +5,12 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "EXPENSE")
+@Table(name = "EXPENSES")
 public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_expens")
     private Integer id;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,8 @@ public class Expense {
     @Column(name = "expense")
     @NotNull
     private double expense;
+
+
 
     public Expense(LocalDate date, String category, double expense) {
         this.date = date;
