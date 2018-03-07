@@ -11,7 +11,6 @@ import java.util.TreeSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CsvReaderTest {
-
     @Test
     void shouldReadRightValueFromExpensesFile() {
         // Given

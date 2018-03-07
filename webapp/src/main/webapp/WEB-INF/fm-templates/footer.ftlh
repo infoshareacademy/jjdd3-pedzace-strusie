@@ -1,0 +1,1 @@
+<div>Copyright&copy; ${.now?string('yyyy')}</div>
