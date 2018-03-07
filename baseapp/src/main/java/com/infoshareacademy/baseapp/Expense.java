@@ -7,6 +7,9 @@ public class Expense {
     private String category;
     private double expense;
 
+    public Expense() {
+    }
+
     public Expense(LocalDate date, String category, double expense) {
         this.date = date;
         this.category = category;
@@ -17,20 +20,33 @@ public class Expense {
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getExpense() {
         return expense;
     }
 
+    public void setExpense(double expense) {
+        this.expense = expense;
+    }
+
     @Override
     public String toString() {
-        return "Expense{" +
-                "date='" + date + '\'' +
-                ", category='" + category + '\'' +
-                ", expense=" + expense + UserRepository.getCurrency()+
-                '}';
+        final StringBuffer sb = new StringBuffer("Expense{");
+        sb.append("date=").append(date);
+        sb.append(", category='").append(category).append('\'');
+        sb.append(", expense=").append(expense).append(UserRepository.getCurrency());
+        sb.append('}');
+        return sb.toString();
     }
 }
