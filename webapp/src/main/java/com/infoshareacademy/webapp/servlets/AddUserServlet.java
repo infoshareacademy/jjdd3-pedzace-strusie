@@ -78,16 +78,6 @@ public class AddUserServlet extends HttpServlet {
         user.setName(req.getParameter("name"));
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));
-        user.setAge(Integer.parseInt(req.getParameter("age")));
-
-        Part filePart = req.getPart("image");
-        File file = null;
-        try {
-            file = fileUploadProcessor.uploadImageFile(filePart);
-            user.setImageURL("/images/" + file.getName());
-        } catch (UserImageNotFound userImageNotFound) {
-            logger.log(Level.SEVERE, userImageNotFound.getMessage());
-        }
 
         usersRepositoryDao.addUser(user);
 

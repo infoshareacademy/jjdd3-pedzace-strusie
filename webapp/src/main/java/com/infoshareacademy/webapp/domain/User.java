@@ -5,9 +5,7 @@ public class User {
     String name;
     String login;
     String password;
-    Integer age;
-    Gender gender;
-    String imageURL;
+
 
     public Integer getId() {
         return id;
@@ -39,29 +37,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public String getImageURL() {
-        return imageURL;
     }
 }

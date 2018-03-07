@@ -19,12 +19,11 @@ import java.util.Map;
 @WebServlet("/welcome-user")
 public class WelcomeUserServlet extends HttpServlet {
 
-//    Logger logger = Logger.getLogger(getClass().getName());
     Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("Hello Worldfgfeqwfgefffffffffffkjhdhaskjdhkjahdkjhakshdkhaskdhkashdhadhkadkhkhakhdhakdhkashask");
+        logger.info("Hello World");
 
         String name = req.getParameter("name");
 
@@ -42,7 +41,7 @@ public class WelcomeUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-//            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.debug(e.getMessage());
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.infoshareacademy.webapp.interceptors;
 
 
-import com.infoshareacademy.webapp.domain.Gender;
 import com.infoshareacademy.webapp.domain.User;
 
 import javax.interceptor.AroundInvoke;
@@ -18,14 +17,14 @@ public class AddUserSetGenderInterceptor {
         Object[] parameters = context.getParameters();
         for (Object parameter : parameters) {
             User user = (User) parameter;
-            if (user.getGender() == null) {
+            if (user.getLogin() == null) {
                 if (user.getName().endsWith("a")) {
-                    user.setGender(Gender.WOMAN);
+                    user.setLogin("Login ends on 'a'");
                 } else {
-                    user.setGender(Gender.MAN);
+                    user.setLogin("Login is diff");
                 }
             }
-            logger.info("Gender interceptor: Gender has been set to: " + user.getGender().toString());
+            logger.info("Login interceptor: Login has been set to: " + user.getLogin().toString());
         }
         context.setParameters(parameters);
         return context.proceed();
