@@ -31,8 +31,8 @@ public class AddUserServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(AddUserServlet.class);
 
-    File templatesPath;
-    Template template;
+    private File templatesPath;
+    private Template template;
 
     @EJB
     UsersRepositoryDao usersRepositoryDao;
@@ -45,7 +45,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-edit-user.ftlh");
         } catch (IOException e) {
-            logger.debug(e.getMessage());
+            logger.warn(e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.debug(e.getMessage());
+            logger.warn(e.getMessage());
         }
     }
 

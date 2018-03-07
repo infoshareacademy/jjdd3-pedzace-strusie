@@ -13,7 +13,7 @@ public class HelloWorldInterceptor {
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {
 
-        logger.info("This is HELLO from interceptor: " + getClass().getName());
+        logger.info(getClass().getName());
         return context.proceed();
     }
 }

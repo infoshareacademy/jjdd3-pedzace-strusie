@@ -1,6 +1,5 @@
 package com.infoshareacademy.webapp.cdi;
 
-
 import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
 
 import javax.enterprise.context.RequestScoped;

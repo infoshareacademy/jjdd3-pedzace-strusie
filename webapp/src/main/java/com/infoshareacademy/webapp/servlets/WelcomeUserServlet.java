@@ -41,7 +41,7 @@ public class WelcomeUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.debug(e.getMessage());
+            logger.warn(e.getMessage());
         }
     }
 }

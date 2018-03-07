@@ -13,7 +13,7 @@ import java.util.List;
 public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
-    @Interceptors({AddUserSetGenderInterceptor.class, AddUserInterceptor.class})
+    @Interceptors({AddUserInterceptor.class})
     public void addUser(User user) {
         UsersRepository.getRepository().add(user);
     }

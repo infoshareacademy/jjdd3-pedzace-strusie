@@ -39,8 +39,7 @@ public class UsersListServlet extends HttpServlet {
         try {
             template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
-            e.printStackTrace();
-            logger.debug(e.getMessage());
+            logger.warn(e.getMessage());
 
         }
     }
