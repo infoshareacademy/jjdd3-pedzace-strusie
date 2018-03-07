@@ -25,7 +25,7 @@ public class UsersListServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
 
     @EJB
-    UsersRepositoryDao usersRepositoryDao;
+    private UsersRepositoryDao usersRepositoryDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +40,6 @@ public class UsersListServlet extends HttpServlet {
             template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
             logger.warn(e.getMessage());
-
         }
     }
 }
