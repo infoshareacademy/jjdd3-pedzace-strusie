@@ -1,4 +1,4 @@
-package dao;
+package com.infoshareacademy.webapp.dao;
 
 import com.infoshareacademy.baseapp.Income;
 

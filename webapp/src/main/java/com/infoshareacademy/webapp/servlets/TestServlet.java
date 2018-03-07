@@ -1,7 +1,7 @@
-package servlet;
+package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.baseapp.Income;
-import dao.IncomeDao;
+import com.infoshareacademy.webapp.dao.IncomeDao;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
