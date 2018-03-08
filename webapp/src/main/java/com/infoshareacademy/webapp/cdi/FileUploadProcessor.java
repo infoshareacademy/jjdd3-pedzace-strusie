@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public interface FileUploadProcessor {
-    File uploadImageFile(Part file) throws IOException, UserImageNotFound;
+    File uploadFinanceSourceFile(Part file) throws IOException, UserImageNotFound;
 
-    String getUploadImageFilesPath() throws IOException;
+    String getUploadFinanceFilesPath() throws IOException;
 }

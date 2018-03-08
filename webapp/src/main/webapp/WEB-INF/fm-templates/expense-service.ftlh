@@ -37,7 +37,7 @@
                 <br>
                 <div class="form-group">
                     <label>Value of expense</label>
-                    <input type="text" class="form-control" placeholder="Please enter value of your expense">
+                    <input type="text" class="form-control" name ="expense" placeholder="Please enter value of your expense">
                     <small class="form-text text-muted">Please enter value of your expense. We'll never
                         share this information with anyone else.
                     </small>

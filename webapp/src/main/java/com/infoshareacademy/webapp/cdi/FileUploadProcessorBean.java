@@ -11,18 +11,18 @@ import java.util.Properties;
 @RequestScoped
 public class FileUploadProcessorBean implements FileUploadProcessor {
 
-    private static final String SETTINGS_FILE = "settings.properties";
+    private static final String SETTINGS_FILE = "config.properties";
 
     @Override
-    public File uploadImageFile(Part filePart) throws IOException, UserImageNotFound {
+    public File uploadFinanceSourceFile(Part filePart) throws IOException, UserImageNotFound {
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
         if (fileName == null || fileName.isEmpty()) {
-            throw new UserImageNotFound("No user image has been uploaded");
+            throw new UserImageNotFound("No user finance data file has been uploaded");
         }
 
-        File file = new File(getUploadImageFilesPath() + fileName);
+        File file = new File(getUploadFinanceFilesPath() + fileName);
 
         InputStream fileContent = filePart.getInputStream();
         OutputStream os = new FileOutputStream(file);
@@ -40,7 +40,7 @@ public class FileUploadProcessorBean implements FileUploadProcessor {
     }
 
     @Override
-    public String getUploadImageFilesPath() throws IOException {
+    public String getUploadFinanceFilesPath() throws IOException {
         Properties settings = new Properties();
         settings.load(Thread.currentThread()
                 .getContextClassLoader().getResource(SETTINGS_FILE).openStream());
