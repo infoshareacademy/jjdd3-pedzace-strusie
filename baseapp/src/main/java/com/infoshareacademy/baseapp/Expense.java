@@ -11,7 +11,7 @@ public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_expens")
-    private Integer id;
+    private Long id;
 
     @Column(name = "date")
     @NotNull
@@ -32,6 +32,14 @@ public class Expense {
         this.date = date;
         this.category = category;
         this.expense = expense;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -61,7 +69,8 @@ public class Expense {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Expense{");
-        sb.append("date=").append(date);
+        sb.append("id=").append(id);
+        sb.append(", date=").append(date);
         sb.append(", category='").append(category).append('\'');
         sb.append(", expense=").append(expense).append(UserRepository.getCurrency());
         sb.append('}');

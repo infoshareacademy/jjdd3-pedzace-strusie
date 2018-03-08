@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao;
 
-import com.infoshareacademy.webapp.domain.User;
+import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.interceptors.AddUserInterceptor;
 import com.infoshareacademy.webapp.repository.UsersRepository;
 

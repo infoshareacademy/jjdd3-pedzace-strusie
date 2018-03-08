@@ -1,7 +1,7 @@
-package com.infoshareacademy.webapp.domain;
+package com.infoshareacademy.webapp.model;
 
 public class User {
-    private Integer idUser;
+    private Long id;
     private String name;
     private String login;
     private String password;
@@ -9,12 +9,12 @@ public class User {
     public User() {
     }
 
-    public Integer getId() {
-        return idUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Integer id) {
-        this.idUser = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

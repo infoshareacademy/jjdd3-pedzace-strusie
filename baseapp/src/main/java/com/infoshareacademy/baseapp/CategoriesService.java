@@ -1,6 +1,5 @@
 package com.infoshareacademy.baseapp;
 
-import javax.persistence.*;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
