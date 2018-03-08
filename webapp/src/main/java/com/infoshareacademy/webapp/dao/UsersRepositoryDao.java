@@ -1,6 +1,5 @@
 package com.infoshareacademy.webapp.dao;
 
-
 import com.infoshareacademy.webapp.domain.User;
 
 import javax.ejb.Local;
