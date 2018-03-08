@@ -1,10 +1,13 @@
 package com.infoshareacademy.baseapp;
 
+import javax.persistence.*;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+
 public class CategoriesService {
+
     private Set<String> categorySet = UserRepository.getCategoriesUserRepository();
     private String[] categoryMenuItems = categorySet.toArray(new String[0]);
 
