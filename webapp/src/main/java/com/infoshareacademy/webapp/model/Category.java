@@ -1,18 +1,16 @@
-package com.infoshareacademy.webapp.domain;
-
-import com.infoshareacademy.baseapp.UserRepository;
+package com.infoshareacademy.webapp.model;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Categorie {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
-    private Integer id;
+    private Long id;
 
     @Column(name = "category_set")
     private Set<String> categorySet;
@@ -21,14 +19,14 @@ public class Categorie {
     private Set<User> user;
 
 
-    public Categorie() {
+    public Category() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

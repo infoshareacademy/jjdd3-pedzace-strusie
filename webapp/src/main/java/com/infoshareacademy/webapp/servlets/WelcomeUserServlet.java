@@ -23,9 +23,9 @@ public class WelcomeUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("Hello World");
 
         String name = req.getParameter("name");
+        logger.info("Hello new user. Your name is {}", name);
 
         if (name == null || name.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);

@@ -1,7 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.UsersRepositoryDao;
-import com.infoshareacademy.webapp.domain.User;
+import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
