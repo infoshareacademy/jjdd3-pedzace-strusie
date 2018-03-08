@@ -7,6 +7,9 @@
 <persistence-unit name="budget-db" transaction-type="JTA">
     <jta-data-source>java:ds/budgetds</jta-data-source>
     <class>com.infoshareacademy.baseapp.Income</class>
+    <class>com.infoshareacademy.baseapp.Expense/class>
+    <class>com.infoshareacademy.webapp.Categorie/class>
+    <class>com.infoshareacademy.webapp.User/class>
 
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

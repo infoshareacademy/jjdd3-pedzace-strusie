@@ -13,7 +13,6 @@ public class Expense {
     @Column(name = "id_expens")
     private Integer id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "date")
     @NotNull
     private LocalDate date;
@@ -26,7 +25,8 @@ public class Expense {
     @NotNull
     private double expense;
 
-
+    public Expense() {
+    }
 
     public Expense(LocalDate date, String category, double expense) {
         this.date = date;

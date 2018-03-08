@@ -19,3 +19,32 @@ public class Categorie {
 
     @JoinColumn(name = "id_user")
     private Set<User> user;
+
+
+    public Categorie() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<String> getCategorySet() {
+        return categorySet;
+    }
+
+    public void setCategorySet(Set<String> categorySet) {
+        this.categorySet = categorySet;
+    }
+
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
+}
