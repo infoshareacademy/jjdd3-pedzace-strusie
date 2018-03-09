@@ -1,3 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.infoshareacademy.pedzace-strusie</groupId>
+        <artifactId>smm</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>web</artifactId>
+    <packaging>war</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.27-incubating</version>
+        </dependency>
+        <dependency>
+            <groupId>com.infoshareacademy.pedzace-strusie</groupId>
+            <artifactId>base-app</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>smm-web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.2.1.Final</version>
+                <configuration>
+                    <name>smm.war</name>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- Below plugin ensures the execution of test cases during maven build-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.0.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.0.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <includes>
+                        <include>${runSuite}</include>
+                    </includes>
+                    <reportsDirectory>${sonar.junit.reportPaths}</reportsDirectory>
+                </configuration>
+            </plugin>
+            <!-- Sonar-JaCoCo integration plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.6.201602180812</version>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPaths}</destFile>
+                    <append>true</append>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+
+
+
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -47,21 +168,21 @@
             <artifactId>base-app</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.logging.log4j</groupId>-->
-            <!--<artifactId>log4j-core</artifactId>-->
-            <!--<version>2.10.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.logging.log4j</groupId>-->
-            <!--<artifactId>log4j-api</artifactId>-->
-            <!--<version>2.10.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.logging.log4j</groupId>-->
-            <!--<artifactId>log4j-slf4j-impl</artifactId>-->
-            <!--<version>2.10.0</version>-->
-        <!--</dependency>-->
+        &lt;!&ndash;<dependency>&ndash;&gt;
+            &lt;!&ndash;<groupId>org.apache.logging.log4j</groupId>&ndash;&gt;
+            &lt;!&ndash;<artifactId>log4j-core</artifactId>&ndash;&gt;
+            &lt;!&ndash;<version>2.10.0</version>&ndash;&gt;
+        &lt;!&ndash;</dependency>&ndash;&gt;
+        &lt;!&ndash;<dependency>&ndash;&gt;
+            &lt;!&ndash;<groupId>org.apache.logging.log4j</groupId>&ndash;&gt;
+            &lt;!&ndash;<artifactId>log4j-api</artifactId>&ndash;&gt;
+            &lt;!&ndash;<version>2.10.0</version>&ndash;&gt;
+        &lt;!&ndash;</dependency>&ndash;&gt;
+        &lt;!&ndash;<dependency>&ndash;&gt;
+            &lt;!&ndash;<groupId>org.apache.logging.log4j</groupId>&ndash;&gt;
+            &lt;!&ndash;<artifactId>log4j-slf4j-impl</artifactId>&ndash;&gt;
+            &lt;!&ndash;<version>2.10.0</version>&ndash;&gt;
+        &lt;!&ndash;</dependency>&ndash;&gt;
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -94,7 +215,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- MySQL Driver -->
+        &lt;!&ndash; MySQL Driver &ndash;&gt;
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -168,4 +289,4 @@
         </plugins>
     </build>
 
-</project>
+</project>-->

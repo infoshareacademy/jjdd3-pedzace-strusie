@@ -3,8 +3,8 @@ package com.infoshareacademy.webapp.model;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "CATEGORIES")
+//@Entity
+//@Table(name = "CATEGORIES")
 public class Category {
 
     @Id
