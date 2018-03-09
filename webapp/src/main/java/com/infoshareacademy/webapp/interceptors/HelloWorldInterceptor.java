@@ -9,7 +9,6 @@ public class HelloWorldInterceptor {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(HelloWorldInterceptor.class);
 
-
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {
 

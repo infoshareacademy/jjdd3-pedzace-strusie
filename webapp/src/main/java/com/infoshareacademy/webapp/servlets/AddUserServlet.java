@@ -3,7 +3,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
 import com.infoshareacademy.webapp.dao.UsersRepositoryDao;
-import com.infoshareacademy.webapp.domain.User;
+import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -72,7 +72,7 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User();
-        user.setId(Integer.parseInt(req.getParameter("id")));
+        user.setId(Long.parseLong(req.getParameter("id")));
         user.setName(req.getParameter("name"));
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));

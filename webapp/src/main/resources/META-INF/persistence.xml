@@ -4,12 +4,8 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
   http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
 
-<persistence-unit name="budget-db" transaction-type="JTA">
+<persistence-unit name="budgetdb" transaction-type="JTA">
     <jta-data-source>java:ds/budgetds</jta-data-source>
-    <class>com.infoshareacademy.baseapp.Income</class>
-    <class>com.infoshareacademy.baseapp.Expense/class>
-    <class>com.infoshareacademy.webapp.Categorie/class>
-    <class>com.infoshareacademy.webapp.User/class>
 
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

@@ -2,17 +2,18 @@ package com.infoshareacademy.webapp.dao;
 
 import com.infoshareacademy.baseapp.Income;
 
-import javax.ejb.Singleton;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.ejb.Local;
+import java.util.List;
 
-@Singleton
-public class IncomeDao {
+@Local
+public interface IncomeDao {
+    public Long save(Income c);
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    public Income update(Income c) ;
 
-    public void save(Income i) {
-        entityManager.persist(i);
-    }
+    public void delete(Long id) ;
+
+    public Income findById(Long id) ;
+
+    public List<Income> findAll() ;
 }
