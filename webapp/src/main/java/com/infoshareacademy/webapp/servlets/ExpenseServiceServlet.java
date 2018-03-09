@@ -3,6 +3,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.baseapp.Expense;
 import com.infoshareacademy.webapp.cdi.FileUploadProcessorBean;
+import com.infoshareacademy.webapp.exceptions.UserFileNotFound;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 
@@ -51,18 +52,20 @@ public class ExpenseServiceServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble("expense"));
 
-      //  expensesRepositoryDao.addExpense(expense);
+        //  expensesRepositoryDao.addExpense(expense);
 
-        Part filePart = req.getPart("/resources");
+        Part filePart = req.getPart("resources");
         File file = null;
 
         try {
-            file = fileUploadProcessorBean.uploadFinanceSourceFile();
+            file = fileUploadProcessorBean.uploadFinanceSourceFile(filePart);
+            //expense.setFileURL("/files/" + file.getName());
+        } catch (UserFileNotFound userFileNotFound) {
+            logger.log(Level.SEVERE, userFileNotFound.getMessage());
         }
 
+        //expenseRepositroyDao.addExpense(expense);
         resp.sendRedirect("/");
-
-
 
 
     }

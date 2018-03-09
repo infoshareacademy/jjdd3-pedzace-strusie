@@ -1,5 +1,6 @@
 package com.infoshareacademy.webapp.cdi;
 
+import com.infoshareacademy.webapp.exceptions.UserFileNotFound;
 import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,12 +15,12 @@ public class FileUploadProcessorBean implements FileUploadProcessor {
     private static final String SETTINGS_FILE = "config.properties";
 
     @Override
-    public File uploadFinanceSourceFile(Part filePart) throws IOException, UserImageNotFound {
+    public File uploadFinanceSourceFile(Part filePart) throws IOException, UserFileNotFound {
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
         if (fileName == null || fileName.isEmpty()) {
-            throw new UserImageNotFound("No user finance data file has been uploaded");
+            throw new UserFileNotFound("No user finance data file has been uploaded");
         }
 
         File file = new File(getUploadFinanceFilesPath() + fileName);
