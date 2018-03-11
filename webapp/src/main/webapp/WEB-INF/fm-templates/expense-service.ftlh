@@ -9,15 +9,16 @@
     </div>
     <br>
     <div class="col-md-8">
-        <form name="expenseForm" method="post" action="ExpenseServiceServlet">
+        <form name="expenseForm" method="post" action="/${action!"add-expense"}">
             <div class="form-group">
                 <label> Date of expense</label>
-                <input type="date" class="form-control" name="date">
+                <input type="date" class="form-control" name="date" value="${(expense.date)!}">
                 <small class="form-text text-muted"> Please choose date of your expense</small>
             </div>
             <div class="form-group">
                 <label>Category</label>
-                <select class="form-control" name="category">
+
+                <select class="form-control" name="category" >
                     <option>Plese select your expense</option>
                     <option>accomodation</option>
                     <option>broadband</option>
@@ -37,7 +38,7 @@
                 <br>
                 <div class="form-group">
                     <label>Value of expense</label>
-                    <input type="text" class="form-control" placeholder="Please enter value of your expense">
+                    <input type="text" class="form-control" placeholder="Please enter value of your expense" name="expense" value="${(expense.expense)!}">
                     <small class="form-text text-muted">Please enter value of your expense. We'll never
                         share this information with anyone else.
                     </small>
