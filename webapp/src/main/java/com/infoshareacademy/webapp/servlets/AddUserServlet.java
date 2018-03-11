@@ -1,14 +1,11 @@
 package com.infoshareacademy.webapp.servlets;
 
-
 import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
-import com.infoshareacademy.webapp.dao.UsersRepositoryDao;
-import com.infoshareacademy.webapp.model.User;
+import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
+import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -24,15 +21,17 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/add-user")
 @MultipartConfig
 public class AddUserServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(AddUserServlet.class);
+    Logger logger = Logger.getLogger(getClass().getName());
 
-    private File templatesPath;
-    private Template template;
+    File templatesPath;
+    Template template;
 
     @EJB
     UsersRepositoryDao usersRepositoryDao;
@@ -45,7 +44,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-edit-user.ftlh");
         } catch (IOException e) {
-            logger.warn(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -65,7 +64,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.warn(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -76,6 +75,16 @@ public class AddUserServlet extends HttpServlet {
         user.setName(req.getParameter("name"));
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));
+//        user.setAge(Integer.parseInt(req.getParameter("age")));
+
+/*        Part filePart = req.getPart("image");
+        File file = null;
+        try {
+            file = fileUploadProcessor.uploadImageFile(filePart);
+            user.setImageURL("/images/" + file.getName());
+        } catch (UserImageNotFound userImageNotFound) {
+            logger.log(Level.SEVERE, userImageNotFound.getMessage());
+        }*/
 
         usersRepositoryDao.addUser(user);
 

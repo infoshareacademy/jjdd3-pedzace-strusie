@@ -6,13 +6,7 @@
 <body>
 <#list users>
     <#items as user>
-        <#if user.age <= 20 >
-        <div style="color: green;">
-        <#elseif (user.age > 20 && user.age < 50) >
-        <div style="color: blue;">
-        <#else>
         <div style="color: red;">
-        </#if>
             <p>ID: ${user.id}</p>
             <p>Login: ${user.login}</p>
             <p>Name: ${user.name}</p>

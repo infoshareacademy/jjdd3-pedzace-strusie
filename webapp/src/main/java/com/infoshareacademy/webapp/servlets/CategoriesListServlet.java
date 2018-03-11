@@ -1,8 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
+import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -14,23 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-@WebServlet("/users-list")
-public class UsersListServlet extends HttpServlet {
+@WebServlet("/categories-list")
+public class CategoriesListServlet extends HttpServlet {
 
     @EJB
-    UsersRepositoryDao usersRepositoryDao;
+    CategoryDaoLoc categoryDaoLoc;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> userList = usersRepositoryDao.getUsersList();
+        Set<String> categoryList = categoryDaoLoc.findAll();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("users", userList);
+        dataModel.put("categories", categoryList);
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "users-list.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "categories-list.ftlh");
 
         try {
             template.process(dataModel, resp.getWriter());

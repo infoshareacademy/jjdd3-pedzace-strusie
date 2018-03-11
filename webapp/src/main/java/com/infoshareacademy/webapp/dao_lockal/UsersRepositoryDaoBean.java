@@ -1,4 +1,4 @@
-package com.infoshareacademy.webapp.dao;
+package com.infoshareacademy.webapp.dao_lockal;
 
 import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.interceptors.AddUserInterceptor;

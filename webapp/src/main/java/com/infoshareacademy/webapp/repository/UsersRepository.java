@@ -8,6 +8,14 @@ import java.util.List;
 public class UsersRepository {
     private static List<User> usersRepository = new ArrayList<>();
 
+    public static List<User> getUsersRepository() {
+        return usersRepository;
+    }
+
+    public static void setUsersRepository(List<User> usersRepository) {
+        UsersRepository.usersRepository = usersRepository;
+    }
+
     public static List<User> getRepository() {
         if (usersRepository.size() == 0) {
             fillRepositoryWithDefaults();
