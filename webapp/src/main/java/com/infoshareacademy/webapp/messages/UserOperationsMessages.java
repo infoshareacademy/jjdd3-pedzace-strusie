@@ -1,5 +1,5 @@
 package com.infoshareacademy.webapp.messages;
 
 public class UserOperationsMessages {
-        public static final String ID_NOT_INTEGER = "Provided ID is not parsable to integer";
+        public static final String NAME_NOT_STRING = "Provided name of Category is not parsable to validated format";
 }

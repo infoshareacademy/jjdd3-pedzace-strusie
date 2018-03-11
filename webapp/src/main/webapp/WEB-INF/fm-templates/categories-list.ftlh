@@ -6,8 +6,8 @@
 <body>
 <#list categories>
   <ol>
-    <#items as cat>
-        <li> ${cat}</li>
+    <#items as category>
+        <li> ${category}</li>
     </#items>
   </ol>
 <#else>

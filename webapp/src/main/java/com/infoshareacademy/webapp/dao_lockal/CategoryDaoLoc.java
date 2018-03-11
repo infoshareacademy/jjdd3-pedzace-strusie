@@ -8,13 +8,13 @@ import java.util.Set;
 
 @Local
 public interface CategoryDaoLoc {
-/*    public Long save(Category c);
+    public void save(String newCategory);
 
-    public Category update(Category c) ;
-
-    public void delete(Long id) ;
-
-    public Category findById(Long id) ;*/
+//    public Category update(Category c) ;
+//
+//    public void delete(Long id) ;
+//
+//    public Category findById(Long id) ;
 
     public Set<String> findAll() ;
 }
