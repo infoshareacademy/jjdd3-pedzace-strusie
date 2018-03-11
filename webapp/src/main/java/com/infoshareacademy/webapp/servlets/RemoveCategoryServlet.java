@@ -1,23 +1,19 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
 import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -25,11 +21,11 @@ import java.util.List;
 import java.util.Map;
 
 
-@WebServlet("/add-category")
+@WebServlet("/remove-category")
 @MultipartConfig
-public class AddCategoryServlet extends HttpServlet {
+public class RemoveCategoryServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(AddCategoryServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(RemoveCategoryServlet.class);
 
     private Template template;
 
@@ -39,7 +35,7 @@ public class AddCategoryServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "add-category.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "remove-category.ftlh");
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
@@ -67,12 +63,11 @@ public class AddCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String newCategory = "";
-        newCategory = req.getParameter("name");
-        logger.debug("Get new category {}", newCategory);
+        String removeCategory = "";
+        removeCategory = req.getParameter("name");
+        logger.debug("Get removing category {}", removeCategory.toUpperCase());
 
-        categoryDaoLoc.save(newCategory.toLowerCase());
-
+        categoryDaoLoc.delete(removeCategory.toLowerCase());
         resp.sendRedirect("/categories-list");
     }
 }

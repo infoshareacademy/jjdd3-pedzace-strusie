@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add category template</title>
+    <title>Remove category template</title>
 </head>
 <body>
 <#if errors??>
@@ -13,9 +13,9 @@
     </ul>
     </#list>
 </#if>
-<form method="post" action="/${action!"add-category"}" enctype="multipart/form-data">
+<form method="post" action="/${action!"remove-category"}" enctype="multipart/form-data">
     Category: <input type="text" name="name" value="${(category)!}"/><br/><br/>
-    <input type="submit" name="save" value="save"/><br/><br/>
+    <input type="submit" name="remove" value="remove"/><br/><br/>
 </form>
 <#include "footer.ftlh">
 </body>

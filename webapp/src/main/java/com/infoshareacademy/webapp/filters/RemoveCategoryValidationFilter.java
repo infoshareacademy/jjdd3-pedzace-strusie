@@ -1,8 +1,10 @@
 package com.infoshareacademy.webapp.filters;
 
+import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.messages.UserOperationsMessages;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +16,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @WebFilter(
-        filterName = "CategoryValidationFilter",
-        urlPatterns = {"/add-category"}
+        filterName = "RemoveCategoryValidationFilter",
+        urlPatterns = {"/remove-category"}
 )
-public class CategoryValidationFilter implements Filter {
+public class RemoveCategoryValidationFilter implements Filter {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CategoryValidationFilter.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(RemoveCategoryValidationFilter.class);
+
+    @EJB
+    CategoryDaoLoc categoryDaoLoc;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,7 +45,11 @@ public class CategoryValidationFilter implements Filter {
             messages.add(UserOperationsMessages.NAME_NOT_STRING);
             isValidationOK = false;
         } else if (categoryName != null && !categoryName.isEmpty()) {
-            category = categoryName;
+            if (!categoryDaoLoc.contains(categoryName)) {
+                messages.add(UserOperationsMessages.NAME_NOT_FOUND);
+                isValidationOK = false;
+            } else
+                category = categoryName;
         }
 
         if (!isValidationOK) {

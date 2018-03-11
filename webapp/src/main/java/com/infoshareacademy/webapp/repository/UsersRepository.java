@@ -43,13 +43,5 @@ public class UsersRepository {
         usersRepository.add(user3);
     }
 
-    public static boolean contains(User user) {
-        List<User> repository = getRepository();
-        for (User userFromList : repository) {
-            if (userFromList.getId() == user.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

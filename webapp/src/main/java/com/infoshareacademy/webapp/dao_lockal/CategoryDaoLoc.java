@@ -11,10 +11,12 @@ public interface CategoryDaoLoc {
     public void save(String newCategory);
 
 //    public Category update(Category c) ;
-//
-//    public void delete(Long id) ;
-//
+
+    public void delete(String removeCategory) ;
+
 //    public Category findById(Long id) ;
+
+    public boolean contains(String name);
 
     public Set<String> findAll() ;
 }

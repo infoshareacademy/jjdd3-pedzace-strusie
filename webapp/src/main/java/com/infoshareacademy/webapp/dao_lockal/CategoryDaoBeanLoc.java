@@ -33,19 +33,31 @@ public class CategoryDaoBeanLoc implements CategoryDaoLoc {
 //    public Category update(Category c) {
 //        return entityManager.merge(c);
 //    }
-//
-//    @Override
-//    public void delete(Long id) {
-//        final Category c = entityManager.find(Category.class, id);
-//        if (c != null) {
-//            entityManager.remove(c);
-//        }
-//    }
-//
-//    @Override
+
+    @Override
+    public void delete(String removeCategory) {
+        new Settings().updateDefaults(new String[]{""});
+        Set<String> categorySet = UserRepository.getCategoriesUserRepository();
+        categorySet.remove(removeCategory);
+        new CsvWriter().writeToCategoriesCsvFile(categorySet, UserRepository.getUserCategoriesFilePath());
+    }
+
+    //    @Override
 //    public Category findById(Long id) {
 //        return entityManager.find(Category.class, id);
 //    }
+
+    @Override
+    public boolean contains(String name) {
+        new Settings().updateDefaults(new String[]{""});
+        Set<String> categorySet = UserRepository.getCategoriesUserRepository();
+        for (String category : categorySet) {
+            if (category.equals(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public Set<String> findAll() {
