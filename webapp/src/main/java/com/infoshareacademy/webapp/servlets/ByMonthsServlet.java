@@ -15,15 +15,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/by-categories")
-public class ByCategoriesServlet extends HttpServlet {
+@WebServlet("/by-months")
+public class ByMonthsServlet extends HttpServlet {
 
     @EJB
     StatisticsDaoLoc statisticsDaoLoc;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Double> stringDoubleMap = statisticsDaoLoc.findExpensesByCategory();
+        Map<String, Double> stringDoubleMap = statisticsDaoLoc.findExpensesByMonths();
         Double sumExpenses = statisticsDaoLoc.findSumExpenses();
         Double sumIncomes = statisticsDaoLoc.findSumIncomes();
 
@@ -32,7 +32,7 @@ public class ByCategoriesServlet extends HttpServlet {
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "by-categories.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "by-months.ftlh");
 
         try {
             template.process(dataModel, resp.getWriter());

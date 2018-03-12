@@ -14,9 +14,11 @@ public interface StatisticsDaoLoc {
 
     public Map<String,Double> findExpensesByCategory() ;
 
-    public Double findSumExpensesByCategory() ;
+    public Double findSumExpenses() ;
 
-    public Double findSumIncomesByCategory() ;
+    public Map<String,Double> findExpensesByMonths() ;
+
+    public Double findSumIncomes() ;
 
     public boolean contains(String name);
 

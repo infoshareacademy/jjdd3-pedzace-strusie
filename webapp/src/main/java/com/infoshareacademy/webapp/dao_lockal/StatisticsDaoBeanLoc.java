@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StatisticsDaoBeanLoc implements StatisticsDaoLoc {
 
     @Override
-    public Double findSumExpensesByCategory() {
+    public Double findSumExpenses() {
         new Settings().updateDefaults(new String[]{""});
         new Settings().updateExpenseListFromFile();
         List<Expense> expenses = UserRepository.getExpensesUserRepository();
@@ -25,7 +25,7 @@ public class StatisticsDaoBeanLoc implements StatisticsDaoLoc {
     }
 
     @Override
-    public Double findSumIncomesByCategory() {
+    public Double findSumIncomes() {
         new Settings().updateDefaults(new String[]{""});
         new Settings().updateIncomeListFromFile();
         List<Income> incomes = UserRepository.getIncomesUserRepository();
@@ -52,6 +52,24 @@ public class StatisticsDaoBeanLoc implements StatisticsDaoLoc {
 
         Map<String, Double> mapByCategories = periodExpensesList.stream()
                 .collect(Collectors.groupingBy(Expense::getCategory,
+                        Collectors.summingDouble(Expense::getExpense)));
+
+        return new TreeMap<>(mapByCategories);
+    }
+
+    @Override
+    public Map<String, Double> findExpensesByMonths() {
+        new Settings().updateDefaults(new String[]{""});
+        new Settings().updateExpenseListFromFile();
+
+        List<Expense> expenses = UserRepository.getExpensesUserRepository();
+        LocalDate minDatePeriod = LocalDate.of(2017, 6, 1);
+        LocalDate maxDatePeriod = LocalDate.of(2018, 1, 1);
+
+        List<Expense> periodExpensesList = new StatisticsService().getPeriodExpenses(expenses, minDatePeriod, maxDatePeriod);
+
+        Map<String, Double> mapByCategories = periodExpensesList.stream()
+                .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
                         Collectors.summingDouble(Expense::getExpense)));
 
         return new TreeMap<>(mapByCategories);
