@@ -37,7 +37,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightExpensesFilePath() {
         // Given
-        String expectedExpensesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/userData/expenses.csv";
+        String expectedExpensesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/expenses.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -50,7 +50,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightIncomesFilePath() {
         // Given
-        String expectedIncomesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/userData/incomes.csv";
+        String expectedIncomesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/incomes.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -76,7 +76,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightUserCategoriesFilePath() {
         // Given
-        String expectedUserCategoriesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/userData/userCategories.csv";
+        String expectedUserCategoriesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/userCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();

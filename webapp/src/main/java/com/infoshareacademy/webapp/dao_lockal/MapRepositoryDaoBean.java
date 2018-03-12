@@ -1,18 +1,17 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.baseapp.Expense;
-import com.infoshareacademy.baseapp.Settings;
-import com.infoshareacademy.baseapp.UserRepository;
-import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.interceptors.AddUserInterceptor;
+import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.repository.UsersRepository;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
-public class UsersRepositoryDaoBean implements UsersRepositoryDao {
+public class MapRepositoryDaoBean implements MapRepositoryDao {
 
     @Override
     @Interceptors({AddUserInterceptor.class})
@@ -37,14 +36,22 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
             if (user.getLogin().equals(login)) {
                 return user;
             }
+
+
         }
         return null;
     }
 
     @Override
-    public List<User> getUsersList() {
+    public Map<Double, String> getUsersMap() {
 
-        return UsersRepository.getRepository();
+        Map<Double,String> hm = new HashMap<>();
+        hm.put(3.0,"three");
+        hm.put(1.0,"one");
+        hm.put(4.0,"four");
+        hm.put(2.0,"two");
+
+        return hm;
     }
 
 }
