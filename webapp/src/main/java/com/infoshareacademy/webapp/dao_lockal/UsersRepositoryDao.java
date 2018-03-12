@@ -1,5 +1,6 @@
-package com.infoshareacademy.webapp.dao;
+package com.infoshareacademy.webapp.dao_lockal;
 
+import com.infoshareacademy.baseapp.Expense;
 import com.infoshareacademy.webapp.model.User;
 
 import javax.ejb.Local;
