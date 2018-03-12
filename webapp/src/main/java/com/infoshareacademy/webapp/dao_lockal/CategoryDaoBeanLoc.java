@@ -1,5 +1,6 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
+import com.infoshareacademy.baseapp.CategoriesService;
 import com.infoshareacademy.baseapp.CsvWriter;
 import com.infoshareacademy.baseapp.Settings;
 import com.infoshareacademy.baseapp.UserRepository;
@@ -28,11 +29,16 @@ public class CategoryDaoBeanLoc implements CategoryDaoLoc {
         categorySet.add(newCategory);
         new CsvWriter().writeToCategoriesCsvFile(categorySet, UserRepository.getUserCategoriesFilePath());
     }
-//
-//    @Override
-//    public Category update(Category c) {
-//        return entityManager.merge(c);
-//    }
+
+    @Override
+    public void update() {
+        new Settings().updateDefaults(new String[]{""});
+//        new CategoriesService().restoreDefaultCategories();
+
+        new Settings().updateCategorySetFromFile(UserRepository.getDefaultCategoriesFilePath());
+        new CsvWriter().writeToCategoriesCsvFile(UserRepository.getCategoriesUserRepository(), UserRepository.getUserCategoriesFilePath());
+
+    }
 
     @Override
     public void delete(String removeCategory) {

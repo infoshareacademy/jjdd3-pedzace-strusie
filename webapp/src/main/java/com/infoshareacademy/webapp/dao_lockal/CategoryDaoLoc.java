@@ -10,7 +10,7 @@ import java.util.Set;
 public interface CategoryDaoLoc {
     public void save(String newCategory);
 
-//    public Category update(Category c) ;
+    public void update() ;
 
     public void delete(String removeCategory) ;
 
