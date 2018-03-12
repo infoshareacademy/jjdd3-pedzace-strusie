@@ -4,13 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
+        logger.info("Start Main class");
 
-        Logger logger = LoggerFactory.getLogger(Main.class);
-
-        logger.info("'sup? I'm your info logger");
-        logger.debug("hey HEY hey! I'm your debug logger");
         new Settings().updateDefaults(args);
         new MainMenu().executeMenu();
     }

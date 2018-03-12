@@ -1,9 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.baseapp.Expense;
-import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
+import com.infoshareacademy.webapp.dao_lockal.StatisticsDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -15,23 +13,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@WebServlet("/users-list")
-public class UsersListServlet extends HttpServlet {
+@WebServlet("/by-categories")
+public class ByCategoriesServlet extends HttpServlet {
 
     @EJB
-    UsersRepositoryDao usersRepositoryDao;
+    StatisticsDaoLoc statisticsDaoLoc;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> userList = usersRepositoryDao.getUsersList();
+        Map<String, Double> stringDoubleMap = statisticsDaoLoc.findExpensesByCategory();
+        Double sumExpenses = statisticsDaoLoc.findSumExpenses();
+        Double sumIncomes = statisticsDaoLoc.findSumIncomes();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("users", userList);
+        dataModel.put("maps", stringDoubleMap.entrySet());
+        dataModel.put("sumExpenses", sumExpenses);
+        dataModel.put("sumIncomes", sumIncomes);
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "users-list.ftlh");
+        Template template = TemplateProvider.createTemplate(getServletContext(), "by-categories.ftlh");
 
         try {
             template.process(dataModel, resp.getWriter());
