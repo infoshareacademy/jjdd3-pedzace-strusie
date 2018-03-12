@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
 import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
+import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,8 +78,8 @@ public class AddUserServlet extends HttpServlet {
         user.setLogin(req.getParameter("login"));
         user.setPassword(req.getParameter("password"));
 //        user.setAge(Integer.parseInt(req.getParameter("age")));
-
-/*        Part filePart = req.getPart("image");
+/*
+        Part filePart = req.getPart("image");
         File file = null;
         try {
             file = fileUploadProcessor.uploadImageFile(filePart);

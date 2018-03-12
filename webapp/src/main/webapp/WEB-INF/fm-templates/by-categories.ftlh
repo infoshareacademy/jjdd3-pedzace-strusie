@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Map list</title>
 </head>
 <body>
 <#list maps>
     <#items as map>
-        <div style="color: red;">
+        <div >
             <p>Category: ${map.getKey()}</p>
             <p>Expenses: ${map.getValue()}</p>
         <#sep><p>=======================</p></#sep>
         </div>
     </#items>
 </#list>
-<p>sunExpenses: ${sumExpenses}</p>
-<p>sumIncoms: ${sumIncoms}</p>
+<p>sunExpenses: <strong>${sumExpenses}</strong></p>
+<p>sumIncomes: <strong>${sumIncomes}</strong></p>
 
 <#include "footer.ftlh">
 </body>

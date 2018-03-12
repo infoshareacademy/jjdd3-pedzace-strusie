@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PropertiesServiceTest {
-
+/*
     @Test
     void shouldGetRightValueOfCurrency() {
         // Given
@@ -84,5 +84,5 @@ class PropertiesServiceTest {
 
         // Then
         assertEquals(expectedUserCategoriesFilePath, actualUserCategoriesFilePath);
-    }
+    }*/
 }

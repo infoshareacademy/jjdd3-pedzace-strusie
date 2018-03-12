@@ -6,7 +6,7 @@
 <body>
 <#list users>
     <#items as user>
-        <div style="color: red;">
+        <div>
             <p>ID: ${user.id}</p>
             <p>Login: ${user.login}</p>
             <p>Name: ${user.name}</p>

@@ -6,7 +6,7 @@
 <body>
 <#list users>
     <#items as user>
-        <div style="color: red;">
+        <div>
             <p>Key: ${user.getKey()}</p>
             <p>Value: ${user.getValue()}</p>
         <#sep><p>=======================</p></#sep>
