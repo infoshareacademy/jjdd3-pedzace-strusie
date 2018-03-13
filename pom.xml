@@ -7,7 +7,8 @@
     <artifactId>smm</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <properties>
+
+  <properties>
         <!-- Below property indicates the pattern of the test suite -->
         <runSuite>**/*Test.java</runSuite>
         <!-- Sonar-JaCoCo properties -->
@@ -17,6 +18,7 @@
         <sonar.language>java</sonar.language>
         <sonar.junit.reportPaths>${project.basedir}/../target/surefire-reports</sonar.junit.reportPaths>
     </properties>
+
     <!-- SLF4J  -->
     <dependencies>
 <!--        <dependency>
@@ -55,7 +57,8 @@
             <version>0.7.3</version>
         </dependency>
     </dependencies>
-    <modules>
+
+  <modules>
         <module>baseapp</module>
         <module>webapp</module>
     </modules>
