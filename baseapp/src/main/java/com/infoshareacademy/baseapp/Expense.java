@@ -10,7 +10,7 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_expens")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "date")

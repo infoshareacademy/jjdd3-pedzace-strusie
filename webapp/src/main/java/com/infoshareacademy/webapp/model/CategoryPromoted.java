@@ -1,12 +1,28 @@
 package com.infoshareacademy.webapp.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@Entity
+@Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
+
+    @Column(name = "id", length = 32)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
-    private Long id_fk;
+
+    @Column(name = "id_category_fk", length = 32)
+    @NotNull
+    private Long id_category_fk;
+
+    @Column(name = "date")
+    @NotNull
     private LocalDate date;
+
+    @Column(name = "time")
+    @NotNull
     private LocalTime time;
 
     public CategoryPromoted() {
@@ -21,11 +37,11 @@ public class CategoryPromoted {
     }
 
     public Long getId_fk() {
-        return id_fk;
+        return id_category_fk;
     }
 
     public void setId_fk(Long id_fk) {
-        this.id_fk = id_fk;
+        this.id_category_fk = id_fk;
     }
 
     public LocalDate getDate() {
@@ -48,7 +64,7 @@ public class CategoryPromoted {
     public String toString() {
         final StringBuffer sb = new StringBuffer("CategoryPromoted{");
         sb.append("id=").append(id);
-        sb.append(", id_fk=").append(id_fk);
+        sb.append(", id_fk=").append(id_category_fk);
         sb.append(", date=").append(date);
         sb.append(", time=").append(time);
         sb.append('}');
