@@ -6,15 +6,27 @@ import java.util.stream.Collectors;
 
 public class StatisticsService {
     public void printAmountByCategoriesByPeriod(List<Expense> expenses, List<Income> incomes, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
-        List<Expense> periodExpensesList = expenses.stream()
-                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
-                .collect(Collectors.toList());
+        List<Expense> periodExpensesList = getPeriodExpenses(expenses, minDatePeriod, maxDatePeriod);
 
-        List<Income> periodIncomesList = incomes.stream()
-                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
-                .collect(Collectors.toList());
+        List<Income> periodIncomesList = getPeriodIncomes(incomes, minDatePeriod, maxDatePeriod);
 
         printAmountByCategories(periodExpensesList, periodIncomesList);
+    }
+
+    public List<Expense> getPeriodExpenses(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        return expenses.stream()
+                .filter(i -> minDatePeriod.isEqual(maxDatePeriod) ? i.getDate().isEqual(maxDatePeriod)
+                        : ((i.getDate().isEqual(maxDatePeriod) || i.getDate().isBefore(maxDatePeriod))
+                        && (i.getDate().isEqual(minDatePeriod) || i.getDate().isAfter(minDatePeriod))))
+                .collect(Collectors.toList());
+    }
+
+    public List<Income> getPeriodIncomes(List<Income> incomes, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        return incomes.stream()
+                .filter(i -> minDatePeriod.isEqual(maxDatePeriod) ? i.getDate().isEqual(maxDatePeriod)
+                        : ((i.getDate().isEqual(maxDatePeriod) || i.getDate().isBefore(maxDatePeriod))
+                        && (i.getDate().isEqual(minDatePeriod) || i.getDate().isAfter(minDatePeriod))))
+                .collect(Collectors.toList());
     }
 
     private void printAmountByCategories(List<Expense> expenses, List<Income> incomes) {
@@ -28,17 +40,24 @@ public class StatisticsService {
                 .sorted(Map.Entry.comparingByKey())
                 .forEach((i) -> System.out.printf("Category:%20s,\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()));
 
-        Double resultIncome = incomes.stream()
-                .mapToDouble(Income::getIncome)
-                .sum();
-
+        Double resultIncome = getSumOfIncomes(incomes);
         System.out.printf("%nTotal amount of revenue:%32.2f%s%n", resultIncome, UserRepository.getCurrency());
-        Double resultExpense = expenses.stream()
-                .mapToDouble(Expense::getExpense)
-                .sum();
 
+        Double resultExpense = getSumOfExpenses(expenses);
         System.out.printf("Total amount of expenditure:%28.2f%s%n", resultExpense, UserRepository.getCurrency());
         System.out.printf("Total profit:%43.2f%s%n", resultIncome - resultExpense, UserRepository.getCurrency());
+    }
+
+    public Double getSumOfExpenses(List<Expense> expenses) {
+        return expenses.stream()
+                    .mapToDouble(Expense::getExpense)
+                    .sum();
+    }
+
+    public Double getSumOfIncomes(List<Income> incomes) {
+        return incomes.stream()
+                    .mapToDouble(Income::getIncome)
+                    .sum();
     }
 
     private void printPeriod(List<Expense> periodList) {
@@ -52,9 +71,7 @@ public class StatisticsService {
     }
 
     public void printAmountByDateByPeriod(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
-        List<Expense> periodList = expenses.stream()
-                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
-                .collect(Collectors.toList());
+        List<Expense> periodList = getPeriodExpenses(expenses, minDatePeriod, maxDatePeriod);
 
         printAmountByDate(periodList);
     }
@@ -70,17 +87,13 @@ public class StatisticsService {
                 .sorted(Map.Entry.comparingByKey())
                 .forEach((i) -> System.out.printf("Month:%24s.\t\tExpense:%12.2f%s%n", i.getKey(), i.getValue(), UserRepository.getCurrency()));
 
-        Double result = expenses.stream()
-                .mapToDouble(Expense::getExpense)
-                .sum();
+        Double result = getSumOfExpenses(expenses);
 
         System.out.printf("%nTotal amount of expenditure:%28.2f%s%n", result, UserRepository.getCurrency());
     }
 
     public void printAmountByDateByCategoriesByPeriod(List<Expense> expenses, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
-        List<Expense> periodList = expenses.stream()
-                .filter(i -> i.getDate().isBefore(maxDatePeriod) && i.getDate().isAfter(minDatePeriod))
-                .collect(Collectors.toList());
+        List<Expense> periodList = getPeriodExpenses(expenses, minDatePeriod, maxDatePeriod);
 
         printAmountByDateByCategories(periodList);
     }
@@ -102,9 +115,7 @@ public class StatisticsService {
             value.forEach((keyInside, valueInside) -> System.out.printf("Category:%20s,\t\tExpense:%12.2f%s%n", keyInside, valueInside, UserRepository.getCurrency()));
         });
 
-        Double result = expenses.stream()
-                .mapToDouble(Expense::getExpense)
-                .sum();
+        Double result = getSumOfExpenses(expenses);
 
         System.out.printf("%nTotal amount of expenditure:%28.2f%s%n", result, UserRepository.getCurrency());
     }
