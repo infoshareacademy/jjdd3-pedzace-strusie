@@ -28,6 +28,10 @@ public class User {
     @NotNull
     private String password;
 
+    @Column(name = "role")
+    @NotNull
+    private String role;
+
     @OneToMany
     @JoinColumn(name = "income")
     private Income income;
