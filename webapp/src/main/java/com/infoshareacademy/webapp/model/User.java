@@ -1,10 +1,48 @@
 package com.infoshareacademy.webapp.model;
 
+import com.infoshareacademy.baseapp.Expense;
+import com.infoshareacademy.baseapp.Income;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
+
+@Entity
+@Table(name = "USER")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
+    @NotNull
     private String name;
+
+    @Column(name = "login")
+    @NotNull
     private String login;
+
+    @Column(name = "password")
+    @NotNull
     private String password;
+
+    @OneToMany
+    @JoinColumn(name = "income")
+    private Income income;
+
+    @OneToMany
+    @JoinColumn(name = "expence")
+    private Expense expense;
+
+    @ManyToMany
+    @JoinTable(name = "user_to_category")
+    private Set<Category> categories;
+
+    @ManyToMany
+    @JoinTable(name = "user_to_categoryPromoted")
+    private Set<CategoryPromoted> categoryPromoteds;
 
     public User() {
     }
