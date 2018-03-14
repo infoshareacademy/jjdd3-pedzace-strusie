@@ -1,6 +1,8 @@
 package com.infoshareacademy.webapp.filters;
 
 import com.infoshareacademy.baseapp.Expense;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,14 +13,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"http://localhost:8080/budget/add-expense"})
+@WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"/add-expense"})
 public class AddExpenseFilter implements Filter {
 
-    private  static final Logger logger = Logger.getLogger(getClass().getName());
+    private static final Logger logger = LoggerFactory.getLogger(AddExpenseFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,43 +34,40 @@ public class AddExpenseFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
-        Expense expense = getExpenseObject(httpRequest);
-        List<String> messages = new ArrayList<>();
+        boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        String dateParameter = httpRequest.getParameter("date");
-        String valueOfExpense = httpRequest.getParameter("expense");
+        if (isPost) {
+            Expense expense = new Expense();
+            List<String> messages = new ArrayList<>();
 
-        if (!isDateParameterValid("date", httpRequest)) {
-            messages.add("Your date is out of bound. Please choose date again.");
-            isValidationOK = false;
-        } else if (dateParameter != null && !dateParameter.isEmpty()) {
-            expense.setDate(LocalDate.parse(dateParameter));
-        }
+            String dateParameter = httpRequest.getParameter("date");
+            String valueOfExpense = httpRequest.getParameter("expense");
 
-        if (isValueOfExpenseValid("expense", httpRequest)) {
-           messages.add("Your value of expnese is in invalid format. Please enter for example 450.35");
-           isValidationOK = false;
-        } else if (valueOfExpense != null || !valueOfExpense.isEmpty()){
-            expense.setExpense(Double.parseDouble(valueOfExpense));
-        }
+            if (!isDateParameterValid("date", httpRequest)) {
+                messages.add("Your date is out of bound. Please choose date again.");
+                isValidationOK = false;
+            } else if (dateParameter != null && !dateParameter.isEmpty()) {
+                // TODO; check date format
+                expense.setDate(LocalDate.parse(dateParameter));
+            }
 
-        if (!isValidationOK){
-            httpRequest.getSession().setAttribute("errors" , messages);
-            httpRequest.getSession().setAttribute("expense", expense);
-            httpResponse.sendRedirect(httpRequest.getRequestURL().toString());
-            return;
+            if (isValueOfExpenseValid("expense", httpRequest)) {
+                messages.add("Your value of expense is in invalid format. Please enter for example 450.35");
+                isValidationOK = false;
+            } else if (valueOfExpense != null && !valueOfExpense.isEmpty()) {
+                // TODO; check if valueOfExpense is valid double
+                expense.setExpense(Double.parseDouble(valueOfExpense));
+            }
+
+            if (!isValidationOK) {
+                httpRequest.getSession().setAttribute("errors", messages);
+                httpRequest.getSession().setAttribute("expense", expense);
+                httpResponse.sendRedirect(httpRequest.getRequestURL().toString());
+                return;
+            }
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    private Expense getExpenseObject(HttpServletRequest servletRequest) {
-        Expense expense = new Expense();
-        expense.setDate(null);
-        expense.setCategory(servletRequest.getParameter("category"));
-        expense.setExpense(Double.parseDouble(null));
-
-        return expense;
     }
 
     private boolean isDateParameterValid(String date, HttpServletRequest servletRequest) {
@@ -77,7 +76,7 @@ public class AddExpenseFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.log(Level.INFO, String.valueOf(isPost));
+        logger.error(String.valueOf(isPost));
 
         if (parameter == null || parameter.isEmpty()) {
             return !isPost;
@@ -88,8 +87,9 @@ public class AddExpenseFilter implements Filter {
 
         if (!matcher.matches()) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     private boolean isValueOfExpenseValid(String expense, HttpServletRequest servletRequest) {
@@ -98,7 +98,7 @@ public class AddExpenseFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.log(Level.INFO, String.valueOf(isPost));
+        logger.error(String.valueOf(isPost));
 
         if (parameter == null || parameter.isEmpty()) {
             return !isPost;
@@ -108,9 +108,10 @@ public class AddExpenseFilter implements Filter {
         Matcher matcher = expenseValuePattern.matcher(parameter);
 
         if (!matcher.matches()) {
+            return true;
+        } else {
             return false;
         }
-        return true;
     }
 
     @Override

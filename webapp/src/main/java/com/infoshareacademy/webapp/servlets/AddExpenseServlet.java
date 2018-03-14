@@ -1,9 +1,12 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.baseapp.Expense;
+import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,24 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @WebServlet("/add-expense")
 
 public class AddExpenseServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(getClass().getName());
+    private static final Logger logger = LoggerFactory.getLogger(AddExpenseServlet.class);
 
-    Template template;
+    private Template template;
+
+//    @EJB
+//    private ExpenseDaoBean expenseDaoBean;
 
     @EJB
-    private ExpenseDaoBean expenseDaoBean;
+    CategoryDaoLoc categoryDaoLoc;
 
 
     @Override
@@ -41,7 +46,7 @@ public class AddExpenseServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "expense-service.ftlh");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.error(e.getMessage());
         }
     }
 
@@ -58,10 +63,15 @@ public class AddExpenseServlet extends HttpServlet {
             req.getSession().removeAttribute("user");
         }
 
+        Set<String> categoryList = categoryDaoLoc.findAll();
+
+        Map<String, Object> categoriesModel = new HashMap<>();
+        categoriesModel.put("categories", categoryList);
+
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -73,9 +83,9 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-        expenseDaoBean.addExpense(expense);
+        //expenseDaoBean.addExpense(expense);
 
-        resp.sendRedirect("/budget/add-expense");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
+        resp.sendRedirect("/");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika
     }
 }
