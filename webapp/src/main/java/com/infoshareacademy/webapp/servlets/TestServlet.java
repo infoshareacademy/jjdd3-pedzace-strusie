@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.baseapp.Income;
+import model.Income;
 import com.infoshareacademy.webapp.dao.IncomeDao;
 
 import javax.inject.Inject;

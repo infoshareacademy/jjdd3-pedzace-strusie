@@ -1,7 +1,4 @@
-package com.infoshareacademy.webapp.model;
-
-import com.infoshareacademy.baseapp.Expense;
-import com.infoshareacademy.baseapp.Income;
+package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,11 +29,14 @@ public class User {
     @NotNull
     private String role;
 
-    @OneToMany
-    @JoinColumn(name = "income")
-    private Income income;
+    @OneToMany(mappedBy = "income")
+    private Set<Income> income;
 
-    @OneToMany
+    public void setIncome(Set<Income> income) {
+        this.income = income;
+    }
+
+    /*@OneToMany
     @JoinColumn(name = "expence")
     private Expense expense;
 
@@ -46,7 +46,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "user_to_categoryPromoted")
-    private Set<CategoryPromoted> categoryPromoteds;
+    private Set<CategoryPromoted> categoryPromoteds;*/
 
     public User() {
     }

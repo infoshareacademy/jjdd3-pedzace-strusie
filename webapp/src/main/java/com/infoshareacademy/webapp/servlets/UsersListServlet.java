@@ -1,11 +1,10 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.baseapp.Expense;
 import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

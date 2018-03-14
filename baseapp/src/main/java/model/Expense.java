@@ -1,4 +1,6 @@
-package com.infoshareacademy.baseapp;
+package model;
+
+import com.infoshareacademy.baseapp.UserRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

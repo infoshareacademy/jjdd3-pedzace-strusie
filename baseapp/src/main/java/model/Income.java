@@ -1,8 +1,11 @@
-package com.infoshareacademy.baseapp;
+package model;
+
+import com.infoshareacademy.baseapp.UserRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "INCOMES")
@@ -20,6 +23,10 @@ public class Income {
     @Column(name = "income")
     @NotNull
     private double income;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Income() {
     }

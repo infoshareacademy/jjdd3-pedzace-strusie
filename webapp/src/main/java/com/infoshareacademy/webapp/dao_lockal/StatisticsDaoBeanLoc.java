@@ -1,6 +1,8 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
 import com.infoshareacademy.baseapp.*;
+import model.Expense;
+import model.Income;
 
 import javax.ejb.Stateless;
 import java.time.LocalDate;

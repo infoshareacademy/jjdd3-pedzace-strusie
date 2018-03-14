@@ -1,13 +1,12 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
 import com.infoshareacademy.webapp.interceptors.AddUserInterceptor;
-import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.repository.UsersRepository;
+import model.User;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Stateless

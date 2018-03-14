@@ -1,7 +1,6 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.baseapp.Expense;
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import javax.ejb.Local;
 import java.util.List;

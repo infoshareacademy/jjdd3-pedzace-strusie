@@ -1,24 +1,29 @@
 package com.infoshareacademy.webapp.filters;
 
-import com.infoshareacademy.baseapp.Expense;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 @WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"http://localhost:8080/budget/add-expense"})
 public class AddExpenseFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
 
-    private  static final Logger logger = Logger.getLogger(getClass().getName());
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+
+    /*private  static final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -116,5 +121,5 @@ public class AddExpenseFilter implements Filter {
     @Override
     public void destroy() {
 
-    }
+    }*/
 }
