@@ -138,6 +138,7 @@
                     <reportsDirectory>${sonar.junit.reportPaths}</reportsDirectory>
                 </configuration>
             </plugin>
+
             <!-- Sonar-JaCoCo integration plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
