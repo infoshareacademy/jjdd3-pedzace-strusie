@@ -1,7 +1,7 @@
 package com.infoshareacademy.webapp.model;
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -12,12 +12,13 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "category_set")
-    private Set<String> categorySet;
+    @Column(name = "category")
+    @NotNull
+    private String category;
 
-    @JoinColumn(name = "id_user")
-    private Set<User> user;
-
+//    @JoinColumn(name = "id_user")
+//    @NotNull
+//    private Set<User> user;
 
     public Category() {
     }
@@ -30,19 +31,20 @@ public class Category {
         this.id = id;
     }
 
-    public Set<String> getCategorySet() {
-        return categorySet;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategorySet(Set<String> categorySet) {
-        this.categorySet = categorySet;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Set<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<User> user) {
-        this.user = user;
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Category{");
+        sb.append("id=").append(id);
+        sb.append(", category='").append(category).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

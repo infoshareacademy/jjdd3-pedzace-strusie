@@ -1,50 +1,45 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
-import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
-import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
+import com.infoshareacademy.baseapp.Expense;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/add-user")
-@MultipartConfig
-public class AddUserServlet extends HttpServlet {
+@WebServlet("/add-expense")
 
-    Logger logger = Logger.getLogger(getClass().getName());
+public class AddExpenseServlet extends HttpServlet {
 
-    File templatesPath;
+    private static final Logger logger = Logger.getLogger(getClass().getName());
+
     Template template;
 
     @EJB
-    UsersRepositoryDao usersRepositoryDao;
+    private ExpenseDaoBean expenseDaoBean;
 
-    @Inject
-    FileUploadProcessor fileUploadProcessor;
 
     @Override
     public void init() throws ServletException {
+
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "add-edit-user.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "expense-service.ftlh");
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -72,24 +67,15 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User();
-        user.setId(Long.parseLong(req.getParameter("id")));
-        user.setName(req.getParameter("name"));
-        user.setLogin(req.getParameter("login"));
-        user.setPassword(req.getParameter("password"));
-//        user.setAge(Integer.parseInt(req.getParameter("age")));
-/*
-        Part filePart = req.getPart("image");
-        File file = null;
-        try {
-            file = fileUploadProcessor.uploadImageFile(filePart);
-            user.setImageURL("/images/" + file.getName());
-        } catch (UserImageNotFound userImageNotFound) {
-            logger.log(Level.SEVERE, userImageNotFound.getMessage());
-        }*/
 
-        usersRepositoryDao.addUser(user);
+        Expense expense = new Expense();
+        expense.setDate(LocalDate.parse(req.getParameter("date")));
+        expense.setCategory(req.getParameter("category"));
+        expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-        resp.sendRedirect("/users-list");
+        expenseDaoBean.addExpense(expense);
+
+        resp.sendRedirect("/budget/add-expense");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
+        // wyświetlanie wydatków użytkownika
     }
 }

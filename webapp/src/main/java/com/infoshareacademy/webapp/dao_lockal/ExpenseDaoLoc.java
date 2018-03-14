@@ -1,4 +1,4 @@
-package com.infoshareacademy.webapp.dao;
+package com.infoshareacademy.webapp.dao_lockal;
 
 import com.infoshareacademy.baseapp.Expense;
 
@@ -6,7 +6,7 @@ import javax.ejb.Local;
 import java.util.List;
 
 @Local
-public interface ExpenseDao {
+public interface ExpenseDaoLoc {
     public Long save(Expense c);
 
     public Expense update(Expense c) ;

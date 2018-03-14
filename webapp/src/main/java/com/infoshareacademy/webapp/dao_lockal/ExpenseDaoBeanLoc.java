@@ -1,4 +1,4 @@
-package com.infoshareacademy.webapp.dao;
+package com.infoshareacademy.webapp.dao_lockal;
 
 import com.infoshareacademy.baseapp.Expense;
 
@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
-public class ExpenseDaoBean implements ExpenseDao{
+public class ExpenseDaoBeanLoc implements ExpenseDaoLoc {
 
     @PersistenceContext
     private EntityManager entityManager;

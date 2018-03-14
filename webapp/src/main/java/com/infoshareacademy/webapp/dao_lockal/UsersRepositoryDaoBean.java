@@ -1,5 +1,8 @@
-package com.infoshareacademy.webapp.dao;
+package com.infoshareacademy.webapp.dao_lockal;
 
+import com.infoshareacademy.baseapp.Expense;
+import com.infoshareacademy.baseapp.Settings;
+import com.infoshareacademy.baseapp.UserRepository;
 import com.infoshareacademy.webapp.model.User;
 import com.infoshareacademy.webapp.interceptors.AddUserInterceptor;
 import com.infoshareacademy.webapp.repository.UsersRepository;
@@ -40,6 +43,7 @@ public class UsersRepositoryDaoBean implements UsersRepositoryDao {
 
     @Override
     public List<User> getUsersList() {
+
         return UsersRepository.getRepository();
     }
 

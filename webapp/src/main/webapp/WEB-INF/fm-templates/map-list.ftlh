@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Users list</title>
+    <title>Map list</title>
 </head>
 <body>
 <#list users>
     <#items as user>
         <div>
-            <p>ID: ${user.id}</p>
-            <p>Login: ${user.login}</p>
-            <p>Name: ${user.name}</p>
-            <p><a href="/edit-user?id=${user.id}">Edit user</a></p>
+            <p>Key: ${user.getKey()}</p>
+            <p>Value: ${user.getValue()}</p>
         <#sep><p>=======================</p></#sep>
         </div>
     </#items>
 </#list>
+<p>sunEx: ${sumEx}</p>
+<p>sumIn: ${sumIn}</p>
+
 <#include "footer.ftlh">
 </body>
 </html>
