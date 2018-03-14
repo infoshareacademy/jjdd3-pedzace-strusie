@@ -24,7 +24,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet("/add-expense")
-//@MultipartConfig
 
 public class AddExpenseServlet extends HttpServlet {
 
@@ -74,7 +73,7 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-//        expenseDaoBean.addExpense(expense);
+        expenseDaoBean.addExpense(expense);
 
         resp.sendRedirect("/budget/add-expense");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika

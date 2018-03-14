@@ -45,7 +45,7 @@ public class AddIncomeServlet extends HttpServlet {
         income.setDate(LocalDate.parse(req.getParameter("date")));
         income.setIncome(Double.parseDouble(req.getParameter("income")));
 
-//        incomeDaoBean.save(income);
+        incomeDaoBean.save(income);
 
         resp.sendRedirect("/"); //Należy wstawić odnośnik do servletu odpowiedzialnego za wyświetlenie listy
         // dochodów   !!!!!

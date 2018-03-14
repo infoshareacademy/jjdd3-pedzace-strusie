@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 @WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"http://localhost:8080/budget/add-expense"})
 public class AddExpenseFilter implements Filter {
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private  static final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
