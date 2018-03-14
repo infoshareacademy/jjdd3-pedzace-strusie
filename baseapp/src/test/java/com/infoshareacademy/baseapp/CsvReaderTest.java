@@ -22,7 +22,7 @@ class CsvReaderTest {
         String expected = String.valueOf(expectedExpense);
 
         // When
-        String testExpensesFile = "src/test/resources/expenses_test.csv";
+        String testExpensesFile = "userData/expenses_test.csv";
         CsvReader csvReader = new CsvReader();
         List<Expense> actualExpense = csvReader.readFromFileExpenses(testExpensesFile);
         String actual = String.valueOf(actualExpense);
@@ -43,7 +43,7 @@ class CsvReaderTest {
         String expected = String.valueOf(expectedIncome);
 
         // When
-        String testIncomeFile = "src/test/resources/incomes_test.csv";
+        String testIncomeFile = "userData/incomes_test.csv";
         CsvReader csvReader = new CsvReader();
         List<Income> actualIncome = csvReader.readFromFileIncomes(testIncomeFile);
         String actual = String.valueOf(actualIncome);
@@ -65,7 +65,7 @@ class CsvReaderTest {
         String expected = String.valueOf(expectedCategories);
 
         // When
-        String testDefaultCategoriesFile = "src/test/resources/defaultCategories_test.csv";
+        String testDefaultCategoriesFile = "userData/defaultCategories_test.csv";
         CsvReader csvReader = new CsvReader();
         Set<String> actualCategories = csvReader.readCategoriesFromFile(testDefaultCategoriesFile);
         String actual = String.valueOf(actualCategories);
