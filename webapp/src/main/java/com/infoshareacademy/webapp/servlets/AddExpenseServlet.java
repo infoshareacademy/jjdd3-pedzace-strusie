@@ -59,21 +59,13 @@ public class AddExpenseServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             req.getSession().removeAttribute("errors");
-
         }
-
-//        Set<String> categoryList = categoryDaoLoc.findAll();
-//
-//        Map<String, Object> categoriesModel = new HashMap<>();
-//        categoriesModel.put("categories", categoryList);
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.error(e.getMessage(), e);
         }
-
-
     }
 
     @Override
@@ -84,7 +76,7 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-        expenseDaoBean.addExpense(expense);
+//        expenseDaoBean.addExpense(expense);
 
         resp.sendRedirect("/");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika

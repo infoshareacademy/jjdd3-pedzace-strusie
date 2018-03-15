@@ -2,7 +2,6 @@ package com.infoshareacademy.webapp.servlets;
 
 
 import com.infoshareacademy.baseapp.Income;
-//import com.infoshareacademy.webapp.dao.IncomeDaoBean;
 import com.infoshareacademy.webapp.dao.IncomeDaoBean;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
