@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao;
 
-import com.infoshareacademy.webapp.model.CategoryPromoted;
+import model.CategoryPromoted;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
