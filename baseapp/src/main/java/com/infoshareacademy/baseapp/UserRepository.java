@@ -1,5 +1,8 @@
 package com.infoshareacademy.baseapp;
 
+import model.Expense;
+import model.Income;
+
 import java.util.*;
 
 public class UserRepository {

@@ -1,9 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao_lockal.MapRepositoryDao;
-import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/map-list")

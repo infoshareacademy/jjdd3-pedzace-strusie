@@ -1,5 +1,7 @@
 package com.infoshareacademy.baseapp;
 
+import model.Expense;
+import model.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

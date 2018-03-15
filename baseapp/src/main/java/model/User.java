@@ -1,11 +1,42 @@
-package com.infoshareacademy.webapp.model;
+package model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
+
+@Entity
+@Table(name = "USERS")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
+    @NotNull
     private String name;
+
+    @Column(name = "login")
+    @NotNull
     private String login;
+
+    @Column(name = "password")
+    @NotNull
     private String password;
 
+    @Column(name = "role")
+    @NotNull
+    private String role;
+
+    @OneToMany(mappedBy = "income")
+    private Set<Income> income;
+
+    public void setIncome(Set<Income> income) {
+        this.income = income;
+    }
+
+   
     public User() {
     }
 

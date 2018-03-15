@@ -1,9 +1,8 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import javax.ejb.Local;
-import java.util.List;
 import java.util.Map;
 
 @Local

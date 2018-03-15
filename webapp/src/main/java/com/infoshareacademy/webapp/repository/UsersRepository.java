@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.repository;
 
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
