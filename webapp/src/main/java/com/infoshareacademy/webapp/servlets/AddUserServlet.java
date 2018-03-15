@@ -66,13 +66,7 @@ public class AddUserServlet extends HttpServlet {
             req.getSession().removeAttribute("user");
         }
 
-      /*  User user = new User();
-        Set<Income> incomes = new HashSet<>(Arrays.asList(new Income(LocalDate.now(), 14d)));
-        user.setIncome(incomes);
-        user.setIncome(name);
-        userDao.save(user);*/
-
-        try {
+     try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
