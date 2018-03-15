@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "CATEGORY_PROMOTED")
@@ -26,7 +27,17 @@ public class CategoryPromoted {
     @NotNull
     private LocalTime time;
 
+    @ManyToMany(mappedBy = "categoryPromoted")
+    private List<User> user;
+
     public CategoryPromoted() {
+    }
+
+    public CategoryPromoted(Long id_category_fk, LocalDate date, LocalTime time, List<User> user) {
+        this.id_category_fk = id_category_fk;
+        this.date = date;
+        this.time = time;
+        this.user = user;
     }
 
     public Long getId() {
@@ -37,12 +48,12 @@ public class CategoryPromoted {
         this.id = id;
     }
 
-    public Long getId_fk() {
+    public Long getId_category_fk() {
         return id_category_fk;
     }
 
-    public void setId_fk(Long id_fk) {
-        this.id_category_fk = id_fk;
+    public void setId_category_fk(Long id_category_fk) {
+        this.id_category_fk = id_category_fk;
     }
 
     public LocalDate getDate() {
@@ -61,13 +72,22 @@ public class CategoryPromoted {
         this.time = time;
     }
 
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CategoryPromoted{");
         sb.append("id=").append(id);
-        sb.append(", id_fk=").append(id_category_fk);
+        sb.append(", id_category_fk=").append(id_category_fk);
         sb.append(", date=").append(date);
         sb.append(", time=").append(time);
+        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }

@@ -27,13 +27,18 @@ public class Expense {
     @NotNull
     private double expense;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Expense() {
     }
 
-    public Expense(LocalDate date, String category, double expense) {
+    public Expense(LocalDate date, String category, double expense, User user) {
         this.date = date;
         this.category = category;
         this.expense = expense;
+        this.user = user;
     }
 
     public Long getId() {
@@ -68,13 +73,22 @@ public class Expense {
         this.expense = expense;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Expense{");
         sb.append("id=").append(id);
         sb.append(", date=").append(date);
         sb.append(", category='").append(category).append('\'');
-        sb.append(", expense=").append(expense).append(UserRepository.getCurrency());
+        sb.append(", expense=").append(expense);
+        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }

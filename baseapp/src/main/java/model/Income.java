@@ -31,9 +31,10 @@ public class Income {
     public Income() {
     }
 
-    public Income(LocalDate date, double income) {
+    public Income(LocalDate date, double income, User user) {
         this.date = date;
         this.income = income;
+        this.user = user;
     }
 
     public Long getId() {
@@ -60,12 +61,21 @@ public class Income {
         this.income = income;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Income{");
         sb.append("id=").append(id);
         sb.append(", date=").append(date);
-        sb.append(", income=").append(income).append(UserRepository.getCurrency());
+        sb.append(", income=").append(income);
+        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }
