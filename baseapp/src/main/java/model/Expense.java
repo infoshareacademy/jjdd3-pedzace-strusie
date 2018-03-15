@@ -1,4 +1,6 @@
-package com.infoshareacademy.baseapp;
+package model;
+
+import com.infoshareacademy.baseapp.UserRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,7 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_expens")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "date")

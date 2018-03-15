@@ -1,7 +1,7 @@
 package com.infoshareacademy.webapp.filters;
 
 import com.infoshareacademy.webapp.messages.UserOperationsMessages;
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

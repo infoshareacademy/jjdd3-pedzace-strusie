@@ -1,33 +1,13 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.baseapp.Expense;
-import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-
-import javax.ejb.EJB;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/add-expense")
 
 public class AddExpenseServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(getClass().getName());
+  /*  private static final Logger logger = Logger.getLogger(getClass().getName());
 
     Template template;
 
@@ -77,5 +57,5 @@ public class AddExpenseServlet extends HttpServlet {
 
         resp.sendRedirect("/budget/add-expense");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika
-    }
+    }*/
 }

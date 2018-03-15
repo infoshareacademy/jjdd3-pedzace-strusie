@@ -1,5 +1,8 @@
 package com.infoshareacademy.baseapp;
 
+import model.Expense;
+import model.Income;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

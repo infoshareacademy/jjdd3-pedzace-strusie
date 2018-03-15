@@ -1,9 +1,10 @@
-package com.infoshareacademy.webapp.model;
+package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 @Entity
 @Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
