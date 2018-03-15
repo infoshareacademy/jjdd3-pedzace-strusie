@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public class User {
 
     @Id
@@ -36,18 +36,7 @@ public class User {
         this.income = income;
     }
 
-    /*@OneToMany
-    @JoinColumn(name = "expence")
-    private Expense expense;
-
-    @ManyToMany
-    @JoinTable(name = "user_to_category")
-    private Set<Category> categories;
-
-    @ManyToMany
-    @JoinTable(name = "user_to_categoryPromoted")
-    private Set<CategoryPromoted> categoryPromoteds;*/
-
+   
     public User() {
     }
 

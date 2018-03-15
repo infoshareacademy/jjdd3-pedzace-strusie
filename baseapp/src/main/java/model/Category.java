@@ -16,9 +16,6 @@ public class Category {
     @NotNull
     private String category;
 
-//    @JoinColumn(name = "id_user")
-//    @NotNull
-//    private Set<User> user;
 
     public Category() {
     }
