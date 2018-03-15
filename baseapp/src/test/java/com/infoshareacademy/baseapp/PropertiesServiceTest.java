@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PropertiesServiceTest {
-
-/*    @Test
+/*
+    @Test
     void shouldGetRightValueOfCurrency() {
         // Given
         new Settings().updateDefaults(new String[0]);
@@ -37,7 +37,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightExpensesFilePath() {
         // Given
-        String expectedExpensesFilePath = "userData/expenses.csv";
+        String expectedExpensesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/expenses.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -50,7 +50,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightIncomesFilePath() {
         // Given
-        String expectedIncomesFilePath = "userData/incomes.csv";
+        String expectedIncomesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/incomes.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -63,7 +63,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightDefaultCategoriesFilePath() {
         // Given
-        String expectedDefaultCategoriesFilePath = "defaultCategories.csv";
+        String expectedDefaultCategoriesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/defaultCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();
@@ -76,7 +76,7 @@ class PropertiesServiceTest {
     @Test
     void shouldGetRightUserCategoriesFilePath() {
         // Given
-        String expectedUserCategoriesFilePath = "userData/userCategories.csv";
+        String expectedUserCategoriesFilePath = "/home/cod3bind/Development/jjdd3-pedzace-strusie/baseapp/src/main/resources/userCategories.csv";
 
         // When
         PropertiesService propertiesService = new PropertiesService();

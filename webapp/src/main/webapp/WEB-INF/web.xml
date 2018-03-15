@@ -4,12 +4,12 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
         version="3.1">
 
-    <!--<data-source>-->
-        <!--<name>java:ds/demods</name>-->
-        <!--<class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>-->
-        <!--<url>jdbc:mysql://0.0.0.0:6603/test</url>-->
-        <!--<user>root</user>-->
-        <!--<password>pass123</password>-->
-    <!--</data-source>-->
+    <data-source>
+        <name>java:ds/demods</name>
+        <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
+        <url>jdbc:mysql://0.0.0.0:6603/test</url>
+        <user>root</user>
+        <password>pass123</password>
+    </data-source>
 
 </web-app>

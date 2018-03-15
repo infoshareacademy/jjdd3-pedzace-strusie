@@ -19,14 +19,13 @@ import java.util.Map;
 @WebServlet("/welcome-user")
 public class WelcomeUserServlet extends HttpServlet {
 
-//    Logger logger = Logger.getLogger(getClass().getName());
     Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("Hello Worldfgfeqwfgefffffffffffkjhdhaskjdhkjahdkjhakshdkhaskdhkashdhadhkadkhkhakhdhakdhkashask");
 
         String name = req.getParameter("name");
+        logger.info("Hello new user. Your name is {}", name);
 
         if (name == null || name.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -42,7 +41,7 @@ public class WelcomeUserServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-//            logger.log(Level.SEVERE, e.getMessage(), e);
+            logger.warn(e.getMessage());
         }
     }
 }

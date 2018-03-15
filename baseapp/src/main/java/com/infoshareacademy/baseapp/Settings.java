@@ -1,9 +1,14 @@
 package com.infoshareacademy.baseapp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Set;
 
 public class Settings {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public void updateDefaults(String[] args) {
         PropertiesService service = new PropertiesService();
 
@@ -13,10 +18,14 @@ public class Settings {
         UserRepository.setIncomesFilePath(service.getIncomesFilePath());
         UserRepository.setDefaultCategoriesFilePath(service.getDefaultCategoriesFilePath());
         UserRepository.setUserCategoriesFilePath(service.getUserCategoriesFilePath());
+        logger.info("Set default properties");
 
         updateCategorySetFromFile(UserRepository.getUserCategoriesFilePath());
+        logger.info("Update user categories");
 
         new InputService().setFilePathFromArgs(args);
+        logger.info("Read file path from args");
+
     }
 
     public void updateExpenseListFromFile() {

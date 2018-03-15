@@ -4,7 +4,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+
 public class CategoriesService {
+
     private Set<String> categorySet = UserRepository.getCategoriesUserRepository();
     private String[] categoryMenuItems = categorySet.toArray(new String[0]);
 
@@ -51,7 +53,7 @@ public class CategoriesService {
         checkCategoryToRemove(categoryToRemove);
     }
 
-    protected void restoreDefaultCategories() {
+    public void restoreDefaultCategories() {
         new Settings().updateCategorySetFromFile(UserRepository.getDefaultCategoriesFilePath());
         new CsvWriter().writeToCategoriesCsvFile(UserRepository.getCategoriesUserRepository(), UserRepository.getUserCategoriesFilePath());
         System.out.println("Categories are up to date.");
