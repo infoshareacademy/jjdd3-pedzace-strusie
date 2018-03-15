@@ -1,7 +1,5 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.webapp.model.Category;
-
 import javax.ejb.Local;
 import java.util.List;
 import java.util.Set;

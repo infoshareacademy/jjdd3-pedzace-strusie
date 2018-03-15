@@ -1,11 +1,8 @@
 package model;
 
-import com.infoshareacademy.baseapp.UserRepository;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "INCOMES")
@@ -31,10 +28,9 @@ public class Income {
     public Income() {
     }
 
-    public Income(LocalDate date, double income, User user) {
+    public Income(LocalDate date, double income) {
         this.date = date;
         this.income = income;
-        this.user = user;
     }
 
     public Long getId() {
