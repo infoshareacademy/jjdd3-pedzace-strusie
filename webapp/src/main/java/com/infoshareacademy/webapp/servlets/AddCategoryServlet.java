@@ -1,23 +1,19 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
 import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;

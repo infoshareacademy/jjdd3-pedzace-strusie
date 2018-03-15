@@ -1,5 +1,7 @@
 package com.infoshareacademy.baseapp;
 
+import model.Expense;
+import model.Income;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

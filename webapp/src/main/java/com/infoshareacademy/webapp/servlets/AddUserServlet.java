@@ -1,12 +1,14 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.cdi.FileUploadProcessor;
+import com.infoshareacademy.webapp.dao.UserDao;
+import com.infoshareacademy.webapp.dao.UserDaoBean;
 import com.infoshareacademy.webapp.dao_lockal.UsersRepositoryDao;
-import com.infoshareacademy.webapp.exceptions.UserImageNotFound;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
-import com.infoshareacademy.webapp.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Income;
+import model.User;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -16,13 +18,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +37,9 @@ public class AddUserServlet extends HttpServlet {
 
     @EJB
     UsersRepositoryDao usersRepositoryDao;
+
+    @EJB
+    UserDao userDao;
 
     @Inject
     FileUploadProcessor fileUploadProcessor;
@@ -63,7 +66,7 @@ public class AddUserServlet extends HttpServlet {
             req.getSession().removeAttribute("user");
         }
 
-        try {
+     try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);

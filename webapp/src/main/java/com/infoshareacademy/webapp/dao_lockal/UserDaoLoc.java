@@ -1,19 +1,19 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import javax.ejb.Local;
 import java.util.List;
 
 @Local
 public interface UserDaoLoc {
-    public Long save(User c);
+    Long save(User c);
 
-    public User update(User c) ;
+    User update(User c);
 
-    public void delete(Long id) ;
+    void delete(Long id);
 
-    public User findById(Long id) ;
+    User findById(Long id);
 
-    public List<User> findAll() ;
+    List<User> findAll();
 }
