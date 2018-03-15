@@ -33,8 +33,8 @@ public class AddExpenseServlet extends HttpServlet {
 
     private Template template;
 
-//    @EJB
-//    private ExpenseDaoBean expenseDaoBean;
+    @EJB
+    private ExpenseDaoBean expenseDaoBean;
 
     @EJB
     CategoryDaoLoc categoryDaoLoc;
@@ -58,21 +58,22 @@ public class AddExpenseServlet extends HttpServlet {
         List<String> errors = (List<String>) req.getSession().getAttribute("errors");
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
-            dataModel.put("user", req.getSession().getAttribute("user"));
-            req.getSession().removeAttribute("error");
-            req.getSession().removeAttribute("user");
+            req.getSession().removeAttribute("errors");
+
         }
 
-        Set<String> categoryList = categoryDaoLoc.findAll();
-
-        Map<String, Object> categoriesModel = new HashMap<>();
-        categoriesModel.put("categories", categoryList);
+//        Set<String> categoryList = categoryDaoLoc.findAll();
+//
+//        Map<String, Object> categoriesModel = new HashMap<>();
+//        categoriesModel.put("categories", categoryList);
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.error(e.getMessage(), e);
         }
+
+
     }
 
     @Override
@@ -83,7 +84,7 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-        //expenseDaoBean.addExpense(expense);
+        expenseDaoBean.addExpense(expense);
 
         resp.sendRedirect("/");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika

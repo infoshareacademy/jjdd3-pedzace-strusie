@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.filters;
 
-import com.infoshareacademy.baseapp.Expense;
+import com.infoshareacademy.baseapp.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,15 +12,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"/add-expense"})
-public class AddExpenseFilter implements Filter {
+@WebFilter(filterName = "AddIncomeFilter", urlPatterns = {"/add-income"})
+public class AddIncomeFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(AddExpenseFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddIncomeFilter.class);
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,35 +36,36 @@ public class AddExpenseFilter implements Filter {
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
         if (isPost) {
-            Expense expense = new Expense();
+            Income income = new Income();
             List<String> messages = new ArrayList<>();
 
             String dateParameter = httpRequest.getParameter("date");
-            String valueOfExpense = httpRequest.getParameter("expense");
+            String valueOfIncome = httpRequest.getParameter("income");
 
             if (!isDateParameterValid("date", httpRequest)) {
-                messages.add("Your date is out of bound. Please choose date again.");
+                messages.add("Date is out of bound. Please choose date again.");
                 isValidationOK = false;
             } else if (dateParameter != null && !dateParameter.isEmpty()) {
-                expense.setDate(LocalDate.parse(dateParameter));
+                income.setDate(LocalDate.parse(dateParameter));
             }
 
-            if (isValueOfExpenseValid("expense", httpRequest)) {
-                messages.add("Your value of expense is in invalid format. Please enter for example 450.35");
+            if (isValueOfExpenseValid("income", httpRequest)) {
+                messages.add("Value of income is in invalid format. Please enter for example 2100.35");
                 isValidationOK = false;
-            } else if (valueOfExpense != null && !valueOfExpense.isEmpty()) {
-                expense.setExpense(Double.parseDouble(valueOfExpense));
+            } else if (valueOfIncome != null && !valueOfIncome.isEmpty()) {
+                income.setIncome(Double.parseDouble(valueOfIncome));
             }
 
             if (!isValidationOK) {
                 httpRequest.getSession().setAttribute("errors", messages);
-                httpRequest.getSession().setAttribute("expense", expense);
+                httpRequest.getSession().setAttribute("income", income);
                 httpResponse.sendRedirect(httpRequest.getRequestURL().toString());
                 return;
             }
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
+
     }
 
     private boolean isDateParameterValid(String date, HttpServletRequest servletRequest) {
@@ -76,7 +76,7 @@ public class AddExpenseFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if (parameter == null && parameter.isEmpty()) {
+        if (parameter == null || parameter.isEmpty()) {
             return !isPost;
         }
 
@@ -90,9 +90,9 @@ public class AddExpenseFilter implements Filter {
         }
     }
 
-    private boolean isValueOfExpenseValid(String expense, HttpServletRequest servletRequest) {
+    private boolean isValueOfExpenseValid(String income, HttpServletRequest servletRequest) {
 
-        String parameter = servletRequest.getParameter(expense);
+        String parameter = servletRequest.getParameter(income);
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
@@ -114,5 +114,6 @@ public class AddExpenseFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 }
