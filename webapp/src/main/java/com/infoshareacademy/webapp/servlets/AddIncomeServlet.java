@@ -1,11 +1,10 @@
 package com.infoshareacademy.webapp.servlets;
 
-
-import com.infoshareacademy.baseapp.Income;
-import com.infoshareacademy.webapp.dao.IncomeDaoBean;
+import com.infoshareacademy.webapp.dao.IncomeDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 @WebServlet("/add-income")
 public class AddIncomeServlet extends HttpServlet {
 
@@ -32,7 +30,7 @@ public class AddIncomeServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    private IncomeDaoBean incomeDaoBean;
+    private IncomeDao incomeDaoBean;
 
 
     @Override

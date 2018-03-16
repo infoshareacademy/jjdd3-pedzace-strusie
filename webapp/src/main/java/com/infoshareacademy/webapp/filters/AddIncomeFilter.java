@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.filters;
 
-import com.infoshareacademy.baseapp.Income;
+import model.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,7 +95,7 @@ public class AddIncomeFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if (parameter == null && parameter.isEmpty()) {
+        if (parameter.isEmpty() && parameter == null) {
             return !isPost;
         }
 
