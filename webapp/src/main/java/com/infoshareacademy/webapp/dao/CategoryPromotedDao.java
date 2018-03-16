@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.dao;
 
-import com.infoshareacademy.webapp.model.CategoryPromoted;
+
+import model.CategoryPromoted;
 
 import javax.ejb.Local;
 import java.util.List;

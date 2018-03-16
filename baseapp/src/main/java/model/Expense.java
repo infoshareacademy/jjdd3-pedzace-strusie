@@ -1,7 +1,5 @@
 package model;
 
-import com.infoshareacademy.baseapp.UserRepository;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -34,11 +32,10 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(LocalDate date, String category, double expense, User user) {
+    public Expense(LocalDate date, String category, double expense) {
         this.date = date;
         this.category = category;
         this.expense = expense;
-        this.user = user;
     }
 
     public Long getId() {

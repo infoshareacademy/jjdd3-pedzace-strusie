@@ -27,7 +27,7 @@ public class CategoryPromoted {
     @NotNull
     private LocalTime time;
 
-    @ManyToMany(mappedBy = "categoryPromoted")
+    @ManyToMany(mappedBy = "categoriesPromoted")
     private List<User> user;
 
     public CategoryPromoted() {
