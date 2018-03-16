@@ -17,7 +17,7 @@ public class Category {
     @NotNull
     private String category;
 
-    @ManyToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "categories")
     private List<User> user;
 
 
