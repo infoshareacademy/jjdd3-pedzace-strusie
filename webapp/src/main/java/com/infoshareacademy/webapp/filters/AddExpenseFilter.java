@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.filters;
 
-import com.infoshareacademy.baseapp.Expense;
+import model.Expense;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
