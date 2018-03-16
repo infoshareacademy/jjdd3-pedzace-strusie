@@ -30,7 +30,7 @@
         </#list>
     </#if>
     <div class="col-md-8">
-        <form name="expenseForm" method="post" action="/${action!"budget/add-expense"}" enctype="multipart/form-data">
+        <form name="expenseForm" method="post" action="/${action!"add-expense"}">
             <div class="form-group">
                 <label> Date of expense</label>
                 <input type="date" class="form-control" name="date" value="${(expense.date)!}">
@@ -40,6 +40,7 @@
                 <label>Category</label>
 
                 <select class="form-control" name="category">
+
                     <option>Plese select your expense</option>
                     <option>accomodation</option>
                     <option>broadband</option>
