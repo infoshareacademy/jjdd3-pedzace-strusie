@@ -95,7 +95,7 @@ public class AddIncomeFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if (parameter == null && parameter.isEmpty()) {
+        if (parameter.isEmpty() && parameter == null) {
             return !isPost;
         }
 
