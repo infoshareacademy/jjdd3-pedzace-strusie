@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao.ExpenseDaoBean;
+import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -32,7 +32,7 @@ public class AddExpenseServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    private ExpenseDaoBean expenseDaoBean;
+    private ExpenseDao expenseDao;
 
     @EJB
     CategoryDaoLoc categoryDaoLoc;
@@ -74,7 +74,7 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-        expenseDaoBean.save(expense);
+        expenseDao.save(expense);
 
         resp.sendRedirect("/");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika
