@@ -74,7 +74,7 @@ public class AddExpenseServlet extends HttpServlet {
         expense.setCategory(req.getParameter("category"));
         expense.setExpense(Double.parseDouble(req.getParameter("expense")));
 
-//        expenseDaoBean.addExpense(expense);
+        expenseDaoBean.save(expense);
 
         resp.sendRedirect("/");// tutaj należy wstawić odnośnik do servletu odpowiedzialnego za
         // wyświetlanie wydatków użytkownika
