@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao;
 
-import model.CategoryPromoted;
+import model.Expense;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,38 +9,38 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
-public class CategoryPromotedDaoBean implements CategoryPromotedDao {
+public class ExpenseDaoBean implements ExpenseDao{
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public Long save(CategoryPromoted c) {
+    public Long save(Expense c) {
         entityManager.persist(c);
         return c.getId();
     }
 
     @Override
-    public CategoryPromoted update(CategoryPromoted c) {
+    public Expense update(Expense c) {
         return entityManager.merge(c);
     }
 
     @Override
     public void delete(Long id) {
-        final CategoryPromoted c = entityManager.find(CategoryPromoted.class, id);
+        final Expense c = entityManager.find(Expense.class, id);
         if (c != null) {
             entityManager.remove(c);
         }
     }
 
     @Override
-    public CategoryPromoted findById(Long id) {
-        return entityManager.find(CategoryPromoted.class, id);
+    public Expense findById(Long id) {
+        return entityManager.find(Expense.class, id);
     }
 
     @Override
-    public List<CategoryPromoted> findAll() {
-        final Query query = entityManager.createQuery("SELECT s FROM CategoryPromoted s");
+    public List<Expense> findAll() {
+        final Query query = entityManager.createQuery("SELECT s FROM Expense s");
 
         return query.getResultList();
     }

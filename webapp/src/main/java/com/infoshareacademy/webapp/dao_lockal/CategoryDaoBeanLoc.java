@@ -4,7 +4,6 @@ import com.infoshareacademy.baseapp.CategoriesService;
 import com.infoshareacademy.baseapp.CsvWriter;
 import com.infoshareacademy.baseapp.Settings;
 import com.infoshareacademy.baseapp.UserRepository;
-import com.infoshareacademy.webapp.model.Category;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
