@@ -1,7 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
 
-import com.infoshareacademy.webapp.dao.IncomeDaoBean;
+import com.infoshareacademy.webapp.dao.IncomeDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -32,7 +32,7 @@ public class AddIncomeServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    private IncomeDaoBean incomeDaoBean;
+    private IncomeDao incomeDao;
 
 
     @Override
@@ -73,7 +73,7 @@ public class AddIncomeServlet extends HttpServlet {
         income.setDate(LocalDate.parse(req.getParameter("date")));
         income.setIncome(Double.parseDouble(req.getParameter("income")));
 
-        incomeDaoBean.save(income);
+        incomeDao.save(income);
 
         resp.sendRedirect("/"); //Należy wstawić odnośnik do servletu odpowiedzialnego za wyświetlenie listy
         // dochodów   !!!!!
