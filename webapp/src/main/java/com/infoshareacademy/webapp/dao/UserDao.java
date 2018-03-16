@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao;
 
-import com.infoshareacademy.webapp.model.User;
+import model.User;
 
 import javax.ejb.Local;
 import java.util.List;

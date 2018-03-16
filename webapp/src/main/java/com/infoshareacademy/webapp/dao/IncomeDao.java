@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao;
 
-import com.infoshareacademy.baseapp.Income;
+import model.Income;
 
 import javax.ejb.Local;
 import java.util.List;

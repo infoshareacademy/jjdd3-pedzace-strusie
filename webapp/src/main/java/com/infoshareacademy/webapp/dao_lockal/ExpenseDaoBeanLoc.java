@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.dao_lockal;
 
-import com.infoshareacademy.baseapp.Expense;
+import model.Expense;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,5 +1,8 @@
 package com.infoshareacademy.baseapp;
 
+import model.Expense;
+import model.Income;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
