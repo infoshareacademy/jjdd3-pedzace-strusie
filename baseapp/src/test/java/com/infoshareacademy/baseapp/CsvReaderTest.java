@@ -24,7 +24,6 @@ class CsvReaderTest {
         String expected = String.valueOf(expectedExpense);
 
         // When
-//        String testExpensesFile = "resources/expenses_test.csv";
         String testExpensesFile = getClass().getResource("/expenses_test.csv").getFile();
 
         CsvReader csvReader = new CsvReader();
