@@ -6,16 +6,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Entity
-@Table(name = "CATEGORY_PROMOTED")
+//@Entity
+//@Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
     @Id
-    @Column(name = "id", length = 32)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
-    @Column(name = "id_category_fk", length = 32)
+    @Column(name = "id_category_fk")
     @NotNull
     private Long id_category_fk;
 
@@ -27,7 +27,7 @@ public class CategoryPromoted {
     @NotNull
     private LocalTime time;
 
-    @ManyToMany(mappedBy = "categoriesPromoted")
+//    @ManyToMany(mappedBy = "categoriesPromoted")
     private List<User> user;
 
     public CategoryPromoted() {

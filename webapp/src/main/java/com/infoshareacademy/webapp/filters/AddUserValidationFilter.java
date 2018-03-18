@@ -66,9 +66,9 @@ public class AddUserValidationFilter implements Filter {
     private User getUserObject(HttpServletRequest servletRequest) {
         User user = new User();
         user.setId(null);
-        user.setName(servletRequest.getParameter("name"));
-        user.setLogin(servletRequest.getParameter("login"));
-        user.setPassword(servletRequest.getParameter("password"));
+//        user.setName(servletRequest.getParameter("name"));
+//        user.setLogin(servletRequest.getParameter("login"));
+//        user.setPassword(servletRequest.getParameter("password"));
 //        user.setAge(null);
         return user;
     }

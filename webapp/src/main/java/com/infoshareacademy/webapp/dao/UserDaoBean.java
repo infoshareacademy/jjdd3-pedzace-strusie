@@ -4,9 +4,11 @@ import model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UserDaoBean implements UserDao {
@@ -36,6 +38,16 @@ public class UserDaoBean implements UserDao {
     @Override
     public User findById(Long id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public Optional<User> findByUserId(String userId) {
+        try {
+            User foundUser = entityManager.find(User.class, userId);
+            return Optional.of(foundUser);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
     @Override

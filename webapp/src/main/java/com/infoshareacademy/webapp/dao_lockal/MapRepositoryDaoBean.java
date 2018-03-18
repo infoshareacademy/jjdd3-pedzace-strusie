@@ -32,9 +32,9 @@ public class MapRepositoryDaoBean implements MapRepositoryDao {
     @Override
     public User getUserByLogin(String login) {
         for (User user : UsersRepository.getRepository()) {
-            if (user.getLogin().equals(login)) {
+//            if (user.getLogin().equals(login)) {
                 return user;
-            }
+//            }
 
 
         }

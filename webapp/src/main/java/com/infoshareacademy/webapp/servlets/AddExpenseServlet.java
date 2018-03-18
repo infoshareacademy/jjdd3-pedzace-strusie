@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class AddExpenseServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(AddExpenseServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     private Template template;
 

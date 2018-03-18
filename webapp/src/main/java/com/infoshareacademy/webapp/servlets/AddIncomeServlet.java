@@ -26,14 +26,11 @@ import java.util.Map;
 
 @WebServlet("/add-income")
 public class AddIncomeServlet extends HttpServlet {
-
-    private static final Logger logger = LoggerFactory.getLogger(AddIncomeServlet.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
     private IncomeDao incomeDao;
-
 
     @Override
     public void init() throws ServletException {
@@ -41,10 +38,9 @@ public class AddIncomeServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "incomes-service.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            logger.error("Template incomes-service is not found {}",e.getMessage());
         }
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

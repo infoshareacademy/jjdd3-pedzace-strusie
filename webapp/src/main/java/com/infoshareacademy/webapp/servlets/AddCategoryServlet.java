@@ -20,13 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @WebServlet("/add-category")
 @MultipartConfig
 public class AddCategoryServlet extends HttpServlet {
-
-    private static final Logger logger = LoggerFactory.getLogger(AddCategoryServlet.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
@@ -37,7 +34,7 @@ public class AddCategoryServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-category.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Template add-category is not found {}",e.getMessage());
         }
     }
 
