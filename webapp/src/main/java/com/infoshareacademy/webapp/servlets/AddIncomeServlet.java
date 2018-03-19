@@ -31,7 +31,7 @@ public class AddIncomeServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    private IncomeDao incomeDaoBean;
+    private IncomeDao incomeDao;
 
 
     @Override
@@ -72,7 +72,7 @@ public class AddIncomeServlet extends HttpServlet {
         income.setDate(LocalDate.parse(req.getParameter("date")));
         income.setIncome(Double.parseDouble(req.getParameter("income")));
 
-        incomeDaoBean.save(income);
+        incomeDao.save(income);
 
         resp.sendRedirect("/"); //Należy wstawić odnośnik do servletu odpowiedzialnego za wyświetlenie listy
         // dochodów   !!!!!

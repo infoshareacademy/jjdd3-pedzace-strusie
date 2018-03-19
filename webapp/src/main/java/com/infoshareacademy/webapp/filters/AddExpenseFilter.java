@@ -94,7 +94,7 @@ public class AddExpenseFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if (parameter.isEmpty() && parameter == null) {
+        if ( parameter == null && parameter.isEmpty()) {
             return !isPost;
         }
 
