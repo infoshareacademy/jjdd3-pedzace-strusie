@@ -44,14 +44,14 @@ public class AddExpenseFilter implements Filter {
             String valueOfExpense = httpRequest.getParameter("expense");
 
             if (!isDateParameterValid("date", httpRequest)) {
-                messages.add("Your date is out of bound. Please choose date again.");
+                messages.add("Date is out of bound. Please choose date again.");
                 isValidationOK = false;
             } else if (dateParameter != null && !dateParameter.isEmpty()) {
                 expense.setDate(LocalDate.parse(dateParameter));
             }
 
             if (isValueOfExpenseValid("expense", httpRequest)) {
-                messages.add("Your value of expense is in invalid format. Please enter for example 450.35");
+                messages.add("Value of expense is in invalid format. Please enter for example 450.35");
                 isValidationOK = false;
             } else if (valueOfExpense != null && !valueOfExpense.isEmpty()) {
                 expense.setExpense(Double.parseDouble(valueOfExpense));
@@ -83,7 +83,7 @@ public class AddExpenseFilter implements Filter {
         Pattern datePattern = Pattern.compile("\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])*");
         Matcher matcher = datePattern.matcher(parameter);
 
-        return !matcher.matches();
+        return matcher.matches();
     }
 
     private boolean isValueOfExpenseValid(String expense, HttpServletRequest servletRequest) {
@@ -94,7 +94,7 @@ public class AddExpenseFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if (parameter == null || parameter.isEmpty()) {
+        if ( parameter == null && parameter.isEmpty()) {
             return !isPost;
         }
 
