@@ -24,7 +24,7 @@
                 <li id="logout"><a href="/budget/logout">Logout</a></li>
             </ul>
         </nav>
-        <h3 class="text-muted">App.com</h3>
+        <h3 class="text-muted">PedzaceStrusie.com</h3>
     </div>
     <div class="jumbotron">
         <h3>Hello ${userId}!</h3>

@@ -40,15 +40,15 @@ public class Start extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-//        boolean isAdmin = userService.initUserSession(accessToken);
-//        req.getSession().setAttribute("admin", isAdmin);
+        boolean isAdmin = userService.initUserSession(accessToken);
+        req.getSession().setAttribute("admin", isAdmin);
         logger.info("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-//        logger.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQUser is admin: {}", isAdmin);
+        logger.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQUser is admin: {}", isAdmin);
 
 
 
         RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/WEB-INF/index.html");
+                .getRequestDispatcher("/WEB-INF/home.jsp");
         dispatcher.forward(req, resp);
     }
 
