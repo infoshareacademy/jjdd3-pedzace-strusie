@@ -3,8 +3,8 @@ package model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-//@Entity
-//@Table(name = "USERS_LOGINS")
+@Entity
+@Table(name = "USERS_LOGINS")
 public class UsersLogins {
 
     @Id
@@ -12,8 +12,8 @@ public class UsersLogins {
     @Column(name = "id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
     @Column(name = "login_time")

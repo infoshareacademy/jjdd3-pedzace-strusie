@@ -4,8 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-//@Entity
-//@Table(name = "INCOMES")
+@Entity
+@Table(name = "INCOMES")
 public class Income {
 
     @Id
@@ -21,8 +21,8 @@ public class Income {
     @NotNull
     private double income;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Income() {

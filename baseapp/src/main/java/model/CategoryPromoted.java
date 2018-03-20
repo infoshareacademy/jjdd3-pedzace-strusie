@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-//@Entity
-//@Table(name = "CATEGORY_PROMOTED")
+@Entity
+@Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
     @Id
     @Column(name = "id")
@@ -27,7 +27,7 @@ public class CategoryPromoted {
     @NotNull
     private LocalTime time;
 
-//    @ManyToMany(mappedBy = "categoriesPromoted")
+    @ManyToMany(mappedBy = "categoriesPromoted")
     private List<User> user;
 
     public CategoryPromoted() {

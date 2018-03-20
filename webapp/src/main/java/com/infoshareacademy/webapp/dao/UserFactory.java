@@ -38,16 +38,17 @@ public class UserFactory {
         ResteasyWebTarget target = client.target(url);
         AuthClient authClient = target.proxy(AuthClient.class);
         String userId = authClient.getUserInfo("Bearer " + accessToken);
-        logger.info(userId);
         return userId;
     }
 
     public User addAdmin (String userId) {
+        logger.info("Add new Admin");
         Optional<User> user = userDAOBean.findByUserId(userId);
         if (user.isPresent()) {
             return user.get();
         }
-        User newUser = new User (userId, true);
+        logger.info("Create new Admin");
+        User newUser = new User(userId, true);
         userDAOBean.save(newUser);
         return newUser;
     }

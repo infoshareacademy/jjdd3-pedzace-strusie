@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-//@Entity
-//@Table(name = "USERS")
+@Entity
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = {"userId"}))
 public class User {
 
     @Id
@@ -19,21 +19,21 @@ public class User {
     @Column(name = "isAdmin")
     private boolean isAdmin;
 
-//    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<UsersLogins> logins;
 
-//    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private Set<Income> income;
 
-//    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private Set<Expense> expense;
 
-//    @ManyToMany
-//    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @ManyToMany
+    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
     private Set<Category> categories;
 
-//    @ManyToMany
-//    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @ManyToMany
+    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
     private Set<CategoryPromoted> categoriesPromoted;
 
 

@@ -43,8 +43,12 @@ public class UserDaoBean implements UserDao {
     @Override
     public Optional<User> findByUserId(String userId) {
         try {
-            User foundUser = entityManager.find(User.class, userId);
-            return Optional.of(foundUser);
+            List<User> users = entityManager.createQuery("SELECT s FROM User s WHERE s.userId = :userId")
+                    .setParameter("userId", userId).getResultList();
+            if (users.isEmpty()) {
+                return Optional.empty();
+            }
+            return Optional.of(users.get(0));
         } catch (NoResultException e) {
             return Optional.empty();
         }

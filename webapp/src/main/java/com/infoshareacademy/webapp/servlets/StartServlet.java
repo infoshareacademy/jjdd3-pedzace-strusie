@@ -19,7 +19,7 @@ import java.io.*;
 
 @WebServlet("/budget/start")
 @MultipartConfig
-public class Start extends HttpServlet {
+public class StartServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
@@ -43,7 +43,7 @@ public class Start extends HttpServlet {
         boolean isAdmin = userService.initUserSession(accessToken);
         req.getSession().setAttribute("admin", isAdmin);
         logger.info("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-        logger.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQUser is admin: {}", isAdmin);
+        logger.info("User is admin: {}", isAdmin);
 
 
 
