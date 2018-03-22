@@ -37,7 +37,6 @@ public class AddUserValidationFilter implements Filter {
         List<String> messages = new ArrayList<>();
 
         String idParameter = httpRequest.getParameter("id");
-//        String ageParameter = httpRequest.getParameter("age");
 
         if (!isIntegerParameterValid("id", httpRequest)) {
             messages.add(UserOperationsMessages.NAME_NOT_STRING);
@@ -45,13 +44,6 @@ public class AddUserValidationFilter implements Filter {
         } else if (idParameter != null && !idParameter.isEmpty()) {
             user.setId(Long.parseLong(idParameter));
         }
-
-//        if (!isIntegerParameterValid("age", httpRequest)) {
-//            messages.add(UserOperationsMessages.AGE_NOT_INTEGER);
-//            isValidationOK = false;
-//        } else if (ageParameter != null && !ageParameter.isEmpty()) {
-//            user.setAge(Integer.parseInt(httpRequest.getParameter("age")));
-//        }
 
         if (!isValidationOK) {
             httpRequest.getSession().setAttribute("errors", messages);
@@ -66,10 +58,6 @@ public class AddUserValidationFilter implements Filter {
     private User getUserObject(HttpServletRequest servletRequest) {
         User user = new User();
         user.setId(null);
-        user.setName(servletRequest.getParameter("name"));
-        user.setLogin(servletRequest.getParameter("login"));
-        user.setPassword(servletRequest.getParameter("password"));
-//        user.setAge(null);
         return user;
     }
 

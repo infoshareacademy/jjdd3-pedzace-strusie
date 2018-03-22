@@ -25,7 +25,7 @@ import java.util.Map;
 @MultipartConfig
 public class RemoveCategoryServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(RemoveCategoryServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(RemoveCategoryServlet.class);
 
     private Template template;
 

@@ -17,7 +17,7 @@ public class Expense {
     @NotNull
     private LocalDate date;
 
-    @Column(name = "category", length = 32)
+    @Column(name = "category")
     @NotNull
     private String category;
 

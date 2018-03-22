@@ -20,8 +20,6 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<User> user;
 
-
-
     public Category() {
     }
 
