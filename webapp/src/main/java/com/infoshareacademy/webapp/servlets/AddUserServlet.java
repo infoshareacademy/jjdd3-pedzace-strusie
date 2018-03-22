@@ -30,8 +30,8 @@ public class AddUserServlet extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
-    File templatesPath;
-    Template template;
+    private File templatesPath;
+    private Template template;
 
     @EJB
     UsersRepositoryDao usersRepositoryDao;
