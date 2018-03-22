@@ -19,7 +19,7 @@ public class UserFactory {
     private final String url = "https://pedzacestrusie.eu.auth0.com/userinfo";
 
     @Inject
-    UserDao userDAOBean;
+    private UserDao userDAOBean;
 
     public User createUser(String userId, String accessToken) {
 

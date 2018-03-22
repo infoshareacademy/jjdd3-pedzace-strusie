@@ -20,6 +20,12 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<User> user;
 
+    @Column(name = "isActive")
+    private boolean isActive;
+
+    @Column(name = "isDefault")
+    private boolean isDefault;
+
     public Category() {
     }
 
@@ -52,12 +58,30 @@ public class Category {
         this.user = user;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Category{");
         sb.append("id=").append(id);
         sb.append(", category='").append(category).append('\'');
         sb.append(", user=").append(user);
+        sb.append(", isActive=").append(isActive);
+        sb.append(", isDefault=").append(isDefault);
         sb.append('}');
         return sb.toString();
     }

@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class UserService {
 
     @Inject
-    UserFactory userFactory;
+    private UserFactory userFactory;
 
     @Inject
-    UsersLoginsDAO usersLoginsDAO;
+    private UsersLoginsDAO usersLoginsDAO;
 
     public boolean initUserSession (String accessToken) {
         String userId = userFactory.getUserId(accessToken);

@@ -13,7 +13,7 @@ import java.util.List;
 public class UsersLoginsDAOBean implements UsersLoginsDAO {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void save(UsersLogins ul) {

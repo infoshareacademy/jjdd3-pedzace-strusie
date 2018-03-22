@@ -28,7 +28,7 @@ public class AddCategoryServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 
     @Override
     public void init() throws ServletException {
