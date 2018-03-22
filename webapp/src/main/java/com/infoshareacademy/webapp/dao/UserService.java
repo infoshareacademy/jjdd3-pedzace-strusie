@@ -17,8 +17,8 @@ public class UserService {
     private UsersLoginsDAO usersLoginsDAO;
 
     public boolean initUserSession (String accessToken) {
-        String userId = userFactory.getUserId(accessToken);
-        User user = userFactory.createUser(userId, accessToken);
+        String userIdFromAuth = userFactory.getUserIdFromAuth(accessToken);
+        User user = userFactory.createUser(userIdFromAuth);
         UsersLogins userlogin = new UsersLogins(user, LocalDateTime.now());
         usersLoginsDAO.save(userlogin);
         boolean isAdmin = user.isAdmin();
