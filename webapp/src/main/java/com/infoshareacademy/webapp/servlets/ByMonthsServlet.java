@@ -4,6 +4,8 @@ import com.infoshareacademy.webapp.dao_lockal.StatisticsDaoLoc;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -12,14 +14,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/by-months")
 public class ByMonthsServlet extends HttpServlet {
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
+    private Template template;
 
     @EJB
     StatisticsDaoLoc statisticsDaoLoc;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            template = TemplateProvider.createTemplate(getServletContext(), "by-months.ftlh");
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,17 +41,17 @@ public class ByMonthsServlet extends HttpServlet {
         Double sumExpenses = statisticsDaoLoc.findSumExpenses();
         Double sumIncomes = statisticsDaoLoc.findSumIncomes();
 
+        PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
+
         dataModel.put("maps", stringDoubleMap.entrySet());
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
 
-        Template template = TemplateProvider.createTemplate(getServletContext(), "by-months.ftlh");
-
         try {
-            template.process(dataModel, resp.getWriter());
+            template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.warn("Template Exceptions {}",e.getMessage());
         }
     }
 }

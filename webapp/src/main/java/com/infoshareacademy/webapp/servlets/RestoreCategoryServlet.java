@@ -20,8 +20,7 @@ import java.util.Set;
 
 @WebServlet("/restore-category")
 public class RestoreCategoryServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(RestoreCategoryServlet.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
@@ -32,7 +31,7 @@ public class RestoreCategoryServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "restore-category.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Template by-categories is not found {}",e.getMessage());
         }
     }
 

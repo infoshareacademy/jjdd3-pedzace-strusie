@@ -1,11 +1,11 @@
 package model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = {"userId"}))
 public class User {
 
     @Id
@@ -13,21 +13,14 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    @NotNull
-    private String name;
+    @Column(name = "userId")
+    private String userId;
 
-    @Column(name = "login")
-    @NotNull
-    private String login;
+    @Column(name = "isAdmin")
+    private boolean isAdmin;
 
-    @Column(name = "password")
-    @NotNull
-    private String password;
-
-    @Column(name = "role")
-    @NotNull
-    private String role;
+    @OneToMany(mappedBy = "user")
+    private List<UsersLogins> logins;
 
     @OneToMany(mappedBy = "user")
     private Set<Income> income;
@@ -44,18 +37,12 @@ public class User {
     private Set<CategoryPromoted> categoriesPromoted;
 
 
-     public User() {
+    public User() {
     }
 
-    public User(String name, String login, String password, String role, Set<Income> income, Set<Expense> expense, Set<Category> categories, Set<CategoryPromoted> categoriesPromoted) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.role = role;
-        this.income = income;
-        this.expense = expense;
-        this.categories = categories;
-        this.categoriesPromoted = categoriesPromoted;
+    public User(String userId, boolean isAdmin) {
+        this.userId = userId;
+        this.isAdmin = isAdmin;
     }
 
     public Long getId() {
@@ -66,36 +53,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getLogin() {
-        return login;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
-    public String getPassword() {
-        return password;
+    public List<UsersLogins> getLogins() {
+        return logins;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setLogins(List<UsersLogins> logins) {
+        this.logins = logins;
     }
 
     public Set<Income> getIncome() {
@@ -128,21 +107,5 @@ public class User {
 
     public void setCategoriesPromoted(Set<CategoryPromoted> categoriesPromoted) {
         this.categoriesPromoted = categoriesPromoted;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("User{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", login='").append(login).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", role='").append(role).append('\'');
-        sb.append(", income=").append(income);
-        sb.append(", expense=").append(expense);
-        sb.append(", categories=").append(categories);
-        sb.append(", categoriesPromoted=").append(categoriesPromoted);
-        sb.append('}');
-        return sb.toString();
     }
 }

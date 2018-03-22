@@ -1,9 +1,10 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
+import com.infoshareacademy.webapp.dao.CategoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,24 +21,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @WebServlet("/add-category")
 @MultipartConfig
 public class AddCategoryServlet extends HttpServlet {
-
-    private static final Logger logger = LoggerFactory.getLogger(AddCategoryServlet.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
-    CategoryDaoLoc categoryDaoLoc;
+    CategoryDao categoryDao;
 
     @Override
     public void init() throws ServletException {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-category.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Template add-category is not found {}",e.getMessage());
         }
     }
 
@@ -66,8 +64,9 @@ public class AddCategoryServlet extends HttpServlet {
         String newCategory = "";
         newCategory = req.getParameter("name");
         logger.debug("Get new category {}", newCategory);
+        logger.debug("User id {}", req.getSession().getAttribute("userId"));
 
-        categoryDaoLoc.save(newCategory.toLowerCase());
+        categoryDao.save(new Category(newCategory.toLowerCase(),null));
 
         resp.sendRedirect("/categories-list");
     }

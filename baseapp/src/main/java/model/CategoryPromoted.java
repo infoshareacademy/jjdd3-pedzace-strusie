@@ -10,12 +10,12 @@ import java.util.List;
 @Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
     @Id
-    @Column(name = "id", length = 32)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 
-    @Column(name = "id_category_fk", length = 32)
+    @Column(name = "id_category_fk")
     @NotNull
     private Long id_category_fk;
 
