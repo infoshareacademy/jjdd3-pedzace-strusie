@@ -48,7 +48,7 @@ public class StartServlet extends HttpServlet {
 
 
         RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/WEB-INF/home.jsp");
+                .getRequestDispatcher("/WEB-INF/index.html");
         dispatcher.forward(req, resp);
     }
 
