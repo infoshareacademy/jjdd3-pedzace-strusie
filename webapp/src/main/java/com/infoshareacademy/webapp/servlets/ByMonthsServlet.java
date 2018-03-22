@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/by-months")
@@ -24,7 +26,7 @@ public class ByMonthsServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    StatisticsDaoLoc statisticsDaoLoc;
+    private StatisticsDaoLoc statisticsDaoLoc;
 
     @Override
     public void init() throws ServletException {
@@ -47,6 +49,7 @@ public class ByMonthsServlet extends HttpServlet {
         dataModel.put("maps", stringDoubleMap.entrySet());
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
+        dataModel.put("chartData", getChartData());  // odpowiada za rysowanie wykresu;
 
         try {
             template.process(dataModel, printWriter);
@@ -54,4 +57,18 @@ public class ByMonthsServlet extends HttpServlet {
             logger.warn("Template Exceptions {}",e.getMessage());
         }
     }
+
+
+    private Map<String, Double> getChartData() {
+
+        Map data = new HashMap<String, Double>();
+        data.put("dla dzieci", 320.2d);
+        data.put("jedzenie", 12.2d);
+        data.put("paliwo", 350.50d);
+        data.put("mieszkanie", 520d);
+
+        return data;
+    }
+
+
 }

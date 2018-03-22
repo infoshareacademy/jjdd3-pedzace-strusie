@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -47,11 +48,24 @@ public class ByCategoriesServlet extends HttpServlet {
         dataModel.put("maps", stringDoubleMap.entrySet());
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
+        dataModel.put("chartData", getChartData());
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.warn("Template Exceptions {}",e.getMessage());
         }
+    }
+
+    private Map<String, Double> getChartData() {
+
+        Map data = new HashMap<String, Double>();
+        data.put("dla dzieci", 320.2d);
+        data.put("jedzenie", 12.2d);
+        data.put("paliwo", 350.50d);
+        data.put("mieszkanie", 520d);
+        data.put("leki", 135.2d);
+
+        return data;
     }
 }
