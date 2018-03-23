@@ -29,11 +29,13 @@ public class User {
     private Set<Expense> expense;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_category_fk", referencedColumnName = "id"))
     private Set<Category> categories;
 
-    @ManyToMany
-    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoryPromoted_fk", referencedColumnName = "id"))
     private Set<CategoryPromoted> categoriesPromoted;
 
 

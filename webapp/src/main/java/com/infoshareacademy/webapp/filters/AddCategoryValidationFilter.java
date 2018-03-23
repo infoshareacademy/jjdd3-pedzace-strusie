@@ -8,8 +8,10 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +46,12 @@ public class AddCategoryValidationFilter implements Filter {
             category = categoryName;
         }
 
+//        Enumeration<String> s = httpRequest.getSession().getAttributeNames();
+//        while (s.hasMoreElements()) {
+//            String name = s.nextElement();
+//            logger.info("{} = {}", name, httpRequest.getSession().getAttribute(name));
+//        }
+
         if (!isValidationOK) {
             httpRequest.getSession().setAttribute("errors", messages);
             httpRequest.getSession().setAttribute("category", category);
@@ -51,6 +59,7 @@ public class AddCategoryValidationFilter implements Filter {
             return;
         }
 
+        logger.info("Session Admin: {}", httpRequest.getSession().getAttribute("admin"));
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

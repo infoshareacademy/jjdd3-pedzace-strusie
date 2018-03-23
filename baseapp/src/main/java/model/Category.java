@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-@Table(name = "CATEGORIES")
+@Table(name = "CATEGORIES", uniqueConstraints = @UniqueConstraint(columnNames = {"category"}))
 public class Category {
 
     @Id
@@ -18,7 +18,7 @@ public class Category {
     private String category;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-    private List<User> user;
+    private Set<User> user;
 
     @Column(name = "isActive")
     private boolean isActive;
@@ -29,7 +29,7 @@ public class Category {
     public Category() {
     }
 
-    public Category(String category, List<User> user) {
+    public Category(String category, Set<User> user) {
         this.category = category;
         this.user = user;
     }
@@ -50,18 +50,19 @@ public class Category {
         this.category = category;
     }
 
-    public List<User> getUser() {
+    public Set<User> getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(Set<User> user) {
         this.user = user;
     }
 
-    public void addUserToList(User user) {
-        Set<User> newUser = new HashSet<>();
-        newUser.add(user);
-        this.user = new ArrayList<>(newUser);
+    public void addUserToSet(User user) {
+        if (this.user == null) {
+            this.user = new HashSet<>();
+        }
+        this.user.add(user);
     }
 
     public boolean isActive() {

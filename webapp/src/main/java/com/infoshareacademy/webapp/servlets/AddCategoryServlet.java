@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.CategoryDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +33,9 @@ public class AddCategoryServlet extends HttpServlet {
 
     @EJB
     private CategoryDao categoryDao;
+
+    @Inject
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
@@ -66,15 +71,20 @@ public class AddCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Category newCategory = new Category();
+
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         newCategory.setCategory(req.getParameter("name").toLowerCase());
         newCategory.setActive(true);
         newCategory.setDefault(false);
-        newCategory.addUserToList((User) req.getSession().getAttribute("user"));
 
         logger.debug("Get new category {}", newCategory);
         logger.debug("User id {}", req.getSession().getAttribute("user"));
 
         categoryDao.save(newCategory);
+
+        user.getCategories().add(newCategory);
+        userDao.update(user);
 
         resp.sendRedirect("/categories-list");
     }

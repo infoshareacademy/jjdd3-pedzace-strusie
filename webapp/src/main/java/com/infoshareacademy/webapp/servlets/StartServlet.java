@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Enumeration;
 
 
 @WebServlet("/budget/start")
@@ -52,10 +53,10 @@ public class StartServlet extends HttpServlet {
         logger.info("User Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.isAdmin());
         logger.info("User User XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user);
 
+        logger.info("Session Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", req.getSession().getAttribute("admin"));
 
 
-        RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/WEB-INF/index.html");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.html");
         dispatcher.forward(req, resp);
     }
 
