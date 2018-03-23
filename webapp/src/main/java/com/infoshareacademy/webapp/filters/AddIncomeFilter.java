@@ -20,7 +20,6 @@ public class AddIncomeFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(AddIncomeFilter.class);
 
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -74,7 +73,7 @@ public class AddIncomeFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.error(String.valueOf(isPost));
+        logger.info("Is it post: {}",String.valueOf(isPost));
 
         if (parameter == null || parameter.isEmpty()) {
             return !isPost;
@@ -82,6 +81,7 @@ public class AddIncomeFilter implements Filter {
 
         Pattern datePattern = Pattern.compile("\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])*");
         Matcher matcher = datePattern.matcher(parameter);
+        logger.info("Validation of date parameter is {}",matcher.matches());
 
         return matcher.matches();
 
@@ -93,7 +93,7 @@ public class AddIncomeFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.error(String.valueOf(isPost));
+        logger.info("Is it post: {}",String.valueOf(isPost));
 
         if (parameter == null && parameter.isEmpty()) {
             return !isPost;
@@ -101,6 +101,7 @@ public class AddIncomeFilter implements Filter {
 
         Pattern expenseValuePattern = Pattern.compile("([0-9]{1,5}\\.){1}[0-9]{1,2}");
         Matcher matcher = expenseValuePattern.matcher(parameter);
+        logger.info("Validation of expense value is {}",!matcher.matches());
 
         return !matcher.matches();
     }

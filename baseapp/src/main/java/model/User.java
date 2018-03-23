@@ -19,16 +19,16 @@ public class User {
     @Column(name = "isAdmin")
     private boolean isAdmin;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UsersLogins> logins;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Income> income;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expense;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
     private Set<Category> categories;
 

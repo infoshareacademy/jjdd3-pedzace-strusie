@@ -24,7 +24,7 @@ public class ByCategoriesServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    StatisticsDaoLoc statisticsDaoLoc;
+    private StatisticsDaoLoc statisticsDaoLoc;
 
     @Override
     public void init() throws ServletException {

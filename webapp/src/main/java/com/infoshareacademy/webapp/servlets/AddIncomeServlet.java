@@ -6,6 +6,7 @@ import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Income;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 @WebServlet("/add-income")
 public class AddIncomeServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -38,7 +38,7 @@ public class AddIncomeServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "incomes-service.ftlh");
         } catch (IOException e) {
-            logger.error("Template incomes-service is not found {}",e.getMessage());
+            logger.error("Template incomes-service is not found {}", e.getMessage());
         }
     }
 
@@ -68,10 +68,15 @@ public class AddIncomeServlet extends HttpServlet {
         Income income = new Income();
         income.setDate(LocalDate.parse(req.getParameter("date")));
         income.setIncome(Double.parseDouble(req.getParameter("income")));
+        income.setUser((User) req.getSession().getAttribute("user"));
+        logger.debug("Income date is set as: {}", income.getDate());
+        logger.debug("Income value is set as: {}", income.getIncome());
+        logger.debug("Income user is set as: {}", income.getUser());
+        logger.debug("User ID is set as: {}", income.getUser().getId());
 
         incomeDao.save(income);
 
-        resp.sendRedirect("/"); //Należy wstawić odnośnik do servletu odpowiedzialnego za wyświetlenie listy
-        // dochodów   !!!!!
+        resp.sendRedirect("/categories-list");
+
     }
 }

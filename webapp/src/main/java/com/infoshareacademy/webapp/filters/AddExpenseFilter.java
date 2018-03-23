@@ -74,7 +74,7 @@ public class AddExpenseFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.error(String.valueOf(isPost));
+        logger.info(String.valueOf(isPost));
 
         if (parameter == null || parameter.isEmpty()) {
             return !isPost;
@@ -83,7 +83,7 @@ public class AddExpenseFilter implements Filter {
         Pattern datePattern = Pattern.compile("\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])*");
         Matcher matcher = datePattern.matcher(parameter);
 
-        return !matcher.matches();
+        return matcher.matches();
     }
 
     private boolean isValueOfExpenseValid(String expense, HttpServletRequest servletRequest) {
@@ -102,7 +102,6 @@ public class AddExpenseFilter implements Filter {
         Matcher matcher = expenseValuePattern.matcher(parameter);
 
         return !matcher.matches();
-
     }
 
     @Override

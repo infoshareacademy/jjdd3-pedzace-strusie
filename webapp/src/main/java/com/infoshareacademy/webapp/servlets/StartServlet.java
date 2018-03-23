@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.auth0.SessionUtils;
 import com.infoshareacademy.webapp.dao.UserService;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,10 +41,16 @@ public class StartServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        boolean isAdmin = userService.initUserSession(accessToken);
-        req.getSession().setAttribute("admin", isAdmin);
+//        boolean isAdmin = userService.initUserSession(accessToken);
+        User user = userService.initUserSession(accessToken);
+
+        req.getSession().setAttribute("admin", user.isAdmin());
+        req.getSession().setAttribute("user", user);
+
         logger.info("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-        logger.info("User is admin: {}", isAdmin);
+        logger.info("User ID XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.getId());
+        logger.info("User Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.isAdmin());
+        logger.info("User User XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user);
 
 
 

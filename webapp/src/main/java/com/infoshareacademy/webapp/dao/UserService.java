@@ -16,12 +16,11 @@ public class UserService {
     @Inject
     private UsersLoginsDAO usersLoginsDAO;
 
-    public boolean initUserSession (String accessToken) {
+    public User initUserSession (String accessToken) {
         String userIdFromAuth = userFactory.getUserIdFromAuth(accessToken);
         User user = userFactory.createUser(userIdFromAuth);
         UsersLogins userlogin = new UsersLogins(user, LocalDateTime.now());
         usersLoginsDAO.save(userlogin);
-        boolean isAdmin = user.isAdmin();
-        return isAdmin;
+        return user;
     }
 }

@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.filters;
 
 import com.infoshareacademy.webapp.messages.UserOperationsMessages;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 )
 public class AddCategoryValidationFilter implements Filter {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AddCategoryValidationFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddCategoryValidationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

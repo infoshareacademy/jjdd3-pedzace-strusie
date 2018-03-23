@@ -2,7 +2,7 @@ package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "CATEGORIES")
@@ -17,7 +17,7 @@ public class Category {
     @NotNull
     private String category;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
     private List<User> user;
 
     @Column(name = "isActive")
@@ -56,6 +56,12 @@ public class Category {
 
     public void setUser(List<User> user) {
         this.user = user;
+    }
+
+    public void addUserToList(User user) {
+        Set<User> newUser = new HashSet<>();
+        newUser.add(user);
+        this.user = new ArrayList<>(newUser);
     }
 
     public boolean isActive() {

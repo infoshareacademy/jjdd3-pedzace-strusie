@@ -1,9 +1,10 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
+import com.infoshareacademy.webapp.dao.CategoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,19 +14,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @WebServlet("/categories-list")
+//@Transactional
 public class CategoriesListServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
-    CategoryDaoLoc categoryDaoLoc;
+    private CategoryDao categoryDao;
 
     @Override
     public void init() throws ServletException {
@@ -37,7 +41,7 @@ public class CategoriesListServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Set<String> categoryList = categoryDaoLoc.findAll();
+        List<Category> categoryList = categoryDao.findAll();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
