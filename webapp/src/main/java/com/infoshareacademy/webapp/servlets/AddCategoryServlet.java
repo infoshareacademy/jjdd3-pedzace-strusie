@@ -7,6 +7,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Category;
 import model.User;
+import model.UserActiveCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/add-category")
 @MultipartConfig
@@ -42,7 +40,7 @@ public class AddCategoryServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-category.ftlh");
         } catch (IOException e) {
-            logger.error("Template add-category is not found {}",e.getMessage());
+            logger.error("Template add-category is not found {}", e.getMessage());
         }
     }
 
@@ -70,19 +68,26 @@ public class AddCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Category newCategory = new Category();
-
         User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
 
+        UserActiveCategory userActiveCategory = new UserActiveCategory();
+        userActiveCategory.setUser(user);
+
+        Category newCategory = new Category();
         String categoryName = req.getParameter("name").toLowerCase();
 
-        if (categoryDao.findByCategoryName(categoryName).isPresent()){
+        if (categoryDao.findByCategoryName(categoryName).isPresent()) {
             logger.debug("Category {} is already in DB...", categoryDao.findByCategoryName(categoryName).get().getCategory());
             newCategory = categoryDao.findByCategoryName(categoryName).get();
+//            newCategory.getUserActiveCategories().add(userActiveCategory);
         } else {
             newCategory.setCategory(categoryName);
             newCategory.setActive(true);
             newCategory.setDefault(false);
+
+            Set<UserActiveCategory> newUserActiveCategories = new HashSet<>();
+            newUserActiveCategories.add(userActiveCategory);
+
             categoryDao.save(newCategory);
             logger.debug("Adding new category {} to DB...", newCategory);
         }

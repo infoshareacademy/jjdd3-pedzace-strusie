@@ -42,18 +42,17 @@ public class StartServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-//        boolean isAdmin = userService.initUserSession(accessToken);
         User user = userService.initUserSession(accessToken);
 
         req.getSession().setAttribute("admin", user.isAdmin());
         req.getSession().setAttribute("user", user);
 
-        logger.info("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-        logger.info("User ID XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.getId());
-        logger.info("User Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.isAdmin());
-        logger.info("User User XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user);
+        logger.debug("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
+        logger.debug("User ID XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.getId());
+        logger.debug("User Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.isAdmin());
+        logger.debug("User User XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user);
 
-        logger.info("Session Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", req.getSession().getAttribute("admin"));
+        logger.debug("Session Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", req.getSession().getAttribute("admin"));
 
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.html");

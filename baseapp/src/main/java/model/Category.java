@@ -26,6 +26,9 @@ public class Category {
     @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
     private Set<User> user;
 
+//    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+//    private Set<UserActiveCategory> userActiveCategories;
+
     public Category() {
     }
 
@@ -33,6 +36,14 @@ public class Category {
         this.category = category;
         this.user = user;
     }
+
+//    public Set<UserActiveCategory> getUserActiveCategories() {
+//        return userActiveCategories;
+//    }
+//
+//    public void setUserActiveCategories(Set<UserActiveCategory> userActiveCategories) {
+//        this.userActiveCategories = userActiveCategories;
+//    }
 
     public Long getId() {
         return id;
@@ -58,12 +69,12 @@ public class Category {
         this.user = user;
     }
 
-    public void addUserToSet(User user) {
-        if (this.user == null) {
-            this.user = new HashSet<>();
-        }
-        this.user.add(user);
-    }
+//    public void addUserToSet(User user) {
+//        if (this.user == null) {
+//            this.user = new HashSet<>();
+//        }
+//        this.user.add(user);
+//    }
 
     public boolean isActive() {
         return isActive;

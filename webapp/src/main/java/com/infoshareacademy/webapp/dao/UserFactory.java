@@ -42,7 +42,7 @@ public class UserFactory {
     }
 
     public User addAdmin (String userId) {
-        logger.info("Add new Admin");
+        logger.info("Add new Admin to DB...");
         Optional<User> user = userDAOBean.findByUserId(userId);
         if (user.isPresent()) {
             return user.get();
