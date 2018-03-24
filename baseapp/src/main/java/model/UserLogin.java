@@ -50,4 +50,5 @@ public class UserLogin {
     public void setLoginTime(LocalDateTime loginTime) {
         this.loginTime = loginTime;
     }
+
 }

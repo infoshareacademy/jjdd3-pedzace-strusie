@@ -36,22 +36,26 @@ public class CategoriesListServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "categories-list.ftlh");
         } catch (IOException e) {
-            logger.error("Template by-categories is not found {}",e.getMessage());
+            logger.error("Template by-categories is not found {}", e.getMessage());
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        logger.debug("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         List<Category> categoryList = categoryDao.findAll();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
-
+        logger.debug("Category list is {}", categoryList);
         dataModel.put("categories", categoryList);
+
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.warn("Template Exceptions {}",e.getMessage());
+            logger.warn("Template Exceptions {}", e.getMessage());
         }
     }
 }

@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.dao;
 
 
 import model.Category;
+import model.User;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -19,5 +20,5 @@ public interface CategoryDao {
 
     public List<Category> findAll() ;
 
-    public Optional<Category> findByCategoryName(String name);
+    public Optional<Category> findByCategoryName(String name, User user);
 }

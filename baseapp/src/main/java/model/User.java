@@ -7,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = {"userId"}))
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,16 +27,11 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expense;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_category_fk", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Category> categories;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoryPromoted_fk", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<CategoryPromoted> categoriesPromoted;
-
 
     public User() {
     }
@@ -110,4 +104,5 @@ public class User {
     public void setCategoriesPromoted(Set<CategoryPromoted> categoriesPromoted) {
         this.categoriesPromoted = categoriesPromoted;
     }
+
 }

@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.dao;
 
 
 import model.Category;
+import model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,10 +50,10 @@ public class CategoryDaoBean implements CategoryDao {
     }
 
     @Override
-    public Optional<Category> findByCategoryName(String name) {
+    public Optional<Category> findByCategoryName(String name, User user) {
         try {
-            List<Category> names = entityManager.createQuery("SELECT c FROM Category c WHERE c.category = :categoryName")
-                    .setParameter("categoryName", name).getResultList();
+            List<Category> names = entityManager.createQuery("SELECT c FROM Category c WHERE c.category = :categoryName and c.user =:user")
+                    .setParameter("categoryName", name).setParameter("user", user).getResultList();
             if (names.isEmpty()) {
                 return Optional.empty();
             }

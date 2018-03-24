@@ -5,9 +5,8 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-@Table(name = "CATEGORIES", uniqueConstraints = @UniqueConstraint(columnNames = {"category"}))
+@Table(name = "CATEGORIES")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,27 +22,17 @@ public class Category {
     @Column(name = "isDefault")
     private boolean isDefault;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-    private Set<User> user;
-
-//    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-//    private Set<UserActiveCategory> userActiveCategories;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Category() {
     }
 
-    public Category(String category, Set<User> user) {
+    public Category(User user, String category) {
         this.category = category;
         this.user = user;
     }
-
-//    public Set<UserActiveCategory> getUserActiveCategories() {
-//        return userActiveCategories;
-//    }
-//
-//    public void setUserActiveCategories(Set<UserActiveCategory> userActiveCategories) {
-//        this.userActiveCategories = userActiveCategories;
-//    }
 
     public Long getId() {
         return id;
@@ -61,21 +50,6 @@ public class Category {
         this.category = category;
     }
 
-    public Set<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<User> user) {
-        this.user = user;
-    }
-
-//    public void addUserToSet(User user) {
-//        if (this.user == null) {
-//            this.user = new HashSet<>();
-//        }
-//        this.user.add(user);
-//    }
-
     public boolean isActive() {
         return isActive;
     }
@@ -92,14 +66,22 @@ public class Category {
         isDefault = aDefault;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Category{");
         sb.append("id=").append(id);
         sb.append(", category='").append(category).append('\'');
-        sb.append(", user=").append(user);
         sb.append(", isActive=").append(isActive);
         sb.append(", isDefault=").append(isDefault);
+        sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();
     }

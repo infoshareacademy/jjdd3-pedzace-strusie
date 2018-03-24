@@ -3,40 +3,35 @@ package model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 @Table(name = "CATEGORY_PROMOTED")
 public class CategoryPromoted {
+
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "id_category_fk")
-    @NotNull
-    private Long id_category_fk;
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "date")
-    @NotNull
-    private LocalDate date;
+    private LocalDateTime date;
 
-    @Column(name = "time")
-    @NotNull
-    private LocalTime time;
-
-    @ManyToMany(mappedBy = "categoriesPromoted")
-    private List<User> user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public CategoryPromoted() {
     }
 
-    public CategoryPromoted(Long id_category_fk, LocalDate date, LocalTime time, List<User> user) {
-        this.id_category_fk = id_category_fk;
+    public CategoryPromoted(User user, String category, LocalDateTime date) {
+        this.category = category;
         this.date = date;
-        this.time = time;
         this.user = user;
     }
 
@@ -48,35 +43,27 @@ public class CategoryPromoted {
         this.id = id;
     }
 
-    public Long getId_category_fk() {
-        return id_category_fk;
+    public String getCategory() {
+        return category;
     }
 
-    public void setId_category_fk(Long id_category_fk) {
-        this.id_category_fk = id_category_fk;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public List<User> getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -84,9 +71,8 @@ public class CategoryPromoted {
     public String toString() {
         final StringBuffer sb = new StringBuffer("CategoryPromoted{");
         sb.append("id=").append(id);
-        sb.append(", id_category_fk=").append(id_category_fk);
+        sb.append(", category='").append(category).append('\'');
         sb.append(", date=").append(date);
-        sb.append(", time=").append(time);
         sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();

@@ -72,22 +72,24 @@ public class AddCategoryServlet extends HttpServlet {
         Category newCategory = new Category();
         String categoryName = req.getParameter("name").toLowerCase();
 
-        if (categoryDao.findByCategoryName(categoryName).isPresent()) {
-            newCategory = categoryDao.findByCategoryName(categoryName).get();
+        if (categoryDao.findByCategoryName(categoryName, user).isPresent()) {
+            newCategory = categoryDao.findByCategoryName(categoryName, user).get();
             logger.debug("Category {} is already in DB...", newCategory.getCategory());
         } else {
             newCategory.setCategory(categoryName);
             newCategory.setActive(true);
             newCategory.setDefault(false);
+            logger.debug("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR User is: {}", user);
+            newCategory.setUser((User) req.getSession().getAttribute("user"));
 
             categoryDao.save(newCategory);
+            logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             logger.debug("Adding new category {} to DB...", newCategory);
         }
 
-        logger.debug("User id {}", req.getSession().getAttribute("user"));
-
         user.getCategories().add(newCategory);
         userDao.update(user);
+        logger.debug("User is {}", req.getSession().getAttribute("user"));
 
         resp.sendRedirect("/categories-list");
     }
