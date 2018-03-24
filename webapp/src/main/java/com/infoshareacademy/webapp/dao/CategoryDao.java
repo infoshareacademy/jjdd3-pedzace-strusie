@@ -5,6 +5,7 @@ import model.Category;
 
 import javax.ejb.Local;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface CategoryDao {
@@ -17,4 +18,6 @@ public interface CategoryDao {
     public Category findById(Long id) ;
 
     public List<Category> findAll() ;
+
+    public Optional<Category> findByCategoryName(String name);
 }

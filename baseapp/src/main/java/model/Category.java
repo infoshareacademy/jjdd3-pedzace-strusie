@@ -17,14 +17,14 @@ public class Category {
     @NotNull
     private String category;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-    private Set<User> user;
-
     @Column(name = "isActive")
     private boolean isActive;
 
     @Column(name = "isDefault")
     private boolean isDefault;
+
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+    private Set<User> user;
 
     public Category() {
     }
