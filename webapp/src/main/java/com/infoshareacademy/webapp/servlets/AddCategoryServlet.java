@@ -7,7 +7,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Category;
 import model.User;
-import model.UserActiveCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,23 +69,16 @@ public class AddCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
 
-        UserActiveCategory userActiveCategory = new UserActiveCategory();
-        userActiveCategory.setUser(user);
-
         Category newCategory = new Category();
         String categoryName = req.getParameter("name").toLowerCase();
 
         if (categoryDao.findByCategoryName(categoryName).isPresent()) {
-            logger.debug("Category {} is already in DB...", categoryDao.findByCategoryName(categoryName).get().getCategory());
             newCategory = categoryDao.findByCategoryName(categoryName).get();
-//            newCategory.getUserActiveCategories().add(userActiveCategory);
+            logger.debug("Category {} is already in DB...", newCategory.getCategory());
         } else {
             newCategory.setCategory(categoryName);
             newCategory.setActive(true);
             newCategory.setDefault(false);
-
-            Set<UserActiveCategory> newUserActiveCategories = new HashSet<>();
-            newUserActiveCategories.add(userActiveCategory);
 
             categoryDao.save(newCategory);
             logger.debug("Adding new category {} to DB...", newCategory);
