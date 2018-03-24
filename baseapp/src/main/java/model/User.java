@@ -20,7 +20,7 @@ public class User {
     private boolean isAdmin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<UsersLogins> logins;
+    private List<UserLogin> logins;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Income> income;
@@ -71,11 +71,11 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<UsersLogins> getLogins() {
+    public List<UserLogin> getLogins() {
         return logins;
     }
 
-    public void setLogins(List<UsersLogins> logins) {
+    public void setLogins(List<UserLogin> logins) {
         this.logins = logins;
     }
 

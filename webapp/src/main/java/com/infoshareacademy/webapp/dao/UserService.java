@@ -1,7 +1,7 @@
 package com.infoshareacademy.webapp.dao;
 
 import model.User;
-import model.UsersLogins;
+import model.UserLogin;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -14,13 +14,14 @@ public class UserService {
     private UserFactory userFactory;
 
     @Inject
-    private UsersLoginsDAO usersLoginsDAO;
+    private UserLoginDAO userLoginDAO;
 
     public User initUserSession (String accessToken) {
         String userIdFromAuth = userFactory.getUserIdFromAuth(accessToken);
         User user = userFactory.createUser(userIdFromAuth);
-        UsersLogins userlogin = new UsersLogins(user, LocalDateTime.now());
-        usersLoginsDAO.save(userlogin);
+
+        UserLogin userlogin = new UserLogin(user, LocalDateTime.now());
+        userLoginDAO.save(userlogin);
         return user;
     }
 }
