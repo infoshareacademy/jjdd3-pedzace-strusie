@@ -79,11 +79,10 @@ public class AddCategoryServlet extends HttpServlet {
             newCategory.setCategory(categoryName);
             newCategory.setActive(true);
             newCategory.setDefault(false);
-            logger.debug("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR User is: {}", user);
             newCategory.setUser((User) req.getSession().getAttribute("user"));
+            logger.debug("User is: {}", user);
 
             categoryDao.save(newCategory);
-            logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             logger.debug("Adding new category {} to DB...", newCategory);
         }
 

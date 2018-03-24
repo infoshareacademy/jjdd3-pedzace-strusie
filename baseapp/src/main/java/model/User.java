@@ -104,5 +104,4 @@ public class User {
     public void setCategoriesPromoted(Set<CategoryPromoted> categoriesPromoted) {
         this.categoriesPromoted = categoriesPromoted;
     }
-
 }
