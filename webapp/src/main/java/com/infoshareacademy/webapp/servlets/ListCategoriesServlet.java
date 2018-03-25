@@ -24,7 +24,7 @@ import java.util.Set;
 
 @WebServlet("/categories-list")
 //@Transactional
-public class CategoriesListServlet extends HttpServlet {
+public class ListCategoriesServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
@@ -34,7 +34,7 @@ public class CategoriesListServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "categories-list.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-categories.ftlh");
         } catch (IOException e) {
             logger.error("Template by-categories is not found {}", e.getMessage());
         }
@@ -42,15 +42,13 @@ public class CategoriesListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        logger.debug("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         List<Category> categoryList = categoryDao.findAll();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
+
         logger.debug("Category list is {}", categoryList);
         dataModel.put("categories", categoryList);
-
 
         try {
             template.process(dataModel, printWriter);

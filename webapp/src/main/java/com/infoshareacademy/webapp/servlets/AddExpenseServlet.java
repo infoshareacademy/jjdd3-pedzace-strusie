@@ -1,6 +1,5 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao.CategoryDao;
 import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -32,10 +31,6 @@ public class AddExpenseServlet extends HttpServlet {
 
     @EJB
     private ExpenseDao expenseDao;
-
-    @EJB
-    private CategoryDao categoryDao;
-
 
     @Override
     public void init() throws ServletException {
@@ -79,6 +74,7 @@ public class AddExpenseServlet extends HttpServlet {
         logger.debug("Expense value is set as: {}", expense.getExpense());
         logger.debug("Expense user is set as: {}", expense.getUser());
         logger.debug("User ID is set as: {}", expense.getUser().getId());
+
         expenseDao.save(expense);
 
         resp.sendRedirect("/categories-list");

@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"/add-expense"})
+@WebFilter(
+        filterName = "AddExpenseFilter",
+        urlPatterns = {"/add-expense"}
+)
 public class AddExpenseFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(AddExpenseFilter.class);

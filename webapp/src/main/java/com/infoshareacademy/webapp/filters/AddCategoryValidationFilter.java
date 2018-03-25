@@ -46,12 +46,6 @@ public class AddCategoryValidationFilter implements Filter {
             category = categoryName;
         }
 
-//        Enumeration<String> s = httpRequest.getSession().getAttributeNames();
-//        while (s.hasMoreElements()) {
-//            String name = s.nextElement();
-//            logger.info("{} = {}", name, httpRequest.getSession().getAttribute(name));
-//        }
-
         if (!isValidationOK) {
             httpRequest.getSession().setAttribute("errors", messages);
             httpRequest.getSession().setAttribute("category", category);

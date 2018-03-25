@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/add-income")
-public class AddIncomeServlet extends HttpServlet {
+@WebServlet("/get-expensesbycat")
+public class GetExpensesByCatServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
@@ -34,9 +35,9 @@ public class AddIncomeServlet extends HttpServlet {
     public void init() throws ServletException {
 
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "add-income.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "get-expenses-by-categories.ftlh");
         } catch (IOException e) {
-            logger.error("Template incomes-service is not found {}", e.getMessage());
+            logger.error("Template get-expenses-by-categories is not found {}", e.getMessage());
         }
     }
 
@@ -54,26 +55,22 @@ public class AddIncomeServlet extends HttpServlet {
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.error(e.getMessage(), e);
+            logger.error("Template get-expenses-by-categories is not found {}", e.getMessage());
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Income income = new Income();
-        income.setDate(LocalDate.parse(req.getParameter("date")));
-        income.setIncome(Double.parseDouble(req.getParameter("income")));
-        income.setUser((User) req.getSession().getAttribute("user"));
-        logger.debug("Income date is set as: {}", income.getDate());
-        logger.debug("Income value is set as: {}", income.getIncome());
-        logger.debug("Income user is set as: {}", income.getUser());
-        logger.debug("User ID is set as: {}", income.getUser().getId());
+        LocalDate minDatePeriod = LocalDate.parse(req.getParameter("minDatePeriod"));
+        LocalDate maxDatePeriod = LocalDate.parse(req.getParameter("maxDatePeriod"));
 
-        incomeDao.save(income);
+        logger.debug("Min Date Period is set as: {}", minDatePeriod);
+        logger.debug("Max Date Period is set as: {}", maxDatePeriod);
 
-        resp.sendRedirect("/list-categories");
+        req.getSession().setAttribute("minDatePeriod",minDatePeriod);
+        req.getSession().setAttribute("maxDatePeriod",maxDatePeriod);
 
+        resp.sendRedirect("/by-categories");
     }
 }
