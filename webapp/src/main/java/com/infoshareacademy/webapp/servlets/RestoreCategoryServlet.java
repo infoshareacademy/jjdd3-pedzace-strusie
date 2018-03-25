@@ -1,6 +1,6 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
+import com.infoshareacademy.webapp.dao.CategoryDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -24,7 +24,7 @@ public class RestoreCategoryServlet extends HttpServlet {
     private Template template;
 
     @EJB
-    CategoryDaoLoc categoryDaoLoc;
+    CategoryDao categoryDao;
 
     @Override
     public void init() throws ServletException {
@@ -39,7 +39,7 @@ public class RestoreCategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("Get restore category");
 
-        categoryDaoLoc.update();
+//        categoryDao.update();
         resp.sendRedirect("/categories-list");
     }
 }

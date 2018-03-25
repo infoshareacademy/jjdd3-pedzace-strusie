@@ -60,7 +60,7 @@ public class AddUserServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             dataModel.put("user", req.getSession().getAttribute("user"));
-            req.getSession().removeAttribute("error");
+            req.getSession().removeAttribute("errors");
             req.getSession().removeAttribute("user");
         }
 

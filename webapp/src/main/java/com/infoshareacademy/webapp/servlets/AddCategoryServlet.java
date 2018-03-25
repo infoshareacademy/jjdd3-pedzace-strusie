@@ -52,16 +52,16 @@ public class AddCategoryServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             dataModel.put("category", req.getSession().getAttribute("category"));
-            logger.info("Put category into data model");
+            logger.info("Put new category into data model");
 
-            req.getSession().removeAttribute("error");
+            req.getSession().removeAttribute("errors");
             req.getSession().removeAttribute("category");
         }
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.error(e.getMessage());
+            logger.error("Template add-category is not found {}", e.getMessage());
         }
     }
 
