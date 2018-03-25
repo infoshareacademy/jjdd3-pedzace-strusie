@@ -1,6 +1,5 @@
 package com.infoshareacademy.webapp.servlets;
 
-
 import com.infoshareacademy.webapp.dao.IncomeDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -23,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @WebServlet("/add-income")
 public class AddIncomeServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -36,7 +34,7 @@ public class AddIncomeServlet extends HttpServlet {
     public void init() throws ServletException {
 
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "incomes-service.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "add-income.ftlh");
         } catch (IOException e) {
             logger.error("Template incomes-service is not found {}", e.getMessage());
         }

@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @WebServlet("/add-expense")
 @MultipartConfig
 public class AddExpenseServlet extends HttpServlet {
@@ -42,7 +41,7 @@ public class AddExpenseServlet extends HttpServlet {
     public void init() throws ServletException {
 
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "expense-service.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "add-expense.ftlh");
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
