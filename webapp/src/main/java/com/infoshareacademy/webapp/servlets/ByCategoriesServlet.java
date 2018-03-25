@@ -1,15 +1,15 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.ExpenseDao;
-import com.infoshareacademy.webapp.dao.StatisticsDao;
+import com.infoshareacademy.webapp.dao.IncomeDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Expense;
+import model.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,6 +29,9 @@ public class ByCategoriesServlet extends HttpServlet {
 
     @Inject
     private ExpenseDao expenseDao;
+
+    @Inject
+    private IncomeDao incomeDao;
 
     @Override
     public void init() throws ServletException {
@@ -53,31 +55,36 @@ public class ByCategoriesServlet extends HttpServlet {
 
         if (expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).isPresent()) {
             periodExpensesList = (List<Expense>) expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).get();
-            logger.debug("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
-            logger.debug("Period ilist s set as: {}", periodExpensesList);
+            logger.debug("Expenses period list is set as: {}", periodExpensesList);
 
             Map<String, Double> mapByCategories = periodExpensesList.stream()
                     .collect(Collectors.groupingBy(Expense::getCategory,
                             Collectors.summingDouble(Expense::getExpense)));
-            logger.debug("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
             stringDoubleMap = new TreeMap<>(mapByCategories);
         }
 
+        Double sumExpenses = periodExpensesList.stream()
+                .mapToDouble(Expense::getExpense)
+                .sum();
 
-        logger.debug("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+        List<Income> periodIncomesList = new ArrayList<>();
 
+        if (incomeDao.findByIncomeByPeriod(minDatePeriod, maxDatePeriod).isPresent()) {
+            periodIncomesList = (List<Income>) incomeDao.findByIncomeByPeriod(minDatePeriod, maxDatePeriod).get();
+            logger.debug("Incomes period list is set as: {}", periodIncomesList);
+        }
 
-//        Double sumExpenses = statisticsDao.findSumExpenses();
-//        Double sumIncomes = statisticsDao.findSumIncomes();
+        Double sumIncomes = periodIncomesList.stream()
+                .mapToDouble(Income::getIncome)
+                .sum();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
         dataModel.put("maps", stringDoubleMap.entrySet());
-//        dataModel.put("sumExpenses", sumExpenses);
-//        dataModel.put("sumIncomes", sumIncomes);
+        dataModel.put("sumExpenses", sumExpenses);
+        dataModel.put("sumIncomes", sumIncomes);
 
         try {
             template.process(dataModel, printWriter);
