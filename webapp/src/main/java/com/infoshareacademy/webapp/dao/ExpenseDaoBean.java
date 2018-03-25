@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.dao;
 
 import model.Expense;
+import model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,10 +50,10 @@ public class ExpenseDaoBean implements ExpenseDao{
     }
 
     @Override
-    public Optional<Object> findByExpenseByPeriod(LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+    public Optional<Object> findByExpenseByPeriod(User user, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
         try {
-            List<Expense> names = entityManager.createQuery("SELECT e FROM Expense e WHERE e.date BETWEEN :minDatePeriod and :maxDatePeriod")
-                    .setParameter("minDatePeriod", minDatePeriod).setParameter("maxDatePeriod", maxDatePeriod).getResultList();
+            List<Expense> names = entityManager.createQuery("SELECT e FROM Expense e WHERE e.user =:user and e.date BETWEEN :minDatePeriod and :maxDatePeriod")
+                    .setParameter("user", user).setParameter("minDatePeriod", minDatePeriod).setParameter("maxDatePeriod", maxDatePeriod).getResultList();
             if (names.isEmpty()) {
                 return Optional.empty();
             }

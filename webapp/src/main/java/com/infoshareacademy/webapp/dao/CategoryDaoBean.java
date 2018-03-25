@@ -50,10 +50,10 @@ public class CategoryDaoBean implements CategoryDao {
     }
 
     @Override
-    public Optional<Category> findByCategoryName(String name, User user) {
+    public Optional<Category> findByCategoryName(User user, String name) {
         try {
             List<Category> names = entityManager.createQuery("SELECT c FROM Category c WHERE c.category = :categoryName and c.user =:user")
-                    .setParameter("categoryName", name).setParameter("user", user).getResultList();
+                    .setParameter("user", user).setParameter("categoryName", name).getResultList();
             if (names.isEmpty()) {
                 return Optional.empty();
             }

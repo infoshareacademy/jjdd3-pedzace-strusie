@@ -101,7 +101,7 @@ public class AddExpenseFilter implements Filter {
             return !isPost;
         }
 
-        Pattern expenseValuePattern = Pattern.compile("([0-9]{1,5}\\.){1}[0-9]{1,2}");
+        Pattern expenseValuePattern = Pattern.compile("\\d+");
         Matcher matcher = expenseValuePattern.matcher(parameter);
 
         return !matcher.matches();

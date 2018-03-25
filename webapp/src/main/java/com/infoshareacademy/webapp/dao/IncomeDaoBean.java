@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.dao;
 
 import model.Income;
+import model.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,10 +50,10 @@ public class IncomeDaoBean implements IncomeDao {
     }
 
     @Override
-    public Optional<Object> findByIncomeByPeriod(LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+    public Optional<Object> findByIncomeByPeriod(User user, LocalDate minDatePeriod, LocalDate maxDatePeriod) {
         try {
-            List<Income> names = entityManager.createQuery("SELECT i FROM Income i WHERE i.date BETWEEN :minDatePeriod and :maxDatePeriod")
-                    .setParameter("minDatePeriod", minDatePeriod).setParameter("maxDatePeriod", maxDatePeriod).getResultList();
+            List<Income> names = entityManager.createQuery("SELECT i FROM Income i WHERE i.user =:user and i.date BETWEEN :minDatePeriod and :maxDatePeriod")
+                    .setParameter("user", user).setParameter("minDatePeriod", minDatePeriod).setParameter("maxDatePeriod", maxDatePeriod).getResultList();
             if (names.isEmpty()) {
                 return Optional.empty();
             }

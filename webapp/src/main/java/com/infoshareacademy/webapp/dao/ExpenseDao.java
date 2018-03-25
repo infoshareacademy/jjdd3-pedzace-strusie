@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.dao;
 
 
 import model.Expense;
+import model.User;
 
 import javax.ejb.Local;
 import java.time.LocalDate;
@@ -20,6 +21,6 @@ public interface ExpenseDao {
 
     public List<Expense> findAll() ;
 
-    public Optional<Object> findByExpenseByPeriod(LocalDate minDatePeriod, LocalDate maxDatePeriod);
+    public Optional<Object> findByExpenseByPeriod(User user, LocalDate minDatePeriod, LocalDate maxDatePeriod);
 
     }

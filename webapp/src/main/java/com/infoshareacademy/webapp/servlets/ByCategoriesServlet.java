@@ -2,14 +2,17 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.dao.IncomeDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Expense;
 import model.Income;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +36,9 @@ public class ByCategoriesServlet extends HttpServlet {
     @Inject
     private IncomeDao incomeDao;
 
+    @EJB
+    private UserDao userDao;
+
     @Override
     public void init() throws ServletException {
         try {
@@ -44,6 +50,8 @@ public class ByCategoriesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         LocalDate minDatePeriod = (LocalDate) req.getSession().getAttribute("minDatePeriod");
         LocalDate maxDatePeriod = (LocalDate) req.getSession().getAttribute("maxDatePeriod");
 
@@ -53,8 +61,8 @@ public class ByCategoriesServlet extends HttpServlet {
         List<Expense> periodExpensesList = new ArrayList<>();
         Map<String, Double> stringDoubleMap = new TreeMap<>();
 
-        if (expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).isPresent()) {
-            periodExpensesList = (List<Expense>) expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).get();
+        if (expenseDao.findByExpenseByPeriod(user, minDatePeriod, maxDatePeriod).isPresent()) {
+            periodExpensesList = (List<Expense>) expenseDao.findByExpenseByPeriod(user, minDatePeriod, maxDatePeriod).get();
             logger.debug("Expenses period list is set as: {}", periodExpensesList);
 
             Map<String, Double> mapByCategories = periodExpensesList.stream()
@@ -70,8 +78,8 @@ public class ByCategoriesServlet extends HttpServlet {
 
         List<Income> periodIncomesList = new ArrayList<>();
 
-        if (incomeDao.findByIncomeByPeriod(minDatePeriod, maxDatePeriod).isPresent()) {
-            periodIncomesList = (List<Income>) incomeDao.findByIncomeByPeriod(minDatePeriod, maxDatePeriod).get();
+        if (incomeDao.findByIncomeByPeriod(user, minDatePeriod, maxDatePeriod).isPresent()) {
+            periodIncomesList = (List<Income>) incomeDao.findByIncomeByPeriod(user, minDatePeriod, maxDatePeriod).get();
             logger.debug("Incomes period list is set as: {}", periodIncomesList);
         }
 

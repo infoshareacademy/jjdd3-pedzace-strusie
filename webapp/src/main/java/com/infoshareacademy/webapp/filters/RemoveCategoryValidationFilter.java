@@ -53,7 +53,7 @@ public class RemoveCategoryValidationFilter implements Filter {
                 messages.add(UserOperationsMessages.NAME_NOT_FOUND);
                 isValidationOK = false;
             } else if (categoryParameter != null && !categoryParameter.isEmpty()) {
-                if (!categoryDao.findByCategoryName(categoryParameter, user).isPresent()) {
+                if (!categoryDao.findByCategoryName(user, categoryParameter).isPresent()) {
                     messages.add(UserOperationsMessages.NAME_NOT_FOUND);
                     isValidationOK = false;
                 } else {

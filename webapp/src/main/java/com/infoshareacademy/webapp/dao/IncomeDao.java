@@ -1,6 +1,7 @@
 package com.infoshareacademy.webapp.dao;
 
 import model.Income;
+import model.User;
 
 import javax.ejb.Local;
 import java.time.LocalDate;
@@ -19,6 +20,6 @@ public interface IncomeDao {
 
     public List<Income> findAll() ;
 
-    public Optional<Object> findByIncomeByPeriod(LocalDate minDatePeriod, LocalDate maxDatePeriod);
+    public Optional<Object> findByIncomeByPeriod(User user, LocalDate minDatePeriod, LocalDate maxDatePeriod);
 
 }

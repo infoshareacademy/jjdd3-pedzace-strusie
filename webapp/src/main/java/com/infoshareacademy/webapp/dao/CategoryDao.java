@@ -12,13 +12,13 @@ import java.util.Optional;
 public interface CategoryDao {
     public Long save(Category c);
 
-    public Category update(Category c) ;
+    public Category update(Category c);
 
-    public void delete(Long id) ;
+    public void delete(Long id);
 
-    public Category findById(Long id) ;
+    public Category findById(Long id);
 
-    public List<Category> findAll() ;
+    public List<Category> findAll();
 
-    public Optional<Category> findByCategoryName(String name, User user);
+    public Optional<Category> findByCategoryName(User user, String name);
 }

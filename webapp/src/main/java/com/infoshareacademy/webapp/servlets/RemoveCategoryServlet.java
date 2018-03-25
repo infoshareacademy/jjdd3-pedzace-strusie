@@ -73,11 +73,11 @@ public class RemoveCategoryServlet extends HttpServlet {
 
         Category removeCategory = new Category();
         String categoryName = req.getParameter("name").toLowerCase();
-        logger.debug("Remove category is {}",removeCategory);
-        logger.debug("Category name is{}",categoryName);
+        logger.debug("Remove category is {}", removeCategory);
+        logger.debug("Category name is{}", categoryName);
 
-        if (categoryDao.findByCategoryName(categoryName, user).isPresent()) {
-            removeCategory = categoryDao.findByCategoryName(categoryName, user).get();
+        if (categoryDao.findByCategoryName(user, categoryName).isPresent()) {
+            removeCategory = categoryDao.findByCategoryName(user, categoryName).get();
             logger.debug("Category to remove {} is already in DB...", removeCategory.getCategory());
 
             removeCategory.setActive(false);

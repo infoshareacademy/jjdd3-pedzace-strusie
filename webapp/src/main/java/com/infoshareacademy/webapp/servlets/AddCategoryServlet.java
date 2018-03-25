@@ -31,7 +31,7 @@ public class AddCategoryServlet extends HttpServlet {
     @EJB
     private CategoryDao categoryDao;
 
-    @Inject
+    @EJB
     private UserDao userDao;
 
     @Override
@@ -72,8 +72,8 @@ public class AddCategoryServlet extends HttpServlet {
         Category newCategory = new Category();
         String categoryName = req.getParameter("name").toLowerCase();
 
-        if (categoryDao.findByCategoryName(categoryName, user).isPresent()) {
-            newCategory = categoryDao.findByCategoryName(categoryName, user).get();
+        if (categoryDao.findByCategoryName(user, categoryName).isPresent()) {
+            newCategory = categoryDao.findByCategoryName(user, categoryName).get();
             logger.debug("Category {} is already in DB...", newCategory.getCategory());
         } else {
             newCategory.setCategory(categoryName);
