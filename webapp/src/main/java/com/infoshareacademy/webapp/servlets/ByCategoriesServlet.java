@@ -1,9 +1,11 @@
 package com.infoshareacademy.webapp.servlets;
 
+import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.dao.StatisticsDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Expense;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,8 +20,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet("/by-categories")
 public class ByCategoriesServlet extends HttpServlet {
@@ -27,41 +29,60 @@ public class ByCategoriesServlet extends HttpServlet {
     private Template template;
 
     @Inject
-    private StatisticsDao statisticsDao;
+    private ExpenseDao expenseDao;
 
     @Override
     public void init() throws ServletException {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "list-by-categories.ftlh");
         } catch (IOException e) {
-            logger.error("Template by-categories is not found {}",e.getMessage());
+            logger.error("Template by-categories is not found {}", e.getMessage());
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate minDatePeriod = (LocalDate) req.getSession().getAttribute("minDatePeriod");
         LocalDate maxDatePeriod = (LocalDate) req.getSession().getAttribute("maxDatePeriod");
 
         logger.debug("Min Date Period is set as: {}", minDatePeriod);
         logger.debug("Max Date Period is set as: {}", maxDatePeriod);
 
-        Map<String, Double> stringDoubleMap = statisticsDao.findExpensesByCategory();
-        Double sumExpenses = statisticsDao.findSumExpenses();
-        Double sumIncomes = statisticsDao.findSumIncomes();
+        List<Expense> periodExpensesList = new ArrayList<>();
+        Map<String, Double> stringDoubleMap = new TreeMap<>();
+
+        if (expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).isPresent()) {
+            periodExpensesList = (List<Expense>) expenseDao.findByExpenseByPeriod(minDatePeriod, maxDatePeriod).get();
+            logger.debug("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            logger.debug("Period ilist s set as: {}", periodExpensesList);
+
+            Map<String, Double> mapByCategories = periodExpensesList.stream()
+                    .collect(Collectors.groupingBy(Expense::getCategory,
+                            Collectors.summingDouble(Expense::getExpense)));
+            logger.debug("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+            stringDoubleMap = new TreeMap<>(mapByCategories);
+        }
+
+
+        logger.debug("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+
+
+//        Double sumExpenses = statisticsDao.findSumExpenses();
+//        Double sumIncomes = statisticsDao.findSumIncomes();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
         dataModel.put("maps", stringDoubleMap.entrySet());
-        dataModel.put("sumExpenses", sumExpenses);
-        dataModel.put("sumIncomes", sumIncomes);
+//        dataModel.put("sumExpenses", sumExpenses);
+//        dataModel.put("sumIncomes", sumIncomes);
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.warn("Template Exceptions {}",e.getMessage());
+            logger.warn("Template Exceptions {}", e.getMessage());
         }
     }
 }

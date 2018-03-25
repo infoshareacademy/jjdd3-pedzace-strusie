@@ -20,8 +20,6 @@ public class StatisticsDaoBean implements StatisticsDao {
 
     @Override
     public Double findSumExpenses() {
-        new Settings().updateDefaults(new String[]{""});
-        new Settings().updateExpenseListFromFile();
         List<Expense> expenses = UserRepository.getExpensesUserRepository();
 
         LocalDate minDatePeriod = LocalDate.of(2017, 6, 1);
@@ -34,8 +32,6 @@ public class StatisticsDaoBean implements StatisticsDao {
 
     @Override
     public Double findSumIncomes() {
-        new Settings().updateDefaults(new String[]{""});
-        new Settings().updateIncomeListFromFile();
         List<Income> incomes = UserRepository.getIncomesUserRepository();
 
         LocalDate minDatePeriod = LocalDate.of(2017, 6, 1);
@@ -49,8 +45,6 @@ public class StatisticsDaoBean implements StatisticsDao {
 
     @Override
     public Map<String, Double> findExpensesByCategory() {
-        new Settings().updateDefaults(new String[]{""});
-        new Settings().updateExpenseListFromFile();
 
         List<Expense> expenses = UserRepository.getExpensesUserRepository();
         LocalDate minDatePeriod = LocalDate.of(2017, 6, 1);
@@ -67,8 +61,6 @@ public class StatisticsDaoBean implements StatisticsDao {
 
     @Override
     public Map<String, Double> findExpensesByMonths() {
-        new Settings().updateDefaults(new String[]{""});
-        new Settings().updateExpenseListFromFile();
 
         List<Expense> expenses = UserRepository.getExpensesUserRepository();
         LocalDate minDatePeriod = LocalDate.of(2017, 6, 1);
@@ -85,7 +77,6 @@ public class StatisticsDaoBean implements StatisticsDao {
 
     @Override
     public void save(String newCategory) {
-        new Settings().updateDefaults(new String[]{""});
         Set<String> categorySet = UserRepository.getCategoriesUserRepository();
         categorySet.add(newCategory);
         new CsvWriter().writeToCategoriesCsvFile(categorySet, UserRepository.getUserCategoriesFilePath());

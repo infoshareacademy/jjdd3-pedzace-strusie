@@ -4,9 +4,12 @@ import model.Expense;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class ExpenseDaoBean implements ExpenseDao{
@@ -43,5 +46,19 @@ public class ExpenseDaoBean implements ExpenseDao{
         final Query query = entityManager.createQuery("SELECT s FROM Expense s");
 
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Object> findByExpenseByPeriod(LocalDate minDatePeriod, LocalDate maxDatePeriod) {
+        try {
+            List<Expense> names = entityManager.createQuery("SELECT e FROM Expense e WHERE e.date BETWEEN :minDatePeriod and :maxDatePeriod")
+                    .setParameter("minDatePeriod", minDatePeriod).setParameter("maxDatePeriod", maxDatePeriod).getResultList();
+            if (names.isEmpty()) {
+                return Optional.empty();
+            }
+            return Optional.of(names);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 }
