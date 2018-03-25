@@ -20,5 +20,7 @@ public interface CategoryDao {
 
     public List<Category> findAll();
 
+    public Optional<Object> findAllByUser(User user);
+
     public Optional<Category> findByCategoryName(User user, String name);
 }

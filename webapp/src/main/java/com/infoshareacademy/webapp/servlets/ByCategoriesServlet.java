@@ -30,10 +30,10 @@ public class ByCategoriesServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
-    @Inject
+    @EJB
     private ExpenseDao expenseDao;
 
-    @Inject
+    @EJB
     private IncomeDao incomeDao;
 
     @EJB

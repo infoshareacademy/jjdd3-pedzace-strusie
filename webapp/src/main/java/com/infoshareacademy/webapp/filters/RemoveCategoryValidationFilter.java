@@ -46,10 +46,10 @@ public class RemoveCategoryValidationFilter implements Filter {
             List<String> messages = new ArrayList<>();
 
             Category removeCategory = new Category();
-            String categoryParameter = httpRequest.getParameter("name").toLowerCase();
+            String categoryParameter = httpRequest.getParameter("category").toLowerCase();
             User user = userDao.findById(((User) httpRequest.getSession().getAttribute("user")).getId());
 
-            if (!isCategoryParameterValid("name", httpRequest)) {
+            if (!isCategoryParameterValid("category", httpRequest)) {
                 messages.add(UserOperationsMessages.NAME_NOT_FOUND);
                 isValidationOK = false;
             } else if (categoryParameter != null && !categoryParameter.isEmpty()) {
@@ -72,9 +72,9 @@ public class RemoveCategoryValidationFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    private boolean isCategoryParameterValid(String name, HttpServletRequest servletRequest) {
+    private boolean isCategoryParameterValid(String category, HttpServletRequest servletRequest) {
 
-        String parameter = servletRequest.getParameter(name);
+        String parameter = servletRequest.getParameter(category);
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 

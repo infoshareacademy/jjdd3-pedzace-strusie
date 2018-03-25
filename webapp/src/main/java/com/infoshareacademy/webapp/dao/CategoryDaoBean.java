@@ -49,6 +49,21 @@ public class CategoryDaoBean implements CategoryDao {
         return query.getResultList();
     }
 
+
+    @Override
+    public Optional<Object> findAllByUser(User user) {
+        try {
+            List<Category> names = entityManager.createQuery("SELECT c FROM Category c WHERE c.user =:user")
+                    .setParameter("user", user).getResultList();
+            if (names.isEmpty()) {
+                return Optional.empty();
+            }
+            return Optional.of(names);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
     @Override
     public Optional<Category> findByCategoryName(User user, String name) {
         try {

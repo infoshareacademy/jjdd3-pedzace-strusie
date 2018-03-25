@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class RemoveCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
@@ -58,6 +61,15 @@ public class RemoveCategoryServlet extends HttpServlet {
 
             req.getSession().removeAttribute("errors");
             req.getSession().removeAttribute("removeCategory");
+        } else {
+            List<Category> categoryList = new ArrayList<>();
+            if (categoryDao.findAllByUser(user).isPresent()) {
+                categoryList = (List<Category>) categoryDao.findAllByUser(user).get();
+                logger.debug("Category list is set as: {}", categoryList);
+            }
+
+            logger.debug("Category list is {}", categoryList);
+            dataModel.put("categories", categoryList);
         }
 
         try {
@@ -72,7 +84,7 @@ public class RemoveCategoryServlet extends HttpServlet {
         User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
 
         Category removeCategory = new Category();
-        String categoryName = req.getParameter("name").toLowerCase();
+        String categoryName = req.getParameter("category").toLowerCase();
         logger.debug("Remove category is {}", removeCategory);
         logger.debug("Category name is{}", categoryName);
 
