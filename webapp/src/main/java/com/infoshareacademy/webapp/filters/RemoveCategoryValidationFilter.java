@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebFilter(filterName = "RemoveCategoryValidationFilter", urlPatterns = {"/remove-category"})
+@WebFilter(filterName = "RemoveCategoryValidationFilter", urlPatterns = {"/budget/remove-category"})
 public class RemoveCategoryValidationFilter implements Filter {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 

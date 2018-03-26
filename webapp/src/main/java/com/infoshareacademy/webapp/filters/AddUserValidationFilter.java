@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 @WebFilter(
         filterName = "AddUserValidationFilter",
-        urlPatterns = {"/add-user"}
+        urlPatterns = {"/budget/add-user"}
 )
 public class AddUserValidationFilter implements Filter {
 

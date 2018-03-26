@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 @WebFilter(
         filterName = "AddIncomeFilter",
-        urlPatterns = {"/add-income"}
+        urlPatterns = {"/budget/add-income"}
 )
 public class AddIncomeFilter implements Filter {
 
