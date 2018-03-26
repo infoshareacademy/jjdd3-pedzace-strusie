@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet("/list-categories")
+@WebServlet("/budget/list-categories")
 //@Transactional
 public class ListCategoriesServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());

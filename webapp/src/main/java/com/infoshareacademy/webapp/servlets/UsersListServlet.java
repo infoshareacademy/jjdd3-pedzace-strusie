@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/users-list")
+@WebServlet("/budget/users-list")
 public class UsersListServlet extends HttpServlet {
 
     @EJB

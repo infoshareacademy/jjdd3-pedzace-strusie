@@ -47,18 +47,9 @@ public class StartServlet extends HttpServlet {
         req.getSession().setAttribute("admin", user.isAdmin());
         req.getSession().setAttribute("user", user);
 
-        logger.debug("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-        logger.debug("User ID XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.getId());
-        logger.debug("User Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user.isAdmin());
-        logger.debug("User User XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", user);
-
-        logger.debug("Session Admin XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: {}", req.getSession().getAttribute("admin"));
-
-
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.html");
         dispatcher.forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

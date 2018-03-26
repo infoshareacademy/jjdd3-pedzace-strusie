@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/add-expense")
+@WebServlet("/budget/add-expense")
 @MultipartConfig
 public class AddExpenseServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -99,7 +99,7 @@ public class AddExpenseServlet extends HttpServlet {
 
         expenseDao.save(expense);
 
-        resp.sendRedirect("/list-categories");
+        resp.sendRedirect("/budget/start");
 
     }
 }

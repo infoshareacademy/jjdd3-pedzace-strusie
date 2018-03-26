@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-@WebServlet("/add-category")
+@WebServlet("/budget/add-category")
 @MultipartConfig
 public class AddCategoryServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -90,6 +90,6 @@ public class AddCategoryServlet extends HttpServlet {
         userDao.update(user);
         logger.debug("User is {}", req.getSession().getAttribute("user"));
 
-        resp.sendRedirect("/list-categories");
+        resp.sendRedirect("/budget/start");
     }
 }

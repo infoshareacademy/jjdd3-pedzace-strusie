@@ -24,7 +24,7 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.logging.Level;
 
-@WebServlet("/add-user")
+@WebServlet("/budget/add-user")
 @MultipartConfig
 public class AddUserServlet extends HttpServlet {
 
@@ -78,6 +78,6 @@ public class AddUserServlet extends HttpServlet {
 
         usersRepositoryDao.addUser(user);
 
-        resp.sendRedirect("/users-list");
+        resp.sendRedirect("/budget/start");
     }
 }

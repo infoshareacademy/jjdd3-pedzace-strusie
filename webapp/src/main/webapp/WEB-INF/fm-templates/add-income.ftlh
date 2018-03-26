@@ -31,7 +31,7 @@
     </#if>
 
     <div class="col-md-8">
-        <form name="incomesForm" method="post" action="/${action!"add-income"}">
+        <form name="incomesForm" method="post" action="/${action!"budget/add-income"}">
             <div class="form-group">
                 <label> Date of income</label>
                 <input type="date" class="form-control" name="date" value="${(income.date)!}">

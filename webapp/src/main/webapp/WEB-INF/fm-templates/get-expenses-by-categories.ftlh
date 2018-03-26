@@ -30,7 +30,7 @@
     </#if>
 
     <div class="col-md-8">
-        <form name="periodExpensesForm" method="post" action="/${action!"get-expensesbycat"}">
+        <form name="periodExpensesForm" method="post" action="/${action!"budget/get-expensesbycat"}">
             <div class="form-group">
                 <label> Start date</label>
                 <input type="date" class="form-control" name="minDatePeriod" value="${(minDatePeriod)!}">

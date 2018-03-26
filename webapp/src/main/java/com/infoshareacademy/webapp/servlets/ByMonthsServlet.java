@@ -26,7 +26,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet("/by-months")
+@WebServlet("/budget/by-months")
 public class ByMonthsServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;

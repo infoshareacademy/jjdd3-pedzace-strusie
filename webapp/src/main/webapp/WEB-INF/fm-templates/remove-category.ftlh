@@ -49,7 +49,7 @@
         </#list>
     </#if>
     <div class="col-md-8">
-        <form name="removeCategoryForm" method="post" action="/${action!"remove-category"}">
+        <form name="removeCategoryForm" method="post" action="/${action!"budget/remove-category"}">
 
             <div class="form-group">
                 <label>Remove category</label>

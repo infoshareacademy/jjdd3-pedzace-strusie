@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/get-expensesbycat")
+@WebServlet("/budget/get-expensesbycat")
 public class GetExpensesByCatServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
@@ -71,6 +71,6 @@ public class GetExpensesByCatServlet extends HttpServlet {
         req.getSession().setAttribute("minDatePeriod",minDatePeriod);
         req.getSession().setAttribute("maxDatePeriod",maxDatePeriod);
 
-        resp.sendRedirect("/by-categories");
+        resp.sendRedirect("/budget/by-categories");
     }
 }

@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet("/by-categories")
+@WebServlet("/budget/by-categories")
 public class ByCategoriesServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
@@ -101,15 +101,4 @@ public class ByCategoriesServlet extends HttpServlet {
         }
     }
 
-    private Map<String, Double> getChartData() {
-
-        Map data = new HashMap<String, Double>();
-        data.put("dla dzieci", 320.2d);
-        data.put("jedzenie", 12.2d);
-        data.put("paliwo", 350.50d);
-        data.put("mieszkanie", 520d);
-        data.put("leki", 135.2d);
-
-        return data;
-    }
 }

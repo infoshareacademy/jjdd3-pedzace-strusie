@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/map-list")
+@WebServlet("/budget/map-list")
 public class MapListServlet extends HttpServlet {
 
     @EJB

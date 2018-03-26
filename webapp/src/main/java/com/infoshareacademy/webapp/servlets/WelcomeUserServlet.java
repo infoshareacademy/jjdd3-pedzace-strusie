@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/welcome-user")
+@WebServlet("/budget/welcome-user")
 public class WelcomeUserServlet extends HttpServlet {
 
     Logger logger = LoggerFactory.getLogger(WelcomeUserServlet.class);

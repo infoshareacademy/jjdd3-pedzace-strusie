@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet("/restore-category")
+@WebServlet("/budget/restore-category")
 public class RestoreCategoryServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
@@ -47,7 +47,7 @@ public class RestoreCategoryServlet extends HttpServlet {
         logger.debug("Get restore category");
 
         categoryDao.restoreByUser(user);
-        resp.sendRedirect("/list-categories");
+        resp.sendRedirect("/budget/start");
     }
 }
 

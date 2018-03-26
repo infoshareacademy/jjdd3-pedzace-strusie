@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/add-income")
+@WebServlet("/budget/add-income")
 public class AddIncomeServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
@@ -76,7 +76,7 @@ public class AddIncomeServlet extends HttpServlet {
 
         incomeDao.save(income);
 
-        resp.sendRedirect("/list-categories");
+        resp.sendRedirect("/budget/start");
 
     }
 }

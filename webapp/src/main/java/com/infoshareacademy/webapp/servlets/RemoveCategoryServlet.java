@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/remove-category")
+@WebServlet("/budget/remove-category")
 @MultipartConfig
 public class RemoveCategoryServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
@@ -96,6 +96,6 @@ public class RemoveCategoryServlet extends HttpServlet {
             categoryDao.update(removeCategory);
             logger.debug("Adding new category {} to DB...", removeCategory);
         }
-        resp.sendRedirect("/list-categories");
+        resp.sendRedirect("/budget/start");
     }
 }
