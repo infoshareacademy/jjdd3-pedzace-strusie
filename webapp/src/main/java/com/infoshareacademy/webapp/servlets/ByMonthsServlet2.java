@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.dao.IncomeDao;
+import com.infoshareacademy.webapp.dao.StatisticsDao;
 import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -25,15 +26,15 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet("/by-categories")
-public class ByCategoriesServlet extends HttpServlet {
+@WebServlet("/by-months")
+public class ByMonthsServlet2 extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
-    @EJB
+    @Inject
     private ExpenseDao expenseDao;
 
-    @EJB
+    @Inject
     private IncomeDao incomeDao;
 
     @EJB
@@ -42,9 +43,9 @@ public class ByCategoriesServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "list-by-categories.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-by-months.ftlh");
         } catch (IOException e) {
-            logger.error("Template by-categories is not found {}", e.getMessage());
+            logger.error("Template by-months is not found {}", e.getMessage());
         }
     }
 
@@ -66,7 +67,7 @@ public class ByCategoriesServlet extends HttpServlet {
             logger.debug("Expenses period list is set as: {}", periodExpensesList);
 
             Map<String, Double> mapByCategories = periodExpensesList.stream()
-                    .collect(Collectors.groupingBy(Expense::getCategory,
+                    .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
                             Collectors.summingDouble(Expense::getExpense)));
 
             stringDoubleMap = new TreeMap<>(mapByCategories);

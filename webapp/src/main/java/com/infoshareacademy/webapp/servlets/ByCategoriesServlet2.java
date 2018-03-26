@@ -2,7 +2,6 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.ExpenseDao;
 import com.infoshareacademy.webapp.dao.IncomeDao;
-import com.infoshareacademy.webapp.dao.StatisticsDao;
 import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -14,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,15 +24,15 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet("/by-months")
-public class ByMonthsServlet extends HttpServlet {
+@WebServlet("/by-categories")
+public class ByCategoriesServlet2 extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
-    @Inject
+    @EJB
     private ExpenseDao expenseDao;
 
-    @Inject
+    @EJB
     private IncomeDao incomeDao;
 
     @EJB
@@ -43,9 +41,9 @@ public class ByMonthsServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "list-by-months.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-by-categories.ftlh");
         } catch (IOException e) {
-            logger.error("Template by-months is not found {}", e.getMessage());
+            logger.error("Template by-categories is not found {}", e.getMessage());
         }
     }
 
@@ -67,7 +65,7 @@ public class ByMonthsServlet extends HttpServlet {
             logger.debug("Expenses period list is set as: {}", periodExpensesList);
 
             Map<String, Double> mapByCategories = periodExpensesList.stream()
-                    .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
+                    .collect(Collectors.groupingBy(Expense::getCategory,
                             Collectors.summingDouble(Expense::getExpense)));
 
             stringDoubleMap = new TreeMap<>(mapByCategories);
