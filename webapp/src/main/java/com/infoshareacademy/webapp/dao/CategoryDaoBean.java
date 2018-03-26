@@ -29,6 +29,15 @@ public class CategoryDaoBean implements CategoryDao {
         return entityManager.merge(c);
     }
 
+
+    @Override
+    public void restoreByUser(User user) {
+        List<Category> names = entityManager.createQuery("UPDATE Category c SET c.isActive = 'false' WHERE c.user =:user")
+                .setParameter("user", user).getResultList();
+        entityManager.createQuery("UPDATE Category c SET c.isActive = 'true' WHERE c.user =:user and c.isDefault = 'true'")
+                .setParameter("user", user).getResultList();
+    }
+
     @Override
     public void delete(Long id) {
         final Category c = entityManager.find(Category.class, id);

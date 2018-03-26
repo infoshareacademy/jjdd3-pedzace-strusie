@@ -1,9 +1,11 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.CategoryDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +28,9 @@ public class RestoreCategoryServlet extends HttpServlet {
     @EJB
     CategoryDao categoryDao;
 
+    @EJB
+    private UserDao userDao;
+
     @Override
     public void init() throws ServletException {
         try {
@@ -37,9 +42,11 @@ public class RestoreCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         logger.debug("Get restore category");
 
-//        categoryDao.update();
+        categoryDao.restoreByUser(user);
         resp.sendRedirect("/categories-list");
     }
 }

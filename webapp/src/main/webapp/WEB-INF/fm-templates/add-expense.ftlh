@@ -38,22 +38,14 @@
             </div>
             <div class="form-group">
                 <label>Category</label>
-
                 <select class="form-control" name="category">
-
-                    <option>Plese select your expense</option>
-                    <option>accomodation</option>
-                    <option>broadband</option>
-                    <option>children</option>
-                    <option>clothes</option>
-                    <option>entertainment</option>
-                    <option>food</option>
-                    <option>health</option>
-                    <option>hygiene</option>
-                    <option>loans</option>
-                    <option>others</option>
-                    <option>savings</option>
-                    <option>transportaion</option>
+                    <#list categories>
+                        <#items as category>
+                            <option>${category.category}</option>
+                        </#items>
+                    <#else>
+                        <p>No categories found</p>
+                    </#list>
                 </select>
                 <small class="form-text text-muted">Please choose category of your expense.
                 </small>

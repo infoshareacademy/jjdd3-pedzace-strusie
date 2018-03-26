@@ -49,6 +49,7 @@ public class AddIncomeServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             req.getSession().removeAttribute("errors");
+            req.getSession().removeAttribute("income");
         }
 
         try {

@@ -14,6 +14,8 @@ public interface CategoryDao {
 
     public Category update(Category c);
 
+    public void restoreByUser(User user);
+
     public void delete(Long id);
 
     public Category findById(Long id);

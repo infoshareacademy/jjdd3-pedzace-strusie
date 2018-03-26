@@ -1,9 +1,12 @@
 package com.infoshareacademy.webapp.servlets;
 
+import com.infoshareacademy.webapp.dao.CategoryDao;
 import com.infoshareacademy.webapp.dao.ExpenseDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Category;
 import model.Expense;
 import model.User;
 import org.slf4j.Logger;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +34,13 @@ public class AddExpenseServlet extends HttpServlet {
     private Template template;
 
     @EJB
+    private UserDao userDao;
+
+    @EJB
     private ExpenseDao expenseDao;
+
+    @EJB
+    private CategoryDao categoryDao;
 
     @Override
     public void init() throws ServletException {
@@ -44,6 +54,8 @@ public class AddExpenseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
 
@@ -51,9 +63,20 @@ public class AddExpenseServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             logger.info("Put errors into data model");
-
             req.getSession().removeAttribute("errors");
+            req.getSession().removeAttribute("expense");
+        } else {
+            List<Category> categoryList = new ArrayList<>();
+            if (categoryDao.findAllByUser(user).isPresent()) {
+                categoryList = (List<Category>) categoryDao.findAllByUser(user).get();
+                logger.debug("Category list is set as: {}", categoryList);
+            }
+
+            logger.debug("Category list is {}", categoryList);
+            dataModel.put("categories", categoryList);
         }
+
+
 
         try {
             template.process(dataModel, printWriter);
