@@ -22,7 +22,7 @@
             data.addRows([
             <#list chartData>
                 <#items as map>
-                        ['${map.getKey()}', ${map.getValue()}]
+                        ['${map.getKey()}', parseFloat("${map.getValue()}".replace(",", "."))]
                 </#items>
             </#list>
             ]);
