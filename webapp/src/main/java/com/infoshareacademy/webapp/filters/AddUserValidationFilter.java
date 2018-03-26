@@ -29,10 +29,10 @@ public class AddUserValidationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
-        boolean isValidationOK = true;
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+
+        boolean isValidationOK = true;
         User user = getUserObject(httpRequest);
         List<String> messages = new ArrayList<>();
 

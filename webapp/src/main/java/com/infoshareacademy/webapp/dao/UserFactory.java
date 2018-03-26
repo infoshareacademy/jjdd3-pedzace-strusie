@@ -19,20 +19,20 @@ public class UserFactory {
     private final String url = "https://pedzacestrusie.eu.auth0.com/userinfo";
 
     @Inject
-    UserDao userDAOBean;
+    private UserDao userDAOBean;
 
-    public User createUser(String userId, String accessToken) {
+    public User createUser(String userIdFromAuth) {
 
-        Optional<User> user = userDAOBean.findByUserId(userId);
+        Optional<User> user = userDAOBean.findByUserId(userIdFromAuth);
         if (user.isPresent()) {
             return user.get();
         }
-        User newUser = new User(userId, false);
+        User newUser = new User(userIdFromAuth, false);
         userDAOBean.save(newUser);
         return newUser;
     }
 
-    public String getUserId(String accessToken) {
+    public String getUserIdFromAuth(String accessToken) {
 
         ResteasyClient client = new ResteasyClientBuilder().build();
         ResteasyWebTarget target = client.target(url);
@@ -42,7 +42,7 @@ public class UserFactory {
     }
 
     public User addAdmin (String userId) {
-        logger.info("Add new Admin");
+        logger.info("Add new Admin to DB...");
         Optional<User> user = userDAOBean.findByUserId(userId);
         if (user.isPresent()) {
             return user.get();

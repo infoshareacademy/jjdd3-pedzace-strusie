@@ -1,27 +1,3 @@
-<#--<!DOCTYPE html>-->
-<#--<html>-->
-<#--<head>-->
-    <#--<title>Add category template</title>-->
-<#--</head>-->
-<#--<body>-->
-<#--<#if errors??>-->
-    <#--<#list errors>-->
-    <#--<ul>-->
-        <#--<#items as error>-->
-            <#--<li style="color: #ff0000; font-weight: bold; font-size: 14px;">${error}</li>-->
-        <#--</#items>-->
-    <#--</ul>-->
-    <#--</#list>-->
-<#--</#if>-->
-<#--<form method="post" action="/${action!"budget/add-category"}" enctype="multipart/form-data">-->
-    <#--Category: <input type="text" name="name" value="${(category)!}"/><br/><br/>-->
-    <#--<input type="submit" name="save" value="save"/><br/><br/>-->
-<#--</form>-->
-<#--<#include "footer.ftlh">-->
-<#--</body>-->
-<#--</html>-->
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,11 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Add category template</title>
+    <title>Period date</title>
 </head>
 <body>
 
 <div class="container">
+    <div class="col-md-8">
+
+    </div>
+    <br>
 
     <#if errors??>
         <#list errors>
@@ -50,12 +30,18 @@
     </#if>
 
     <div class="col-md-8">
-        <form name="incomesForm" method="post" action="/${action!"budget/add-category"}">
+        <form name="periodExpensesForm" method="post" action="/${action!"budget/get-expensesbycat"}">
             <div class="form-group">
-                <label>Category name</label>
-                <input type="text" class="form-control" placeholder="Please type in category name" name="name" value="${(category)!}">
+                <label> Start date</label>
+                <input type="date" class="form-control" name="minDatePeriod" value="${(minDatePeriod)!}">
+                <small class="form-text text-muted"> Please type in start date</small>
             </div>
-            <input type="submit" class="btn btn-primary" value="Save">
+            <div class="form-group">
+                <label> End date</label>
+                <input type="date" class="form-control" name="maxDatePeriod" value="${(maxDatePeriod)!}">
+                <small class="form-text text-muted"> Please type in end date</small>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Ok">
         </form>
     </div>
 </div>

@@ -38,6 +38,13 @@ public class Expense {
         this.expense = expense;
     }
 
+    public Expense(User user,LocalDate date, String category, double expense) {
+        this.date = date;
+        this.category = category;
+        this.expense = expense;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

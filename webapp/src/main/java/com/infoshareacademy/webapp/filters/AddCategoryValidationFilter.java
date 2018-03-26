@@ -1,14 +1,17 @@
 package com.infoshareacademy.webapp.filters;
 
 import com.infoshareacademy.webapp.messages.UserOperationsMessages;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +22,7 @@ import java.util.regex.Pattern;
 )
 public class AddCategoryValidationFilter implements Filter {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AddCategoryValidationFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddCategoryValidationFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -50,6 +53,7 @@ public class AddCategoryValidationFilter implements Filter {
             return;
         }
 
+        logger.info("Session Admin: {}", httpRequest.getSession().getAttribute("admin"));
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

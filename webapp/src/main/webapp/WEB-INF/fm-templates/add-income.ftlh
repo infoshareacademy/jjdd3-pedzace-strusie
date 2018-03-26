@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Expense Service</title>
+    <title>Income Service</title>
 </head>
 <body>
 
@@ -29,49 +29,26 @@
             </ul>
         </#list>
     </#if>
+
     <div class="col-md-8">
-        <form name="expenseForm" method="post" action="/${action!"add-expense"}">
+        <form name="incomesForm" method="post" action="/${action!"budget/add-income"}">
             <div class="form-group">
-                <label> Date of expense</label>
-                <input type="date" class="form-control" name="date" value="${(expense.date)!}">
-                <small class="form-text text-muted"> Please choose date of your expense</small>
+                <label> Date of income</label>
+                <input type="date" class="form-control" name="date" value="${(income.date)!}">
+                <small class="form-text text-muted"> Please choose date of your income</small>
             </div>
             <div class="form-group">
-                <label>Category</label>
-
-                <select class="form-control" name="category">
-
-                    <option>Plese select your expense</option>
-                    <option>accomodation</option>
-                    <option>broadband</option>
-                    <option>children</option>
-                    <option>clothes</option>
-                    <option>entertainment</option>
-                    <option>food</option>
-                    <option>health</option>
-                    <option>hygiene</option>
-                    <option>loans</option>
-                    <option>others</option>
-                    <option>savings</option>
-                    <option>transportaion</option>
-                </select>
-                <small class="form-text text-muted">Please choose category of your expense.
+                <label>Value of income</label>
+                <input type="text" class="form-control" placeholder="Please enter value of your income" name="income"
+                       value="${(income.income)!}">
+                <small class="form-text text-muted">Please enter value of your income. We'll never
+                    share this information with anyone else.
                 </small>
-                <br>
-                <div class="form-group">
-                    <label>Value of expense</label>
-                    <input type="text" class="form-control" placeholder="Please enter value of your expense"
-                           name="expense" value="${(expense.expense)!}">
-                    <small class="form-text text-muted">Please enter value of your expense. We'll never
-                        share this information with anyone else.
-                    </small>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Save my expense">
             </div>
+            <input type="submit" class="btn btn-primary" value="Save my income">
         </form>
     </div>
 </div>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

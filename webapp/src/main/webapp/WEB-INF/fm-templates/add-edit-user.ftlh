@@ -13,7 +13,7 @@
     </ul>
     </#list>
 </#if>
-<form method="post" action="/${action!"add-user"}" enctype="multipart/form-data">
+<form method="post" action="/${action!"budget/add-user"}" enctype="multipart/form-data">
     ID: <input type="text" name="id" value="${(user.id)!}"/><br/><br/>
     Name: <input type="text" name="name" value="${(user.name)!}"/><br/><br/>
     Login: <input type="text" name="login" value="${(user.login)!}"/><br/><br/>

@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@WebFilter(filterName = "AddExpenseFilter", urlPatterns = {"/add-expense"})
+@WebFilter(
+        filterName = "AddExpenseFilter",
+        urlPatterns = {"/add-expense"}
+)
 public class AddExpenseFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(AddExpenseFilter.class);
@@ -44,14 +47,14 @@ public class AddExpenseFilter implements Filter {
             String valueOfExpense = httpRequest.getParameter("expense");
 
             if (!isDateParameterValid("date", httpRequest)) {
-                messages.add("Date is out of bound. Please choose date again.");
+                messages.add("Your date is out of bound. Please choose date again.");
                 isValidationOK = false;
             } else if (dateParameter != null && !dateParameter.isEmpty()) {
                 expense.setDate(LocalDate.parse(dateParameter));
             }
 
             if (isValueOfExpenseValid("expense", httpRequest)) {
-                messages.add("Value of expense is in invalid format. Please enter for example 450.35");
+                messages.add("Your value of expense is in invalid format. Please enter for example 450.35");
                 isValidationOK = false;
             } else if (valueOfExpense != null && !valueOfExpense.isEmpty()) {
                 expense.setExpense(Double.parseDouble(valueOfExpense));
@@ -74,7 +77,7 @@ public class AddExpenseFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         boolean isPost = httpRequest.getMethod().equalsIgnoreCase("post");
 
-        logger.error(String.valueOf(isPost));
+        logger.info(String.valueOf(isPost));
 
         if (parameter == null || parameter.isEmpty()) {
             return !isPost;
@@ -94,7 +97,7 @@ public class AddExpenseFilter implements Filter {
 
         logger.error(String.valueOf(isPost));
 
-        if ( parameter == null && parameter.isEmpty()) {
+        if (parameter == null || parameter.isEmpty()) {
             return !isPost;
         }
 
@@ -102,7 +105,6 @@ public class AddExpenseFilter implements Filter {
         Matcher matcher = expenseValuePattern.matcher(parameter);
 
         return !matcher.matches();
-
     }
 
     @Override

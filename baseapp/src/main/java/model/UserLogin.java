@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "USERS_LOGINS")
-public class UsersLogins {
+@Table(name = "USER_LOGINS")
+public class UserLogin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class UsersLogins {
     @Column(name = "login_time")
     private LocalDateTime loginTime;
 
-    public UsersLogins() {
+    public UserLogin() {
     }
 
-    public UsersLogins(User user, LocalDateTime loginTime) {
+    public UserLogin(User user, LocalDateTime loginTime) {
         this.user = user;
         this.loginTime = loginTime;
     }
@@ -50,4 +50,5 @@ public class UsersLogins {
     public void setLoginTime(LocalDateTime loginTime) {
         this.loginTime = loginTime;
     }
+
 }

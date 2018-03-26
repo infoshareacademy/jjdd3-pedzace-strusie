@@ -2,12 +2,11 @@ package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "CATEGORIES")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,13 +16,20 @@ public class Category {
     @NotNull
     private String category;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<User> user;
+    @Column(name = "isActive")
+    private boolean isActive;
+
+    @Column(name = "isDefault")
+    private boolean isDefault;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Category() {
     }
 
-    public Category(String category, List<User> user) {
+    public Category(User user, String category) {
         this.category = category;
         this.user = user;
     }
@@ -44,11 +50,27 @@ public class Category {
         this.category = category;
     }
 
-    public List<User> getUser() {
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -57,6 +79,8 @@ public class Category {
         final StringBuffer sb = new StringBuffer("Category{");
         sb.append("id=").append(id);
         sb.append(", category='").append(category).append('\'');
+        sb.append(", isActive=").append(isActive);
+        sb.append(", isDefault=").append(isDefault);
         sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString();

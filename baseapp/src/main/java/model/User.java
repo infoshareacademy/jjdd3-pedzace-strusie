@@ -7,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = {"userId"}))
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,23 +18,20 @@ public class User {
     @Column(name = "isAdmin")
     private boolean isAdmin;
 
-    @OneToMany(mappedBy = "user")
-    private List<UsersLogins> logins;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserLogin> logins;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Income> income;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Expense> expense;
 
-    @ManyToMany
-    @JoinTable(name = "user_to_category", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Category> categories;
 
-    @ManyToMany
-    @JoinTable(name = "user_to_categoryPromoted", joinColumns = @JoinColumn(name = "id_user_fk", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<CategoryPromoted> categoriesPromoted;
-
 
     public User() {
     }
@@ -69,11 +65,11 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<UsersLogins> getLogins() {
+    public List<UserLogin> getLogins() {
         return logins;
     }
 
-    public void setLogins(List<UsersLogins> logins) {
+    public void setLogins(List<UserLogin> logins) {
         this.logins = logins;
     }
 

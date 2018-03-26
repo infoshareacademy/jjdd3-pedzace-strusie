@@ -2,6 +2,7 @@ package com.infoshareacademy.webapp.servlets;
 
 import com.auth0.SessionUtils;
 import com.infoshareacademy.webapp.dao.UserService;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Enumeration;
 
 
 @WebServlet("/budget/start")
@@ -23,7 +25,7 @@ public class StartServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,18 +42,14 @@ public class StartServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
 
-        boolean isAdmin = userService.initUserSession(accessToken);
-        req.getSession().setAttribute("admin", isAdmin);
-        logger.info("User AccessToken is: {}, user idToken is: {}", accessToken, idToken);
-        logger.info("User is admin: {}", isAdmin);
+        User user = userService.initUserSession(accessToken);
 
+        req.getSession().setAttribute("admin", user.isAdmin());
+        req.getSession().setAttribute("user", user);
 
-
-        RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/WEB-INF/index.html");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.html");
         dispatcher.forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

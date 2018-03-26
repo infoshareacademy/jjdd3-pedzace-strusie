@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,67 +9,89 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Map list</title>
+    <title>Expenses by categories</title>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-
-        // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
         function drawChart() {
-
-            // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Expenses');
             data.addColumn('number', 'Values');
             data.addRows([
-                <#list chartData?keys as dataKey>
-                        ['${dataKey}', ${chartData[dataKey]}],
-
-                </#list>]
-            );
-
-            // Set chart options
+            <#list chartData>
+                <#items as map>
+                        ['${map.getKey()}', parseFloat("${map.getValue()}".replace(",", "."))]
+                </#items>
+            </#list>
+            ]);
             var options = {
-                'title': 'Expenses sorted by monthsHow Much Pizza I Ate Last Night',
-                'width': 700,
-                'height': 500
+                'title': 'Expenses sorted by categories',
+                'width': 600,
+                'height': 400,
+                is3D: true,
             };
-
-            // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
     </script>
 </head>
-
 <body>
 <div class="container">
-    <div class="col">
-        <div id="chart_div"></div>
-
-        <#list maps>
-            <#items as map>
-                <div>
-                    <p>Months: ${map.getKey()}</p>
-                    <p>Expenses: ${map.getValue()}</p>
-                </div>
-            </#items>
-        </#list>
-        <p>sunExpenses: <strong>${sumExpenses}</strong></p>
-        <p>sumIncomes: <strong>${sumIncomes}</strong></p>
-        <#include "footer.ftlh">
-    </div>
-
+    <div id="chart_div"></div>
 </div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<div class="container">
+
+    <#if errors??>
+        <#list errors>
+            <ul>
+                <#items as error>
+                    <li style="...">${error}</li>
+                </#items>
+            </ul>
+        </#list>
+    </#if>
+
+    <div class="col-md-8">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category</th>
+                <th scope="col">Expenses[PLN]</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list maps>
+                <#items as map>
+                <tr>
+                    <th scope="row">#</th>
+                    <td> ${map.getKey()}</td>
+                    <td> ${map.getValue()}</td>
+
+                </tr>
+                </#items>
+            </#list>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col">Total expenses:</th>
+                <th scope="col"></th>
+                <th scope="col"><strong>${sumExpenses}</strong></th>
+            </tr>
+            <tr>
+                <th scope="col">Total incomes:</th>
+                <th scope="col"></th>
+                <th scope="col"><strong>${sumIncomes}</strong></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -79,6 +101,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
 </body>
 </html>

@@ -1,27 +1,3 @@
-<#--<!DOCTYPE html>-->
-<#--<html>-->
-<#--<head>-->
-    <#--<title>Add category template</title>-->
-<#--</head>-->
-<#--<body>-->
-<#--<#if errors??>-->
-    <#--<#list errors>-->
-    <#--<ul>-->
-        <#--<#items as error>-->
-            <#--<li style="color: #ff0000; font-weight: bold; font-size: 14px;">${error}</li>-->
-        <#--</#items>-->
-    <#--</ul>-->
-    <#--</#list>-->
-<#--</#if>-->
-<#--<form method="post" action="/${action!"budget/add-category"}" enctype="multipart/form-data">-->
-    <#--Category: <input type="text" name="name" value="${(category)!}"/><br/><br/>-->
-    <#--<input type="submit" name="save" value="save"/><br/><br/>-->
-<#--</form>-->
-<#--<#include "footer.ftlh">-->
-<#--</body>-->
-<#--</html>-->
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,15 +24,26 @@
             </ul>
         </#list>
     </#if>
-
     <div class="col-md-8">
-        <form name="incomesForm" method="post" action="/${action!"budget/add-category"}">
-            <div class="form-group">
-                <label>Category name</label>
-                <input type="text" class="form-control" placeholder="Please type in category name" name="name" value="${(category)!}">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Save">
-        </form>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list categories>
+                <#items as category>
+                <tr>
+                    <th scope="row">#</th>
+                    <td> ${category.category}</td>
+                </tr>
+                </#items>
+            </#list>
+            </tbody>
+        </table>
+
     </div>
 </div>
 

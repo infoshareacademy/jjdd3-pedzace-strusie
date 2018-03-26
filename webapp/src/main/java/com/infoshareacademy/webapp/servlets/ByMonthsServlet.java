@@ -1,9 +1,15 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.StatisticsDaoLoc;
+import com.infoshareacademy.webapp.dao.ExpenseDao;
+import com.infoshareacademy.webapp.dao.IncomeDao;
+import com.infoshareacademy.webapp.dao.StatisticsDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.Expense;
+import model.Income;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,32 +22,71 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
 
-@WebServlet("/by-months")
+@WebServlet("/budget/by-months")
 public class ByMonthsServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
+    @Inject
+    private ExpenseDao expenseDao;
+
+    @Inject
+    private IncomeDao incomeDao;
+
     @EJB
-    private StatisticsDaoLoc statisticsDaoLoc;
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "by-months.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-by-months.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Template by-months is not found {}", e.getMessage());
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Double> stringDoubleMap = statisticsDaoLoc.findExpensesByMonths();
-        Double sumExpenses = statisticsDaoLoc.findSumExpenses();
-        Double sumIncomes = statisticsDaoLoc.findSumIncomes();
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
+        LocalDate minDatePeriod = (LocalDate) req.getSession().getAttribute("minDatePeriod");
+        LocalDate maxDatePeriod = (LocalDate) req.getSession().getAttribute("maxDatePeriod");
+
+        logger.debug("Min Date Period is set as: {}", minDatePeriod);
+        logger.debug("Max Date Period is set as: {}", maxDatePeriod);
+
+        List<Expense> periodExpensesList = new ArrayList<>();
+        Map<String, Double> stringDoubleMap = new TreeMap<>();
+
+        if (expenseDao.findByExpenseByPeriod(user, minDatePeriod, maxDatePeriod).isPresent()) {
+            periodExpensesList = (List<Expense>) expenseDao.findByExpenseByPeriod(user, minDatePeriod, maxDatePeriod).get();
+            logger.debug("Expenses period list is set as: {}", periodExpensesList);
+
+            Map<String, Double> mapByCategories = periodExpensesList.stream()
+                    .collect(Collectors.groupingBy(e -> String.format("%d, %tm(%s)", e.getDate().getYear(), e.getDate().getMonth(), e.getDate().getMonth()),
+                            Collectors.summingDouble(Expense::getExpense)));
+
+            stringDoubleMap = new TreeMap<>(mapByCategories);
+        }
+
+        Double sumExpenses = periodExpensesList.stream()
+                .mapToDouble(Expense::getExpense)
+                .sum();
+
+        List<Income> periodIncomesList = new ArrayList<>();
+
+        if (incomeDao.findByIncomeByPeriod(user, minDatePeriod, maxDatePeriod).isPresent()) {
+            periodIncomesList = (List<Income>) incomeDao.findByIncomeByPeriod(user, minDatePeriod, maxDatePeriod).get();
+            logger.debug("Incomes period list is set as: {}", periodIncomesList);
+        }
+
+        Double sumIncomes = periodIncomesList.stream()
+                .mapToDouble(Income::getIncome)
+                .sum();
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
@@ -49,26 +94,13 @@ public class ByMonthsServlet extends HttpServlet {
         dataModel.put("maps", stringDoubleMap.entrySet());
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
-        dataModel.put("chartData", getChartData());  // odpowiada za rysowanie wykresu;
+//        dataModel.put("chartData", stringDoubleMap.entrySet());
+
 
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
-            logger.warn("Template Exceptions {}",e.getMessage());
+            logger.warn("Template Exceptions {}", e.getMessage());
         }
     }
-
-
-    private Map<String, Double> getChartData() {
-
-        Map data = new HashMap<String, Double>();
-        data.put("dla dzieci", 320.2d);
-        data.put("jedzenie", 12.2d);
-        data.put("paliwo", 350.50d);
-        data.put("mieszkanie", 520d);
-
-        return data;
-    }
-
-
 }

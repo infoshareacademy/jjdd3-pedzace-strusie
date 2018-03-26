@@ -33,6 +33,12 @@ public class Income {
         this.income = income;
     }
 
+    public Income(User user, LocalDate date, double income) {
+        this.date = date;
+        this.income = income;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

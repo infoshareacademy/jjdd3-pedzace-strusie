@@ -12,7 +12,7 @@ import javax.inject.Inject;
 public class InitializeAdmin {
 
     @Inject
-    UserFactory userFactory;
+    private UserFactory userFactory;
 
     @PostConstruct
     void initializeAdmin () {

@@ -8,10 +8,10 @@
     <#items as user>
         <div>
             <p>ID: ${user.id}</p>
-            <p>Login: ${user.login}</p>
-            <p>Name: ${user.name}</p>
-            <p><a href="/edit-user?id=${user.id}">Edit user</a></p>
-        <#sep><p>=======================</p></#sep>
+            <p>Login: ${user.IsAdmin}</p>
+            <p>Name: ${user.userId}</p>
+            <#--<p><a href="/edit-user?id=${user.id}">Edit user</a></p>-->
+        <#--<#sep><p>=======================</p></#sep>-->
         </div>
     </#items>
 </#list>

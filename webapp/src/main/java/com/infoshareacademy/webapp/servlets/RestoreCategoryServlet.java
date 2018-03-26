@@ -1,9 +1,11 @@
 package com.infoshareacademy.webapp.servlets;
 
-import com.infoshareacademy.webapp.dao_lockal.CategoryDaoLoc;
+import com.infoshareacademy.webapp.dao.CategoryDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +20,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet("/restore-category")
+@WebServlet("/budget/restore-category")
 public class RestoreCategoryServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Template template;
 
     @EJB
-    CategoryDaoLoc categoryDaoLoc;
+    CategoryDao categoryDao;
+
+    @EJB
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
@@ -37,10 +42,12 @@ public class RestoreCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+
         logger.debug("Get restore category");
 
-        categoryDaoLoc.update();
-        resp.sendRedirect("/categories-list");
+        categoryDao.restoreByUser(user);
+        resp.sendRedirect("/budget/start");
     }
 }
 
