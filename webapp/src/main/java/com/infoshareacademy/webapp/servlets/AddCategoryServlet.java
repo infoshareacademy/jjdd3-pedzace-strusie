@@ -90,6 +90,6 @@ public class AddCategoryServlet extends HttpServlet {
         userDao.update(user);
         logger.debug("User is {}", req.getSession().getAttribute("user"));
 
-        resp.sendRedirect("/categories-list");
+        resp.sendRedirect("/list-categories");
     }
 }

@@ -96,6 +96,6 @@ public class RemoveCategoryServlet extends HttpServlet {
             categoryDao.update(removeCategory);
             logger.debug("Adding new category {} to DB...", removeCategory);
         }
-        resp.sendRedirect("/categories-list");
+        resp.sendRedirect("/list-categories");
     }
 }

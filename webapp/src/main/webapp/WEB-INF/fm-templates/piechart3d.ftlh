@@ -5,15 +5,16 @@
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Expenses');
+            data.addColumn('number', 'Values');
+            data.addRows([
+            <#list chartData>
+                <#items as map>
+                        ['${map.getKey()}', ${map.getValue()}],
+                </#items>
+            </#list>
             ]);
-
             var options = {
                 title: 'My Daily Activities',
                 is3D: true,
@@ -24,6 +25,7 @@
         }
     </script>
 </head>
+
 <body>
 <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
 </body>

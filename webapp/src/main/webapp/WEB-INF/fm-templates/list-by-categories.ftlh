@@ -9,38 +9,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <title>Expenses by categories</title>
 
-    <title>Map list</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-
-        // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
         function drawChart() {
-            // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Expenses');
             data.addColumn('number', 'Values');
             data.addRows([
-                <#list chartData?keys as dataKey>
-                        ['${dataKey}', ${chartData[dataKey]}],
-
-                </#list>]
-            );
-            // Set chart options
+            <#list chartData>
+                <#items as map>
+                        ['${map.getKey()}', ${map.getValue()}],
+                </#items>
+            </#list>
+            ]);
             var options = {
                 'title': 'Expenses sorted by categories',
+                is3D: true,
                 'width': 700,
                 'height': 500
             };
-            // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }

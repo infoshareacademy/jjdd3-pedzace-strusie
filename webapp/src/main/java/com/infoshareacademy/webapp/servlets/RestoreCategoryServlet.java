@@ -47,7 +47,7 @@ public class RestoreCategoryServlet extends HttpServlet {
         logger.debug("Get restore category");
 
         categoryDao.restoreByUser(user);
-        resp.sendRedirect("/categories-list");
+        resp.sendRedirect("/list-categories");
     }
 }
 

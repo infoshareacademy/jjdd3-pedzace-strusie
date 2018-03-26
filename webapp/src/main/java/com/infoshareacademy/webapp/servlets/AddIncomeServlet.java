@@ -36,7 +36,7 @@ public class AddIncomeServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-income.ftlh");
         } catch (IOException e) {
-            logger.error("Template incomes-service is not found {}", e.getMessage());
+            logger.error("Template add-income is not found {}", e.getMessage());
         }
     }
 
@@ -48,6 +48,8 @@ public class AddIncomeServlet extends HttpServlet {
         List<String> errors = (List<String>) req.getSession().getAttribute("errors");
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
+            logger.info("Put errors into data model");
+
             req.getSession().removeAttribute("errors");
             req.getSession().removeAttribute("income");
         }

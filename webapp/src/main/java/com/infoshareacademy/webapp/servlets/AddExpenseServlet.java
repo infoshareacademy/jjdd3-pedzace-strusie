@@ -48,7 +48,7 @@ public class AddExpenseServlet extends HttpServlet {
         try {
             template = TemplateProvider.createTemplate(getServletContext(), "add-expense.ftlh");
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Template add-expense is not found {}", e.getMessage());
         }
     }
 
@@ -63,6 +63,7 @@ public class AddExpenseServlet extends HttpServlet {
         if (errors != null && !errors.isEmpty()) {
             dataModel.put("errors", errors);
             logger.info("Put errors into data model");
+
             req.getSession().removeAttribute("errors");
             req.getSession().removeAttribute("expense");
         } else {
@@ -75,8 +76,6 @@ public class AddExpenseServlet extends HttpServlet {
             logger.debug("Category list is {}", categoryList);
             dataModel.put("categories", categoryList);
         }
-
-
 
         try {
             template.process(dataModel, printWriter);
@@ -100,7 +99,7 @@ public class AddExpenseServlet extends HttpServlet {
 
         expenseDao.save(expense);
 
-        resp.sendRedirect("/categories-list");
+        resp.sendRedirect("/list-categories");
 
     }
 }
