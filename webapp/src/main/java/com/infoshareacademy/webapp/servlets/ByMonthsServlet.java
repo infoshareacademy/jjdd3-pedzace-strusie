@@ -43,7 +43,7 @@ public class ByMonthsServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "piechart3d.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-by-months.ftlh");
         } catch (IOException e) {
             logger.error("Template by-months is not found {}", e.getMessage());
         }
@@ -94,7 +94,7 @@ public class ByMonthsServlet extends HttpServlet {
         dataModel.put("maps", stringDoubleMap.entrySet());
         dataModel.put("sumExpenses", sumExpenses);
         dataModel.put("sumIncomes", sumIncomes);
-        dataModel.put("chartData", stringDoubleMap.entrySet());
+//        dataModel.put("chartData", stringDoubleMap.entrySet());
 
 
         try {

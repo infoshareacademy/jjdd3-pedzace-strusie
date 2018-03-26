@@ -22,15 +22,15 @@
             data.addRows([
             <#list chartData>
                 <#items as map>
-                        ['${map.getKey()}', ${map.getValue()}],
+                        ['${map.getKey()}', ${map.getValue()}]
                 </#items>
             </#list>
             ]);
             var options = {
                 'title': 'Expenses sorted by categories',
+                'width': 600,
+                'height': 400,
                 is3D: true,
-                'width': 700,
-                'height': 500
             };
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             chart.draw(data, options);
@@ -38,29 +38,60 @@
     </script>
 </head>
 <body>
-
 <div class="container">
-    <div class="col">
+    <div id="chart_div"></div>
+</div>
+<div class="container">
 
-        <div id="chart_div"></div>
-        <#list maps>
-            <#items as map>
-        <div>
-            <p>Category: ${map.getKey()}</p>
-            <p>Expenses: ${map.getValue()}</p>
-        <#sep><p>=======================</p></#sep>
-        </div>
-            </#items>
+    <#if errors??>
+        <#list errors>
+            <ul>
+                <#items as error>
+                    <li style="...">${error}</li>
+                </#items>
+            </ul>
         </#list>
-        <p>sunExpenses: <strong>${sumExpenses}</strong></p>
-        <p>sumIncomes: <strong>${sumIncomes}</strong></p>
-        <#include "footer.ftlh">
+    </#if>
+
+    <div class="col-md-8">
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category</th>
+                <th scope="col">Expenses[PLN]</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list maps>
+                <#items as map>
+                <tr>
+                    <th scope="row">#</th>
+                    <td> ${map.getKey()}</td>
+                    <td> ${map.getValue()}</td>
+
+                </tr>
+                </#items>
+            </#list>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col">Total expenses:</th>
+                <th scope="col"></th>
+                <th scope="col"><strong>${sumExpenses}</strong></th>
+            </tr>
+            <tr>
+                <th scope="col">Total incomes:</th>
+                <th scope="col"></th>
+                <th scope="col"><strong>${sumIncomes}</strong></th>
+            </tr>
+            </tfoot>
+        </table>
 
     </div>
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

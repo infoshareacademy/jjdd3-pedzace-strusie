@@ -41,7 +41,7 @@ public class ByCategoriesServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "piechart3d.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), "list-by-categories.ftlh");
         } catch (IOException e) {
             logger.error("Template by-categories is not found {}", e.getMessage());
         }

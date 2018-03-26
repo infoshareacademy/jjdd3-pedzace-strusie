@@ -1,10 +1,12 @@
 package com.infoshareacademy.webapp.servlets;
 
 import com.infoshareacademy.webapp.dao.CategoryDao;
+import com.infoshareacademy.webapp.dao.UserDao;
 import com.infoshareacademy.webapp.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Category;
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @WebServlet("/budget/list-categories")
 //@Transactional
@@ -30,6 +29,9 @@ public class ListCategoriesServlet extends HttpServlet {
 
     @EJB
     private CategoryDao categoryDao;
+
+    @EJB
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
@@ -42,10 +44,16 @@ public class ListCategoriesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Category> categoryList = categoryDao.findAll();
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
 
         PrintWriter printWriter = resp.getWriter();
         Map<String, Object> dataModel = new HashMap<>();
+
+        List<Category> categoryList = new ArrayList<>();
+        if (categoryDao.findAllByUser(user).isPresent()) {
+            categoryList = (List<Category>) categoryDao.findAllByUser(user).get();
+            logger.debug("Category list is set as: {}", categoryList);
+        }
 
         logger.debug("Category list is {}", categoryList);
         dataModel.put("categories", categoryList);

@@ -53,8 +53,7 @@
         <form name="incomesForm" method="post" action="/${action!"budget/add-category"}">
             <div class="form-group">
                 <label>Category name</label>
-                <input type="text" class="form-control" placeholder="Please type in category name" name="name"
-                       value="${(category)!}">
+                <input type="text" class="form-control" placeholder="Please type in category name" name="name" value="${(category)!}">
             </div>
             <input type="submit" class="btn btn-primary" value="Save">
         </form>
